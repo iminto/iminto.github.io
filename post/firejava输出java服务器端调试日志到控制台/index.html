@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.76.4" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>FireJava输出Java服务器端调试日志到控制台 - 白菜不是菜</title>
+
+
+<meta name="author" content="baicai" />
+
+
+<meta name="description" content="A minimal Hugo theme with nice theme color." />
+
+
+<meta name="keywords" content="Java" />
+
+<meta property="og:title" content="FireJava输出Java服务器端调试日志到控制台" />
+<meta property="og:description" content="针对最新火狐浏览器50&#43;以上版本的firebug协议，类似FirePHP，但是FirePHP已经很久不更新，并且对最新的浏览器也已失效。 这个在Firebug之上运行的扩展，结合一个服务器端的库，就可以" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iminto.github.io/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/" />
+<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
+<meta property="article:published_time" content="2018-01-10T20:21:52+00:00" />
+<meta property="article:modified_time" content="2018-01-10T20:21:52+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
+
+<meta name="twitter:title" content="FireJava输出Java服务器端调试日志到控制台"/>
+<meta name="twitter:description" content="针对最新火狐浏览器50&#43;以上版本的firebug协议，类似FirePHP，但是FirePHP已经很久不更新，并且对最新的浏览器也已失效。 这个在Firebug之上运行的扩展，结合一个服务器端的库，就可以"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            
+            <span class="title-sub">A minimal Hugo theme.</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/">FireJava输出Java服务器端调试日志到控制台</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-01-10</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;648 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <p>  针对最新火狐浏览器50+以上版本的firebug协议，类似FirePHP，但是FirePHP已经很久不更新，并且对最新的浏览器也已失效。</p>
+<blockquote>
+<p>这个在Firebug之上运行的扩展，结合一个服务器端的库，就可以让你的PHP代码向浏览器发送调试信息，该信息以HTTP响应头（HTTP headers）的方式编码。经过设置，你可以像在Firebug控制台调试JavaScript代码一样得到PHP脚本的警告和错误提示。下面我们来看看具体步骤。</p>
+</blockquote>
+<p>直接上代码</p>
+<pre><code class="language-java">import com.alibaba.fastjson.JSON;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+/**
+ * @version V1.0
+ * @Description:直接输出服务器端调试日志到控制台，简易版本。
+ * @date 2017/6/13 16:51
+ */
+public class DebugTool {
+    public final String VERSION = &quot;2.0.j1&quot;;
+    public final String HEADER_NAME = &quot;X-ChromeLogger-Data&quot;;
+
+    protected Map&lt;String, Object&gt; console = new HashMap&lt;&gt;();
+    private String response=&quot;&quot;;
+
+    public DebugTool() {
+        console.put(&quot;version&quot;, VERSION);
+        console.put(&quot;columns&quot;, new String[]{&quot;log&quot;, &quot;backtrace&quot;, &quot;type&quot;});
+        console.put(&quot;rows&quot;, new ArrayList&lt;Objects&gt;());
+        console.put(&quot;request_uri&quot;, this.getClass().getName());
+    }
+
+    public DebugTool(Class cls) {
+        this();
+        console.put(&quot;request_uri&quot;, cls.getName());
+    }
+
+    public void log(Object o) {
+        log(o,&quot;&quot;);
+    }
+
+    public void info(Object o) {
+        log(o,&quot;info&quot;);
+    }
+
+    public void warn(Object o) {
+        log(o,&quot;warn&quot;);
+    }
+
+    public void error(Object o) {
+        log(o,&quot;error&quot;);
+    }
+
+    public void log(Object o,String type) {
+        Object[] info;
+        if(o instanceof Map){
+            info = new Object[]{o};
+        }else {
+            info = new Object[]{o.toString()};
+        }
+        Object[] obj = new Object[]{info, console.get(&quot;request_uri&quot;), type};
+        ArrayList&lt;Object&gt; rows = (ArrayList&lt;Object&gt;) console.get(&quot;rows&quot;);
+        rows.add(obj);
+        console.put(&quot;rows&quot;, rows);
+    }
+
+    public String getResponse(){
+        String json = JSON.toJSONString(console);
+        json = Base64.encodeToString(json);
+        return json;
+    }
+}
+</code></pre>
+<p>使用方法：</p>
+<pre><code class="language-java">DebugTool debug=new DebugTool(this.getClass());
+tool.log(&quot;hello 八阿哥&quot;);
+Map hash=new HashMap();
+hash.put(&quot;25&quot;,&quot;张三&quot;);
+hash.put(&quot;19&quot;,&quot;李四&quot;);
+tool.warn(hash);
+response.add(DebugTool.HEADER_NAME,tool.response);
+</code></pre>
+<p>仅对最新版Firefox有效。新版chrome有自己的debug协议（使用websocket）。有趣的是，这本来是一个chrome浏览器支持的协议，后来chrome放弃了，而Firefox拿过来了。
+参考：<a href="https://craig.is/writing/chrome-logger" target="_blank">https://craig.is/writing/chrome-logger</a></p>
+
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/amzrk2" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/amzrk2" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://space.bilibili.com/19767474" target="_blank"><span>bilibili</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents"></nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/amzrk2" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/amzrk2" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://space.bilibili.com/19767474" target="_blank"><span>bilibili</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents"></nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            <span>&copy; 2020 <a href="https://iminto.github.io/">baicai</a> |
+                基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
+                   target="_blank">Hugo</a> 构建</span>
+        </div>
+    </div>
+</footer>
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 白菜不是菜</title>
+    <link>https://iminto.github.io/tags/linux/</link>
+    <description>Recent content in Linux on 白菜不是菜</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 26 Aug 2020 10:22:59 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prosody搭建xmpp服务器</title>
+      <link>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Wed, 26 Aug 2020 10:22:59 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中</description>
+    </item>
+    
+    <item>
+      <title>Kde桌面下自带应用无法输入中文</title>
+      <link>https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</link>
+      <pubDate>Sat, 07 Mar 2020 21:07:54 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</guid>
+      <description>​ 这个问题纠结我快一年了。某次manjaro升级后，我的manjaro在系统自带应用上如konsole,kate,Yakuake上都不能切换输入法（目测系统自带的软件都不能），鼠标放键盘图标上提示“无</description>
+    </item>
+    
+    <item>
+      <title>使用Java自动登录需要动态密码的堡垒机</title>
+      <link>https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/</link>
+      <pubDate>Fri, 16 Nov 2018 20:45:00 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/</guid>
+      <description>公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。 不可忍，想了想，还是借助Java在每次调用时自动生成验证</description>
+    </item>
+    
+    <item>
+      <title>Linux 下获取文件创建时间</title>
+      <link>https://iminto.github.io/post/get-createtime-in-linux/</link>
+      <pubDate>Sun, 07 Oct 2018 13:23:59 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/get-createtime-in-linux/</guid>
+      <description>在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805</description>
+    </item>
+    
+    <item>
+      <title>linux下解压bin文件</title>
+      <link>https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sat, 02 Jun 2018 13:08:41 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</guid>
+      <description>现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知</description>
+    </item>
+    
+  </channel>
+</rss>

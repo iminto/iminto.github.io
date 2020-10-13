@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 白菜不是菜</title>
+    <link>https://iminto.github.io/post/</link>
+    <description>Recent content in Posts on 白菜不是菜</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 13 Oct 2020 09:52:43 +0800</lastBuildDate><atom:link href="https://iminto.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ambari里自定义资源模块的实现</title>
+      <link>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Tue, 13 Oct 2020 09:52:43 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>Ambari里主机，集群，用户等等都视为一种资源，对它们的增删改查就是对资源的增删改查。 了解实现Ambari里增加一个资源的流程，就更方便修改Ambari的实现。 1.新建控制器层 ambari的控制器层</description>
+    </item>
+    
+    <item>
+      <title>Prosody搭建xmpp服务器</title>
+      <link>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Wed, 26 Aug 2020 10:22:59 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中</description>
+    </item>
+    
+    <item>
+      <title>基于restfulAPI实现k8s的监听机制</title>
+      <link>https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Tue, 11 Aug 2020 10:17:04 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</guid>
+      <description>k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。 在此之前简单先说一下http长连接 分块传输编码（Chunked transfer encodi</description>
+    </item>
+    
+    <item>
+      <title>Helm集成minio搭建私有仓库</title>
+      <link>https://iminto.github.io/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Fri, 03 Jul 2020 10:20:40 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
+      <description>helm3集成minio搭建私有仓库 我们一般是从本地的目录结构中的chart去进行部署，如果要集中管理chart,就需要涉及到repository的问题可以通过minio建立一个私有的存放仓库。 min</description>
+    </item>
+    
+    <item>
+      <title>一种swagger Ui的替代方案不引入任何源码污染</title>
+      <link>https://iminto.github.io/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/</link>
+      <pubDate>Tue, 12 May 2020 17:18:49 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/</guid>
+      <description>在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要</description>
+    </item>
+    
+    <item>
+      <title>Kde桌面下自带应用无法输入中文</title>
+      <link>https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</link>
+      <pubDate>Sat, 07 Mar 2020 21:07:54 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</guid>
+      <description>​ 这个问题纠结我快一年了。某次manjaro升级后，我的manjaro在系统自带应用上如konsole,kate,Yakuake上都不能切换输入法（目测系统自带的软件都不能），鼠标放键盘图标上提示“无</description>
+    </item>
+    
+    <item>
+      <title>K8s部署springboot</title>
+      <link>https://iminto.github.io/post/k8s%E9%83%A8%E7%BD%B2springboot/</link>
+      <pubDate>Fri, 06 Mar 2020 13:44:14 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/k8s%E9%83%A8%E7%BD%B2springboot/</guid>
+      <description>1.安装k8s 安装K8S的步骤略去，使用k3s安装会更快捷方便，方便测试环境。 如果使用k3s会有个坑，k3s默认使用container而不是docker作为容器，会导致运行时出现一些问题，后面会详细分</description>
+    </item>
+    
+    <item>
+      <title>Windows上编译安装运行rancher</title>
+      <link>https://iminto.github.io/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</link>
+      <pubDate>Fri, 28 Feb 2020 10:07:59 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</guid>
+      <description>rancher 是一个为DevOps团队提供的完整的Kubernetes与容器管理解决方案。rancher最大的优点就是安装部署方便，极大地简化了K8S的安装配置。在官网上，推荐的是使用docker方式安装ranc</description>
+    </item>
+    
+    <item>
+      <title>HttpURLConnection里setReadTimeout超时无效</title>
+      <link>https://iminto.github.io/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</link>
+      <pubDate>Tue, 18 Feb 2020 21:09:34 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</guid>
+      <description>今天群里有位360的安全大佬，发了个链接http://93.175.29.89:8008/，说爬这个网址的时候，IO会一直卡在那，一直没有返回响应。 那个网址是他构造的一个特殊请求，输出一个视频流，但是</description>
+    </item>
+    
+    <item>
+      <title>K8s管理crd和K8SAPI编程</title>
+      <link>https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Tue, 11 Feb 2020 14:38:59 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</guid>
+      <description>k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。 目前用的版本 root@de001:/develop# kubectl version Client Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.2+k3s1&amp;quot;, GitCommit:&amp;quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-01-27T18:09:26Z&amp;quot;, GoVersion:&amp;quot;go1.13.6&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;linux/amd64&amp;quot;} Server Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.2+k3s1&amp;quot;, GitCommit:&amp;quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-01-27T18:09:26Z&amp;quot;, GoVersion:&amp;quot;go1.13.6&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;linux/amd64&amp;quot;} 1.编写Spec文档 apiVersion: apiextensions.k8s.io/v1beta1 kind: CustomResourceDefinition metadata: # name must match the spec fields below, and be in the form: &amp;lt;plural&amp;gt;.&amp;lt;group&amp;gt; name: crontabs.chenwen.com spec: # group</description>
+    </item>
+    
+    <item>
+      <title>hadoop 3.1.2 单机模式安装配置</title>
+      <link>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 25 Aug 2019 23:12:21 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
+      <description>hadoop 3.1.2 单机模式安装配置 现在搞大数据记录一下，方便查阅。 1.安装配置jdk和下载hadoop略。 hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/ 使用</description>
+    </item>
+    
+    <item>
+      <title>讲清楚CAS的那点事</title>
+      <link>https://iminto.github.io/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/</link>
+      <pubDate>Tue, 16 Jul 2019 21:54:09 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/</guid>
+      <description>互联网低潮，老是会看到别人发面试经验，看到很多人谈乐观锁，谈CAS，但是都没有说清楚。忍不住叨叨几句。 那什么是乐观锁呢，比较书面的定义是 “它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不</description>
+    </item>
+    
+    <item>
+      <title>Netty实现http服务器keep Alive无效的问题排查</title>
+      <link>https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</link>
+      <pubDate>Sat, 06 Jul 2019 22:11:37 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</guid>
+      <description>netty实现http服务器keep-alive无效的问题排查 今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的head</description>
+    </item>
+    
+    <item>
+      <title>Filebeat7自定义index的一个坑</title>
+      <link>https://iminto.github.io/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</link>
+      <pubDate>Wed, 26 Jun 2019 13:21:52 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</guid>
+      <description>我用的filebeat7来收集日志发给Elastic search，版本是7.1.1，对应的elasticsearch版本和其相同。 默认的，filebeat生成的索引名字是filebeat-7.1.1-</description>
+    </item>
+    
+    <item>
+      <title>从钉钉一个忽略了近亿人的产品细节谈谈产品思维</title>
+      <link>https://iminto.github.io/post/oh-dingtalk/</link>
+      <pubDate>Mon, 06 May 2019 12:56:37 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/oh-dingtalk/</guid>
+      <description>本来我一个软件工程师，是很不屑提产品的，但时不时总见到一些产品人吹牛皮，也忍不住凑个热闹。 钉钉(DingTalk)是一款由阿里巴巴集团开发的用于商务沟通和工作协同的IM，其和企业版微信占据了中国的大部</description>
+    </item>
+    
+    <item>
+      <title>使用Java自动登录需要动态密码的堡垒机</title>
+      <link>https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/</link>
+      <pubDate>Fri, 16 Nov 2018 20:45:00 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/</guid>
+      <description>公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。 不可忍，想了想，还是借助Java在每次调用时自动生成验证</description>
+    </item>
+    
+    <item>
+      <title>Linux 下获取文件创建时间</title>
+      <link>https://iminto.github.io/post/get-createtime-in-linux/</link>
+      <pubDate>Sun, 07 Oct 2018 13:23:59 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/get-createtime-in-linux/</guid>
+      <description>在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805</description>
+    </item>
+    
+    <item>
+      <title>linux下解压bin文件</title>
+      <link>https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sat, 02 Jun 2018 13:08:41 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</guid>
+      <description>现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知</description>
+    </item>
+    
+    <item>
+      <title>使用内嵌undertow开发调试jfinal项目</title>
+      <link>https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Sat, 19 May 2018 23:56:37 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/</guid>
+      <description>今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了</description>
+    </item>
+    
+    <item>
+      <title>导出freeOTP中的配置</title>
+      <link>https://iminto.github.io/post/export-freeopt-config/</link>
+      <pubDate>Mon, 14 May 2018 22:06:05 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/export-freeopt-config/</guid>
+      <description>之前公司的一个网站使用了OTP来做二次验证，然后我就在手机上安装了freeotp这款软件来管理OTP密码，等到换手机了，才发现没法导出原手机的配置，这就尴尬了。FreeOTP is sponsored and officially published by Red Hat，也算</description>
+    </item>
+    
+    <item>
+      <title>Java里常见的几个语法小坑</title>
+      <link>https://iminto.github.io/post/java_trap/</link>
+      <pubDate>Sat, 05 May 2018 14:18:23 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/java_trap/</guid>
+      <description>很久没更新博客了，想到几个小坑，虽然没啥技术含量，但或许有人不知道呢。 1.删除sublist的元素导致原对象元素被删除 看下面这段代码 List&amp;lt;Integer&amp;gt; students=new ArrayList&amp;lt;Integer&amp;gt;(); for (int i = 0; i &amp;lt;5 ; i++) { students.add(i); } List&amp;lt;Integer&amp;gt; subList=new ArrayList&amp;lt;Integer&amp;gt;(); subList=students.subList(0,5); subList.remove(0); subList.remove(1); for (int i = 0; i &amp;lt;5 ; i++) { System.out.println(i+&amp;quot;=&amp;quot;+students.get(i)); } s</description>
+    </item>
+    
+    <item>
+      <title>折腾阿里云OSS的API</title>
+      <link>https://iminto.github.io/post/aliyun_oss_custom/</link>
+      <pubDate>Thu, 25 Jan 2018 23:26:44 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/aliyun_oss_custom/</guid>
+      <description>这两天想给博客做个插件,利用阿里云的OSS来存储文件.但阿里的文档和代码都烂的超乎想象,要么代码老旧不堪,要么跟小脚老太一样引入一坨依赖,想必这块是外包团队做的吧,或者阿里非核心业务员的技术水平也就这</description>
+    </item>
+    
+    <item>
+      <title>PHP的mb_check_encoding函数的存在是鸡肋吗</title>
+      <link>https://iminto.github.io/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</link>
+      <pubDate>Fri, 12 Jan 2018 21:24:23 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</guid>
+      <description>前不久,有人问到我一个问题，就是使用mb_check_encoding来侦测一段字符的编码，预期是GBK编码，但是PHP给出来UTF-8编码的错误判断。那么，mb_check_encoding的正确姿</description>
+    </item>
+    
+    <item>
+      <title>FireJava输出Java服务器端调试日志到控制台</title>
+      <link>https://iminto.github.io/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/</link>
+      <pubDate>Wed, 10 Jan 2018 20:21:52 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/</guid>
+      <description>针对最新火狐浏览器50+以上版本的firebug协议，类似FirePHP，但是FirePHP已经很久不更新，并且对最新的浏览器也已失效。 这个在Firebug之上运行的扩展，结合一个服务器端的库，就可以</description>
+    </item>
+    
+    <item>
+      <title>TOTP算法Java版本</title>
+      <link>https://iminto.github.io/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Mon, 08 Jan 2018 20:21:52 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/</guid>
+      <description>TOTP 概念 TOTP - Time-based One-time Password Algorithm is an extension of the HMAC-based One Time Password algorithm HOTP to support a time based moving factor. TOTP（基于时间的一次性密码算法）是支持时间作为动态因素基于HMAC一次性密码算法的扩展。它是OTP算法的一种 算法如下: TOTP = Truncate(HMAC-SHA-1(K, (T - T0) / X)) K 共享密</description>
+    </item>
+    
+    <item>
+      <title>Vala使用体验</title>
+      <link>https://iminto.github.io/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Mon, 08 Jan 2018 20:21:52 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid>
+      <description>前段时间用vala开发了一个很小的程序,体验了一把vala的使用,网上关于vala的文章比较少,所以写一篇博客,如果你有相同的使用经验可以交流下. 根据百度百科的解释，vala是一种新的、为GNOME开</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vala on 白菜不是菜</title>
+    <link>https://iminto.github.io/tags/vala/</link>
+    <description>Recent content in Vala on 白菜不是菜</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 08 Jan 2018 20:21:52 +0000</lastBuildDate><atom:link href="https://iminto.github.io/tags/vala/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vala使用体验</title>
+      <link>https://iminto.github.io/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Mon, 08 Jan 2018 20:21:52 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid>
+      <description>前段时间用vala开发了一个很小的程序,体验了一把vala的使用,网上关于vala的文章比较少,所以写一篇博客,如果你有相同的使用经验可以交流下. 根据百度百科的解释，vala是一种新的、为GNOME开</description>
+    </item>
+    
+  </channel>
+</rss>

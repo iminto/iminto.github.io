@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.76.4" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>Linux 下获取文件创建时间 - 白菜不是菜</title>
+
+
+<meta name="author" content="baicai" />
+
+
+<meta name="description" content="A minimal Hugo theme with nice theme color." />
+
+
+<meta name="keywords" content="Linux" />
+
+<meta property="og:title" content="Linux 下获取文件创建时间" />
+<meta property="og:description" content="在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iminto.github.io/post/get-createtime-in-linux/" />
+<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
+<meta property="article:published_time" content="2018-10-07T13:23:59+00:00" />
+<meta property="article:modified_time" content="2018-10-07T13:23:59+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
+
+<meta name="twitter:title" content="Linux 下获取文件创建时间"/>
+<meta name="twitter:description" content="在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            
+            <span class="title-sub">A minimal Hugo theme.</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/get-createtime-in-linux/">Linux 下获取文件创建时间</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-10-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1096 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <p>在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间</p>
+<pre><code class="language-bash">[tudou@tudou-pc statx]$ stat test-statx.c
+  文件：test-statx.c
+  大小：6656            块：16         IO 块：4096   普通文件
+设备：805h/2053d        Inode：6684737     硬链接：1
+权限：(0644/-rw-r--r--)  Uid：( 1000/   tudou)   Gid：( 1001/   tudou)
+最近访问：2018-10-07 13:16:29.000000000 +0800
+最近更改：2018-10-07 13:21:09.855461986 +0800
+最近改动：2018-10-07 13:21:09.855461986 +0800
+创建时间：-
+</code></pre>
+<p>可以看到「创建时间」一行总是「-」。</p>
+<p>如果我们使用百度的话，会看到很多文章说，最近改动时间就是创建时间。的确，我们拿很多文件试验了下，这个最近改动时间（Change Time）确实和创建时间很相近，然而Change time并不是Create time，它实际是文件属性修改时间。
+试一下即知：</p>
+<pre><code class="language-bash">[tudou@tudou-pc 下载]$ ./statx ~/.face
+statx(/home/tudou/.face) = 0
+results=fff
+  Size: 7589            Blocks: 16         IO Block: 4096    regular file
+Device: 08:05           Inode: 5505043     Links: 1
+Access: (0644/-rw-r--r--)  Uid:  1000   Gid:  1001
+Access: 2018-09-16 01:15:52.320014139+0800
+Modify: 2018-09-16 01:15:52.320014139+0800
+Change: 2018-09-16 01:15:52.320014139+0800
+ Birth: 2018-09-16 01:15:52.320014139+0800
+Attributes: 0000000000000000 (........ ........ ........ ........ ........ ........ ....-... .---.-..)
+[tudou@tudou-pc 下载]$ chattr +u ~/.face
+[tudou@tudou-pc 下载]$ ./statx ~/.face
+statx(/home/tudou/.face) = 0
+results=fff
+  Size: 7589            Blocks: 16         IO Block: 4096    regular file
+Device: 08:05           Inode: 5505043     Links: 1
+Access: (0644/-rw-r--r--)  Uid:  1000   Gid:  1001
+Access: 2018-09-16 01:15:52.320014139+0800
+Modify: 2018-09-16 01:15:52.320014139+0800
+Change: 2018-10-07 16:17:10.929769171+0800
+ Birth: 2018-09-16 01:15:52.320014139+0800
+Attributes: 0000000000000000 (........ ........ ........ ........ ........ ........ ....-... .---.-..)
+
+</code></pre>
+<p>不过，linux也不是完全不支持文件创建时间，文件系统如ext4其实是支持的，只是没有API可以获取到这个数据。比如Java提供的文件API，也就因此无法获取文件创建时间。</p>
+<p>不过，自内核 4.11 版本引入的 statx 系统调用支持获取创建时间了，字段名里用的是 btime（Birth time）。</p>
+<p>如果用户想要实现在代码里获取这个创建时间，那么只需要调用glibc提供的API即可。但是目前glibc还没有支持，所以只能自己用syscall函数调用。如果仅仅只是想自己实现一个小工具来获取这个时间，那么内核源码树里 samples/statx/test-statx.c 这个文件就是现成的实现。
+下载源码：<a href="https://www.kernel.org/" target="_blank">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.18.12.tar.xz</a>，选择一个和自己操作系统版本最近的源码分支 .
+你要是不想下载几十M的linux源码的话，也可以从<a href="https://elixir.bootlin.com/linux/v4.18.12/source/samples/statx" target="_blank">这里</a>获取到各个linux版本的源码
+编译文件：</p>
+<pre><code class="language-bash">[tudou@tudou-pc statx]$ gcc -O2 -o statx test-statx.c
+In file included from /usr/include/sys/stat.h:446,
+                 from test-statx.c:28:
+/usr/include/bits/statx.h:25:8: 错误：‘struct statx_timestamp’重定义
+ struct statx_timestamp
+        ^~~~~~~~~~~~~~~
+In file included from test-statx.c:26:
+/usr/include/linux/stat.h:56:8: 附注：原先在这里定义
+ struct statx_timestamp {
+        ^~~~~~~~~~~~~~~
+In file included from /usr/include/sys/stat.h:446,
+                 from test-statx.c:28:
+/usr/include/bits/statx.h:36:8: 错误：‘struct statx’重定义
+</code></pre>
+<p>注释如下两行代码：</p>
+<pre><code class="language-bash">#define _GNU_SOURCE
+#define _ATFILE_SOURCE
+</code></pre>
+<p>再次编译即可。</p>
+<pre><code class="language-bash">[tudou@tudou-pc statx]$ gcc -O2 -o statx test-statx.c
+[tudou@tudou-pc statx]$ ./statx test-statx.c
+statx(test-statx.c) = 0
+results=fff
+  Size: 6656            Blocks: 16         IO Block: 4096    regular file
+Device: 08:05           Inode: 6684737     Links: 1
+Access: (0644/-rw-r--r--)  Uid:  1000   Gid:  1001
+Access: 2018-10-07 13:16:29.000000000+0800
+Modify: 2018-10-07 13:21:09.855461986+0800
+Change: 2018-10-07 13:21:09.855461986+0800
+ Birth: 2018-10-07 13:16:47.771175840+0800
+Attributes: 0000000000000000 (........ ........ ........ ........ ........ ........ ....-... .---.-..)
+</code></pre>
+<p>另外一个思路，  使用debugfs来搞。</p>
+<p>附：glibc即将支持statx调用<a href="https://www.phoronix.com/scan.php?page=news_item&amp;px=Glibc-Statx-Support" target="_blank">Glibc Support For Statx Is Finally Under Review</a></p>
+<p>参考： <a href="https://blog.lilydjwg.me/2018/7/11/get-file-birth-time-in-linux.213101.html" target="_blank">https://blog.lilydjwg.me/2018/7/11/get-file-birth-time-in-linux.213101.html</a></p>
+
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/amzrk2" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/amzrk2" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://space.bilibili.com/19767474" target="_blank"><span>bilibili</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents"></nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/amzrk2" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/amzrk2" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://space.bilibili.com/19767474" target="_blank"><span>bilibili</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents"></nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            <span>&copy; 2020 <a href="https://iminto.github.io/">baicai</a> |
+                基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
+                   target="_blank">Hugo</a> 构建</span>
+        </div>
+    </div>
+</footer>
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+</body>
+
+</html>

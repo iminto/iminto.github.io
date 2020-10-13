@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>闲扯淡 on 白菜不是菜</title>
+    <link>https://iminto.github.io/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/</link>
+    <description>Recent content in 闲扯淡 on 白菜不是菜</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 26 Aug 2020 10:22:59 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prosody搭建xmpp服务器</title>
+      <link>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Wed, 26 Aug 2020 10:22:59 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中</description>
+    </item>
+    
+    <item>
+      <title>从钉钉一个忽略了近亿人的产品细节谈谈产品思维</title>
+      <link>https://iminto.github.io/post/oh-dingtalk/</link>
+      <pubDate>Mon, 06 May 2019 12:56:37 +0000</pubDate>
+      
+      <guid>https://iminto.github.io/post/oh-dingtalk/</guid>
+      <description>本来我一个软件工程师，是很不屑提产品的，但时不时总见到一些产品人吹牛皮，也忍不住凑个热闹。 钉钉(DingTalk)是一款由阿里巴巴集团开发的用于商务沟通和工作协同的IM，其和企业版微信占据了中国的大部</description>
+    </item>
+    
+  </channel>
+</rss>
