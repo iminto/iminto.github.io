@@ -84,7 +84,7 @@
         <div class="col-12 header">
             <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
             
-            <span class="title-sub">A minimal Hugo theme.</span>
+            <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
             
         </div>
     </div>
@@ -101,7 +101,7 @@
         <a href="https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/">Ambari里自定义资源模块的实现</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-10-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1339 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-10-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1583 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     
@@ -132,10 +132,17 @@ import java.util.Collections;
 @Api(value = &quot;Hdfss&quot;, description = &quot;Endpoint for user specific operations&quot;)
 public class HdfsService extends BaseService {
 
-    @GET
+    @GET//查询全部
     @Produces(&quot;text/plain&quot;)
-    public Response getUsers(String body, @Context HttpHeaders headers, @Context UriInfo ui) {
+    public Response getHdfses(String body, @Context HttpHeaders headers, @Context UriInfo ui) {
         return handleRequest(headers, body, ui, Request.Type.GET, createHdfsResource(null));
+    }
+    
+    @GET
+    @Path(&quot;{path}&quot;)//查询单个
+    @Produces(&quot;text/plain&quot;)
+    public Response getHdfs(String body, @Context HttpHeaders headers, @Context UriInfo ui) {
+        return handleRequest(headers, body, ui, Request.Type.GET, createHdfsResource(path));
     }
 
     private ResourceInstance createHdfsResource(String path) {
@@ -239,6 +246,11 @@ public class HdfsResourceProvider extends AbstractControllerResourceProvider{
         return hdfsRequest;
     }
 
+     @Override
+    public RequestStatus updateResources(Request request, Predicate predicate){
+        //更新操作略
+        return getRequestStatus(null);
+    }
 
 
     @Override
@@ -339,7 +351,14 @@ public interface Resource {
    &lt;/persistence-unit&gt;   
 </code></pre>
 <h3 id="5注入相关">5.注入相关</h3>
-<p>AmbariServer类也需要相应注入类依赖的对象</p>
+<p>AmbariServer类里也需要相应注入类依赖的对象，一种方式是手动注入，例如：</p>
+<pre><code class="language-java">ermissionResourceProvider.init(injector.getInstance(PermissionDAO.class));
+    ViewPermissionResourceProvider.init(injector.getInstance(PermissionDAO.class));
+    PrivilegeResourceProvider.init(injector.getInstance(PrivilegeDAO.class), injector.getInstance(UserDAO.class),
+        injector.getInstance(GroupDAO.class), injector.getInstance(PrincipalDAO.class),
+        injector.getInstance(PermissionDAO.class), injector.getInstance(ResourceDAO.class));
+</code></pre>
+<p>还有一种方式是注解注入，参考org.apache.ambari.server.controller.ControllerModule</p>
 <h3 id="6postman模拟验证">6.postman模拟验证</h3>
 <p>请求</p>
 <pre><code class="language-bash">curl --location --request GET 'http://10.180.210.146:8080/api/v1/hdfs?fields=Hdfses/*' \
@@ -383,6 +402,14 @@ public interface Resource {
 <h3 id="7自由风格controller">7.自由风格Controller</h3>
 <p>也可以抛开ambari的规则，自由使用javax.ws风格。</p>
 <p>但这样就没法使用Ambari内置的权限和谓词风格URL查询了</p>
+<h3 id="8异常和参数校验">8.异常和参数校验</h3>
+<p>参数校验在ResourceProvider里，抛出SystemException即可返回给页面</p>
+<p>权限异常</p>
+<pre><code class="language-java"> if (!AuthorizationHelper.isAuthorized(resourceType, resourceId, RoleAuthorization.SERVICE_RUN_SERVICE_CHECK)) {
+              throw new AuthorizationException(&quot;The authenticated user is not authorized to execute service checks.&quot;);
+            }
+
+</code></pre>
 
     </div>
 </article>
@@ -432,15 +459,7 @@ public interface Resource {
         <ul>
             
             <li>
-                <a href="https://github.com/amzrk2" target="_blank"><span>GitHub</span></a>
-            </li>
-            
-            <li>
-                <a href="https://twitter.com/amzrk2" target="_blank"><span>Twitter</span></a>
-            </li>
-            
-            <li>
-                <a href="https://space.bilibili.com/19767474" target="_blank"><span>bilibili</span></a>
+                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
             </li>
             
         </ul>
@@ -492,6 +511,7 @@ public interface Resource {
         <li><a href="#5注入相关">5.注入相关</a></li>
         <li><a href="#6postman模拟验证">6.postman模拟验证</a></li>
         <li><a href="#7自由风格controller">7.自由风格Controller</a></li>
+        <li><a href="#8异常和参数校验">8.异常和参数校验</a></li>
       </ul>
     </li>
   </ul>
@@ -547,15 +567,7 @@ public interface Resource {
         <ul>
             
             <li>
-                <a href="https://github.com/amzrk2" target="_blank"><span>GitHub</span></a>
-            </li>
-            
-            <li>
-                <a href="https://twitter.com/amzrk2" target="_blank"><span>Twitter</span></a>
-            </li>
-            
-            <li>
-                <a href="https://space.bilibili.com/19767474" target="_blank"><span>bilibili</span></a>
+                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
             </li>
             
         </ul>
@@ -607,6 +619,7 @@ public interface Resource {
         <li><a href="#5注入相关">5.注入相关</a></li>
         <li><a href="#6postman模拟验证">6.postman模拟验证</a></li>
         <li><a href="#7自由风格controller">7.自由风格Controller</a></li>
+        <li><a href="#8异常和参数校验">8.异常和参数校验</a></li>
       </ul>
     </li>
   </ul>
