@@ -101,7 +101,7 @@
         <a href="https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/">Ambari里自定义资源模块的实现</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-10-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1583 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-10-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1866 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     
@@ -350,6 +350,84 @@ public interface Resource {
     &lt;class&gt;org.apache.ambari.server.orm.entities.AlertDefinitionEntity&lt;/class&gt;
    &lt;/persistence-unit&gt;   
 </code></pre>
+<p>entity举例：</p>
+<pre><code class="language-java">package org.apache.ambari.server.orm.entities;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = &quot;admin_cluster_host&quot;)
+public class AdminClusterHostEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;id&quot;, nullable = false, updatable = false)
+    private Integer id;
+    @Column(name = &quot;host&quot;, length = 255)
+    private String host;
+    @Column(name = &quot;cluster&quot;, length = 255)
+    private String cluster;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(String cluster) {
+        this.cluster = cluster;
+    }
+}
+
+</code></pre>
+<p>dao举例</p>
+<pre><code class="language-java">package org.apache.ambari.server.orm.dao;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import org.apache.ambari.server.orm.RequiresSession;
+import org.apache.ambari.server.orm.entities.AdminClusterHostEntity;
+import org.apache.ambari.server.orm.entities.AlertHistoryEntity;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import java.util.Collections;
+import java.util.List;
+
+@Singleton
+public class AdminClusterDAO {
+
+    @Inject
+    private Provider&lt;EntityManager&gt; m_entityManagerProvider;
+
+    @RequiresSession
+    public List&lt;AdminClusterHostEntity&gt; findAll() {
+        TypedQuery&lt;AdminClusterHostEntity&gt; query = m_entityManagerProvider.get().createQuery(
+                &quot;SELECT ac FROM AdminClusterHostEntity ac&quot;, AdminClusterHostEntity.class);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return Collections.emptyList();
+        }
+    }
+}
+
+</code></pre>
 <h3 id="5注入相关">5.注入相关</h3>
 <p>AmbariServer类里也需要相应注入类依赖的对象，一种方式是手动注入，例如：</p>
 <pre><code class="language-java">ermissionResourceProvider.init(injector.getInstance(PermissionDAO.class));
@@ -359,6 +437,7 @@ public interface Resource {
         injector.getInstance(PermissionDAO.class), injector.getInstance(ResourceDAO.class));
 </code></pre>
 <p>还有一种方式是注解注入，参考org.apache.ambari.server.controller.ControllerModule</p>
+<p>Ambari注入这块比较迷，比如dao里用到的m_entityManagerProvider对象就不需要手动注入，在它原有的类里使用新加的dao也不需要手动注入。但是有些自己写的ResourceProvider里就需要注入。</p>
 <h3 id="6postman模拟验证">6.postman模拟验证</h3>
 <p>请求</p>
 <pre><code class="language-bash">curl --location --request GET 'http://10.180.210.146:8080/api/v1/hdfs?fields=Hdfses/*' \
