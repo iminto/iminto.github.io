@@ -6,7 +6,16 @@
     <description>Recent content in Linux on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 26 Aug 2020 10:22:59 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Dec 2020 16:44:44 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</title>
+      <link>https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</link>
+      <pubDate>Tue, 29 Dec 2020 16:44:44 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</guid>
+      <description>安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &amp;gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一</description>
+    </item>
+    
     <item>
       <title>Prosody搭建xmpp服务器</title>
       <link>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>

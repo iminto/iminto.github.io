@@ -15,7 +15,7 @@
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
 
 
-<title>Linux - 白菜不是菜</title>
+<title>Centos配置GoogleAuthenticator动态密钥进行ssh二次验证 - 白菜不是菜</title>
 
 
 <meta name="author" content="baicai" />
@@ -24,18 +24,21 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta property="og:title" content="Linux" />
-<meta property="og:description" content="A minimal Hugo theme with nice theme color." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://iminto.github.io/tags/linux/" />
+<meta name="keywords" content="Linux" />
+
+<meta property="og:title" content="Centos配置GoogleAuthenticator动态密钥进行ssh二次验证" />
+<meta property="og:description" content="安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2020-12-29T16:44:44+08:00" />
+<meta property="article:published_time" content="2020-12-29T16:44:44+08:00" />
+<meta property="article:modified_time" content="2020-12-29T16:44:44+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="Linux"/>
-<meta name="twitter:description" content="A minimal Hugo theme with nice theme color."/>
+<meta name="twitter:title" content="Centos配置GoogleAuthenticator动态密钥进行ssh二次验证"/>
+<meta name="twitter:description" content="安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一"/>
 
 
 
@@ -92,14 +95,8 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-
-<div class="page-info">
-    <span>拥有标签 Linux 的文章：</span>
-</div>
-
-
-
-<div class="post">
+<article>
+    
     <h2 class="post-item post-title">
         <a href="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/">Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</a>
     </h2>
@@ -107,82 +104,84 @@
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1000 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
-    <div class="post-item post-summary markdown-body">
-        安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一
+    
+    
+    <div class="post-content markdown-body">
+        <h3 id="安装依赖">安装依赖</h3>
+<pre><code class="language-bash">yum list | grep google-authenticator
+yum install google-authenticator
+yum install qrencode
+</code></pre>
+<h3 id="配置google-authenticator">配置Google Authenticator</h3>
+<p>安装完直接跑下面的命令进行配置，注意只在当前用户生效</p>
+<pre><code>&gt; google-authenticator
+</code></pre>
+<p>之后会需要确认几点信息</p>
+<pre><code>Do you want authentication tokens to be time-based (y/n) y
+</code></pre>
+<p>是否配置基于时间的动态密钥，选择y，之后会出现超级大一个二维码，下面还会有一些小字,这里的key就是用于配置手机端app的，我们先保存下来，不用慌，因为这个key随时都可以查得到.</p>
+<pre><code>Do you want me to update your &quot;/root/.google_authenticator&quot; file? (y/n) y
+</code></pre>
+<p>是否将配置信息更新到自己家目录，选择y进行更新，这个文件里面就保存着上面的key信息，以防后续还有新的手机设备需要用到key</p>
+<pre><code>Do you want to disallow multiple uses of the same authentication
+token? This restricts you to one login about every 30s, but it increases
+your chances to notice or even prevent man-in-the-middle attacks (y/n) y
+</code></pre>
+<p>是否禁止同一密钥在30秒内被多次使用，如果想要更安全就选择y，如果想要更方便就选择n</p>
+<pre><code>By default, a new token is generated every 30 seconds by the mobile app.
+In order to compensate for possible time-skew between the client and the server,
+we allow an extra token before and after the current time. This allows for a
+time skew of up to 30 seconds between authentication server and client. If you
+experience problems with poor time synchronization, you can increase the window
+from its default size of 3 permitted codes (one previous code, the current
+code, the next code) to 17 permitted codes (the 8 previous codes, the current
+code, and the 8 next codes). This will permit for a time skew of up to 4 minutes
+between client and server.
+Do you want to do so? (y/n) n
+</code></pre>
+<p>是否允许前8次和后8次的动态密钥也有效，如果客户端和手机端都是基于网络的时间同步，选择n提高安全性</p>
+<pre><code>If the computer that you are logging into isn't hardened against brute-force
+login attempts, you can enable rate-limiting for the authentication module.
+By default, this limits attackers to no more than 3 login attempts every 30s.
+Do you want to enable rate-limiting? (y/n) y
+</code></pre>
+<p>是否限制30秒内最多3次尝试，为了防止恶意试错，选择y
+这样服务端的Google Authenticator就配置完毕。下面做一些系统设置，使上面的配置用作ssh。</p>
+<h3 id="配置pam">配置pam</h3>
+<pre><code class="language-bash">vim /etc/pam.d/sshd
+auth required pam_google_authenticator.so nullok
+vim /etc/ssh/sshd_config
+UsePAM yes
+PasswordAuthentication no
+ChallengeResponseAuthentication yes
+sshd -t
+systemctl restart sshd
+</code></pre>
+<p>需要注意的是必须设置PasswordAuthentication no（禁用密码登陆，但是并非必须使用公钥），否则二次验证无法使用，会报如下错误：</p>
+<pre><code>sshd[2690384]: fatal: PAM: pam_setcred(): Permission denied
+</code></pre>
+<h3 id="手机设置">手机设置</h3>
+<p>推荐使用 <a href="https://github.com/andOTP/andOTP" target="_blank">andotp</a> 这个APP，扫码添加即可。</p>
+<p>如果换了手机也很容易，登录到服务器，找到~/.google_authenticator文件，里面会有之前保存的key，重新在新手机进行添加即可。</p>
+<h3 id="xshell登录验证">Xshell登录验证</h3>
+<p>下面还是正常ssh登陆服务器，不过输入完用户名以后只能选择交互键盘，依次输入密码和OTP验证码即可。关于登录的一些报错都在/var/log/secure这个日志文件中，不管是什么场景登陆失败都可以先查看下失败日志，对症下药。</p>
+<p>注意保持时间同步。
+直接使用ntpdate即可，国内可以使用国家授时中心的地址</p>
+<pre><code>ntpdate -u 210.72.145.44
+</code></pre>
+<p>基本上服务器和手机都是用的网络时间就不太会有时间同步的问题。</p>
+<p>refer:https://blog.csdn.net/Victor2code/article/details/107215820</p>
+
     </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
+    </blockquote>
 </div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/">Prosody搭建xmpp服务器</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-08-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;723 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/">Kde桌面下自带应用无法输入中文</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-03-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;967 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        ​ 这个问题纠结我快一年了。某次manjaro升级后，我的manjaro在系统自带应用上如konsole,kate,Yakuake上都不能切换输入法（目测系统自带的软件都不能），鼠标放键盘图标上提示“无
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/">使用Java自动登录需要动态密码的堡垒机</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;391 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。 不可忍，想了想，还是借助Java在每次调用时自动生成验证
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/get-createtime-in-linux/">Linux 下获取文件创建时间</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-10-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1096 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/">linux下解压bin文件</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-06-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;508 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知
-    </div>
-</div>
-
-
-
-
-
-
-
 
 
 
@@ -259,6 +258,23 @@
     </div>
     
     
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装依赖">安装依赖</a></li>
+        <li><a href="#配置google-authenticator">配置Google Authenticator</a></li>
+        <li><a href="#配置pam">配置pam</a></li>
+        <li><a href="#手机设置">手机设置</a></li>
+        <li><a href="#xshell登录验证">Xshell登录验证</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
     
     
 </aside>
@@ -344,6 +360,25 @@
             </span>
             
         </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装依赖">安装依赖</a></li>
+        <li><a href="#配置google-authenticator">配置Google Authenticator</a></li>
+        <li><a href="#配置pam">配置pam</a></li>
+        <li><a href="#手机设置">手机设置</a></li>
+        <li><a href="#xshell登录验证">Xshell登录验证</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
     
     

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 25 Dec 2020 11:24:02 +0800</lastBuildDate><atom:link href="https://iminto.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Dec 2020 16:44:44 +0800</lastBuildDate><atom:link href="https://iminto.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</title>
+      <link>https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</link>
+      <pubDate>Tue, 29 Dec 2020 16:44:44 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</guid>
+      <description>安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &amp;gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一</description>
+    </item>
+    
     <item>
       <title>TUI ConsoleLauncher 可定制化geek命令行桌面启动器</title>
       <link>https://iminto.github.io/post/tui-consolelauncher-%E5%8F%AF%E5%AE%9A%E5%88%B6%E5%8C%96geek%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A1%8C%E9%9D%A2%E5%90%AF%E5%8A%A8%E5%99%A8/</link>
