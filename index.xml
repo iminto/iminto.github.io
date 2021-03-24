@@ -6,7 +6,7 @@
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 29 Dec 2020 16:44:44 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Mar 2021 17:39:00 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://iminto.github.io/about/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://iminto.github.io/about/</guid>
       <description>目前可以找到我的联系方式： EMAIL：cGxtZWl6aUAxMjYuY29t XMPP：blueradish@xmpp.jp 不使用微信/QQ</description>
+    </item>
+    
+    <item>
+      <title>Keycloak接入自研系统</title>
+      <link>https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Wed, 24 Mar 2021 17:39:00 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/</guid>
+      <description>简介 keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，并且提供了非常方便的Client Adapters和各</description>
     </item>
     
     <item>
