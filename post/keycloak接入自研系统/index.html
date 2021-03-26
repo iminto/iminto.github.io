@@ -27,7 +27,7 @@
 <meta name="keywords" content="Java" />
 
 <meta property="og:title" content="Keycloak接入自研系统" />
-<meta property="og:description" content="简介 keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，并且提供了非常方便的Client Adapters和各" />
+<meta property="og:description" content="简介 keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，但是提供了非常方便的Client Adapters和各" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
@@ -38,7 +38,7 @@
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
 <meta name="twitter:title" content="Keycloak接入自研系统"/>
-<meta name="twitter:description" content="简介 keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，并且提供了非常方便的Client Adapters和各"/>
+<meta name="twitter:description" content="简介 keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，但是提供了非常方便的Client Adapters和各"/>
 
 
 
@@ -101,18 +101,296 @@
         <a href="https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/">Keycloak接入自研系统</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;875 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3199 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
         <h2 id="简介">简介</h2>
-<p>keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，并且提供了非常方便的Client Adapters和各种服务器进行对接，比如wildfly，tomcat，Jetty等。</p>
+<p>keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，但是提供了非常方便的Client Adapters和各种服务器进行对接，比如wildfly，tomcat，Jetty等。</p>
 <p>对于最流行的SpringBoot来说，keycloak有官方Adapter，只需要修改配置即可。如果非SpringBoot应用呢，那就只能使用Java Servlet Filter Adapter了。</p>
-<p>SpringBoot接入keycloak的例子比较多，我就不赘述了。我们有一个老系统，用的embedded jetty+jersey，虽然官方提供了Jetty 9.x Adapters，但这是针对standalone而言的，现在几乎没人这么用了，所以还是得自己来。官方有Java Servlet Filter Adapter的教程，但是用的是web.xml的例子，而且语焉不详，所以这里就我自己的摸索提供一点参考。</p>
-<h2 id="jettyjersey">jetty+jersey</h2>
-<p>先来看一下jetty+jersey的原生例子，涉及两个文件
+<p>SpringBoot接入keycloak的例子比较多，我就不赘述了。这里只简单说明下。</p>
+<h2 id="接入前的前置准备">接入前的前置准备</h2>
+<p>在接入各种应用之前，需要在keycloak中做好相应的配置。一般来说需要使用下面的步骤：</p>
+<ol>
+<li>
+<p>创建新的realm</p>
+<p>一般来说，为了隔离不同类型的系统，我们建议为不同的client创建不同的realm。当然，如果这些client是相关联的，则可以创建在同一个realm中。</p>
+</li>
+<li>
+<p>创建新的用户和角色。</p>
+<p>用户是用来登录keycloak用的，如果是不同的realm，则需要分别创建用户。用户密码也是在这一步创建的</p>
+</li>
+<li>
+<p>添加和配置client</p>
+<p>这一步是非常重要的，我们需要根据应用程序的不同，配置不同的root URL，redirect URI等。</p>
+<p>还可以配置mapper和scope信息。</p>
+<p>最后，如果是服务器端的配置的话，还需要installation的一些信息。</p>
+<p>有了这些基本的配置之后，我们就可以准备接入应用程序了。</p>
+</li>
+</ol>
+<h2 id="springboot接入keycloak">Springboot接入keycloak</h2>
+<h3 id="引入依赖">引入依赖</h3>
+<pre><code class="language-xml">	&lt;dependency&gt;
+		&lt;groupId&gt;org.keycloak&lt;/groupId&gt;
+		&lt;artifactId&gt;keycloak-spring-boot-starter&lt;/artifactId&gt;
+		&lt;version&gt;11.0.2&lt;/version&gt;
+	&lt;/dependency&gt;
+</code></pre>
+<h3 id="然后配置applicationyml">然后配置application.yml</h3>
+<pre><code class="language-yaml">keycloak:
+    auth-server-url: http://localhost:8080/auth
+    realm: wildfly
+    public-client: true
+    resource: product-app
+    securityConstraints:
+        - authRoles:
+              # 以下路径需要user角色才能访问
+              - user
+          securityCollections:
+              # name可以随便写
+              - name: user-role-mappings
+                patterns:
+                    - /users/*
+
+
+</code></pre>
+<p>至此就接入完成了，不需要编写任何代码。</p>
+<h3 id="获取keycloaksecuritycontext">获取KeycloakSecurityContext</h3>
+<p>但是实际使用中，光能控制登陆权限还不够，业务代码中还需要能获取到当前角色，用户名等信息，这就需要用到KeycloakSecurityContext了。KeycloakSecurityContext是keycloak的上下文，我们可以从其中获取到AccessToken，IDToken，AuthorizationContext和realm信息。</p>
+<p>Identity.java</p>
+<pre><code class="language-java">import java.util.List;
+
+import org.keycloak.AuthorizationContext;
+import org.keycloak.KeycloakSecurityContext;
+import org.keycloak.representations.idm.authorization.Permission;
+
+/**
+ * &lt;p&gt;This is a simple facade to obtain information from authenticated users. You should see usages of instances of this class when
+ * rendering the home page (@code home.ftl).
+ *
+ * &lt;p&gt;Instances of this class are are added to models as attributes in order to make them available to templates.
+ *
+ * @author &lt;a href=&quot;mailto:psilva@redhat.com&quot;&gt;Pedro Igor&lt;/a&gt;
+ * @see com.github.your.demo.controller.HomeController
+ */
+public class Identity {
+
+    private final KeycloakSecurityContext securityContext;
+
+    public Identity(KeycloakSecurityContext securityContext) {
+        this.securityContext = securityContext;
+    }
+
+    /**
+     * An example on how you can use the {@link org.keycloak.AuthorizationContext} to check for permissions granted by Keycloak for a particular user.
+     *
+     * @param name the name of the resource
+     * @return true if user has was granted with a permission for the given resource. Otherwise, false.
+     */
+    public boolean hasResourcePermission(String name) {
+        return getAuthorizationContext().hasResourcePermission(name);
+    }
+
+    /**
+     * An example on how you can use {@link KeycloakSecurityContext} to obtain information about user's identity.
+     *
+     * @return the user name
+     */
+    public String getName() {
+        return securityContext.getIdToken().getPreferredUsername();
+    }
+
+    /**
+     * An example on how you can use the {@link org.keycloak.AuthorizationContext} to obtain all permissions granted for a particular user.
+     *
+     * @return
+     */
+    public List&lt;Permission&gt; getPermissions() {
+        return getAuthorizationContext().getPermissions();
+    }
+
+    /**
+     * Returns a {@link AuthorizationContext} instance holding all permissions granted for an user. The instance is build based on
+     * the permissions returned by Keycloak. For this particular application, we use the Entitlement API to obtain permissions for every single
+     * resource on the server.
+     *
+     * @return
+     */
+    private AuthorizationContext getAuthorizationContext() {
+        return securityContext.getAuthorizationContext();
+    }
+}
+</code></pre>
+<p>使用</p>
+<pre><code class="language-java">@RestController
+public class HomeController {
+    private Logger logger = LoggerFactory.getLogger(HomeController.class);
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @RequestMapping(&quot;/users&quot;)
+    @ResponseBody
+    public List&lt;Users&gt; users() {
+        logIdentity();
+        logger.info(&quot;使用JdbcTemplate查询数据库&quot;);
+        String sql = &quot;SELECT * FROM users &quot;;
+        List&lt;Users&gt; queryAllList = jdbcTemplate.query(sql, new Object[]{},
+                new BeanPropertyRowMapper&lt;&gt;(Users.class));
+        logger.info(&quot;查询用户列表&quot; + queryAllList);
+        return queryAllList;
+    }
+
+    @RequestMapping(&quot;/&quot;)
+    public String home() {
+        return &quot;Hello Docker World&quot;;
+    }
+
+    private void logIdentity() {
+        KeycloakSecurityContext context=getKeycloakSecurityContext();
+        if(context!=null){
+            Identity identity=new Identity(context);
+            logger.info(&quot;KeycloakSecurityContext identity={}&quot;,identity);
+        }else{
+            logger.info(&quot;KeycloakSecurityContext is null&quot;);
+        }
+    }
+
+    private KeycloakSecurityContext getKeycloakSecurityContext() {
+        return (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+    }
+}
+</code></pre>
+<p>Identity类来自Keycloak的官方example。上面介绍的Spring Boot中的其实是隐藏的做法，adaptor自动为我们做了和Keycloak认证服务连接的事情，如果我们需要手动去处理，则需要用到Authorization Client Java API。</p>
+<p>添加maven依赖：</p>
+<pre><code class="language-xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.keycloak&lt;/groupId&gt;
+        &lt;artifactId&gt;keycloak-authz-client&lt;/artifactId&gt;
+        &lt;version&gt;${KEYCLOAK_VERSION}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>具体使用AuthzClient可查看官方文档。</p>
+<h3 id="rest接口">Rest接口</h3>
+<p>有了这些配置，我们基本上就可以创建一个基于spring boot和keycloak的一个rest服务了。</p>
+<p>假如我们为keycloak的client创建了新的用户：alice。</p>
+<p>第一步我们需要拿到alice的access token，则可以这样操作：</p>
+<pre><code class="language-sh"> export access_token=$(\
+    curl -X POST http://localhost:8180/auth/realms/spring-boot-quickstart/protocol/openid-connect/token \
+    -H 'Authorization: Basic YXBwLWF1dGh6LXJlc3Qtc3ByaW5nYm9vdDpzZWNyZXQ=' \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=alice&amp;password=alice&amp;grant_type=password' | jq --raw-output '.access_token' \
+ )
+</code></pre>
+<p>这个命令是直接通过用户名密码的方式去keycloak服务器中拿取access_token,除了access_token，这个命令还会返回refresh_token和session state的信息。</p>
+<p>因为是直接和keycloak进行交换，所以keycloak的directAccessGrantsEnabled一定要设置为true。</p>
+<p>上面命令中的Authorization是什么值呢？</p>
+<p>这个值是为了防止未授权的client对keycloak服务器的非法访问，所以需要请求客户端提供client-id和对应的client-secret并且以下面的方式进行编码得到的：</p>
+<pre><code class="language-sh">Authorization: basic BASE64(client-id + ':' + client-secret)
+</code></pre>
+<p>access_token是JWT格式的，我们可以简单解密一下上面命令得出的token:</p>
+<pre><code class="language-json">    {
+ alg: &quot;RS256&quot;,
+ typ: &quot;JWT&quot;,
+ kid: &quot;FJ86GcF3jTbNLOco4NvZkUCIUmfYCqoqtOQeMfbhNlE&quot;
+}.
+{
+ exp: 1603614445,
+ iat: 1603614145,
+ jti: &quot;b69c784d-5b2d-46ad-9f8d-46214add7afb&quot;,
+ iss: &quot;http://localhost:8180/auth/realms/spring-boot-quickstart&quot;,
+ sub: &quot;e6606d93-99f6-4829-ba99-1329be604159&quot;,
+ typ: &quot;Bearer&quot;,
+ azp: &quot;app-authz-springboot&quot;,
+ session_state: &quot;bdc33764-fd1a-400e-9fe0-90a82f4873c1&quot;,
+ acr: &quot;1&quot;,
+ allowed-origins: [
+  &quot;http://localhost:8080&quot;
+ ],
+ realm_access: {
+  roles: [
+   &quot;user&quot;
+  ]
+ },
+ scope: &quot;email profile&quot;,
+ email_verified: false,
+ preferred_username: &quot;alice&quot;
+}.
+[signature]
+</code></pre>
+<p>有了access_token,我们就可以根据access_token去做很多事情了。</p>
+<p>比如：访问受限的资源：</p>
+<pre><code class="language-sh">curl http://localhost:8080/api/resourcea \
+  -H &quot;Authorization: Bearer &quot;$access_token
+</code></pre>
+<p>这里的api/resourcea只是我们本地spring boot应用中一个非常简单的请求资源链接，一切的权限校验工作都会被keycloak拦截，我们看下这个api的实现：</p>
+<pre><code class="language-java"> @RequestMapping(value = &quot;/api/resourcea&quot;, method = RequestMethod.GET)
+public String handleResourceA() {
+        return createResponse();
+    }
+private String createResponse() {
+        return &quot;Access Granted&quot;;
+    }
+</code></pre>
+<p>可以看到这个只是一个简单的txt返回，但是因为有keycloak的加持，就变成了一个带权限的资源调用。</p>
+<p>上面的access_token解析过后，我们可以看到里面是没有包含权限信息的，我们可以使用access_token来交换一个特殊的RPT的token，这个token里面包含用户的权限信息：</p>
+<pre><code class="language-sh">curl -X POST \
+ http://localhost:8180/auth/realms/spring-boot-quickstart/protocol/openid-connect/token \
+ -H &quot;Authorization: Bearer &quot;$access_token \
+ --data &quot;grant_type=urn:ietf:params:oauth:grant-type:uma-ticket&quot; \
+ --data &quot;audience=app-authz-rest-springboot&quot; \
+  --data &quot;permission=Default Resource&quot; | jq --raw-output '.access_token'
+</code></pre>
+<p>将得出的结果解密之后，看下里面的内容：</p>
+<pre><code class="language-json">    {
+ alg: &quot;RS256&quot;,
+ typ: &quot;JWT&quot;,
+ kid: &quot;FJ86GcF3jTbNLOco4NvZkUCIUmfYCqoqtOQeMfbhNlE&quot;
+}.
+{
+ exp: 1603614507,
+ iat: 1603614207,
+ jti: &quot;93e42d9b-4bc6-486a-a650-b912185c35db&quot;,
+ iss: &quot;http://localhost:8180/auth/realms/spring-boot-quickstart&quot;,
+ aud: &quot;app-authz-springboot&quot;,
+ sub: &quot;e6606d93-99f6-4829-ba99-1329be604159&quot;,
+ typ: &quot;Bearer&quot;,
+ azp: &quot;app-authz-springboot&quot;,
+ session_state: &quot;bdc33764-fd1a-400e-9fe0-90a82f4873c1&quot;,
+ acr: &quot;1&quot;,
+ allowed-origins: [
+  &quot;http://localhost:8080&quot;
+ ],
+ realm_access: {
+  roles: [
+   &quot;user&quot;
+  ]
+ },
+ authorization: {
+  permissions: [
+   {
+rsid: &quot;e26d5d63-5976-4959-8683-94b7d85318e7&quot;,
+rsname: &quot;Default Resource&quot;
+}
+  ]
+ },
+ scope: &quot;email profile&quot;,
+ email_verified: false,
+ preferred_username: &quot;alice&quot;
+}.
+[signature]
+</code></pre>
+<p>可以看到，这个RPT和之前的access_token的区别是这个里面包含了authorization信息。</p>
+<p>我们可以将这个RPT的token和之前的access_token一样使用。</p>
+<h2 id="jettyjersey框架接入keycloak">Jetty+Jersey框架接入Keycloak</h2>
+<p>我们有一个老系统，用的embeded Jetty+Jersey，虽然官方提供了Jetty 9.x Adapters，但这是针对standalone而言的，现在几乎没人这么用了，所以还是得自己来。官方有Java Servlet Filter Adapter的教程，但是用的是web.xml的例子，而且语焉不详，所以这里就我自己的摸索提供一点参考。</p>
+<h3 id="jetty整合jersey框架">Jetty整合Jersey框架</h3>
+<p>先来看一下Jetty+Jersey的原生例子，涉及两个文件
 App.java</p>
 <pre><code class="language-java">package xyz.chen;
 import org.eclipse.jetty.server.Server;
@@ -282,7 +560,7 @@ public class HelloResource {
 
 </code></pre>
 <p>运行就不再举例了。</p>
-<h2 id="整合keycloak">整合keycloak</h2>
+<h3 id="整合keycloak">整合keycloak</h3>
 <p>引入依赖</p>
 <pre><code class="language-xml">    &lt;dependency&gt;
       &lt;groupId&gt;org.keycloak&lt;/groupId&gt;
@@ -308,7 +586,7 @@ server.setHandler(context);
 }
 </code></pre>
 <p>keycloak的配置不再赘述。</p>
-<h2 id="获取用户权限信息">获取用户权限信息</h2>
+<h3 id="获取用户权限信息">获取用户权限信息</h3>
 <p>这块不再举例，自己写个Filter去KeycloakSecurityContext里拿就可以了。</p>
 <h2 id="参考">参考</h2>
 <p><a href="https://www.keycloak.org/docs/latest/securing_apps/#_jetty9_adapter">https://www.keycloak.org/docs/latest/securing_apps/#_jetty9_adapter</a></p>
@@ -406,9 +684,22 @@ server.setHandler(context);
         <nav id="TableOfContents">
   <ul>
     <li><a href="#简介">简介</a></li>
-    <li><a href="#jettyjersey">jetty+jersey</a></li>
-    <li><a href="#整合keycloak">整合keycloak</a></li>
-    <li><a href="#获取用户权限信息">获取用户权限信息</a></li>
+    <li><a href="#接入前的前置准备">接入前的前置准备</a></li>
+    <li><a href="#springboot接入keycloak">Springboot接入keycloak</a>
+      <ul>
+        <li><a href="#引入依赖">引入依赖</a></li>
+        <li><a href="#然后配置applicationyml">然后配置application.yml</a></li>
+        <li><a href="#获取keycloaksecuritycontext">获取KeycloakSecurityContext</a></li>
+        <li><a href="#rest接口">Rest接口</a></li>
+      </ul>
+    </li>
+    <li><a href="#jettyjersey框架接入keycloak">Jetty+Jersey框架接入Keycloak</a>
+      <ul>
+        <li><a href="#jetty整合jersey框架">Jetty整合Jersey框架</a></li>
+        <li><a href="#整合keycloak">整合keycloak</a></li>
+        <li><a href="#获取用户权限信息">获取用户权限信息</a></li>
+      </ul>
+    </li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -507,9 +798,22 @@ server.setHandler(context);
         <nav id="TableOfContents">
   <ul>
     <li><a href="#简介">简介</a></li>
-    <li><a href="#jettyjersey">jetty+jersey</a></li>
-    <li><a href="#整合keycloak">整合keycloak</a></li>
-    <li><a href="#获取用户权限信息">获取用户权限信息</a></li>
+    <li><a href="#接入前的前置准备">接入前的前置准备</a></li>
+    <li><a href="#springboot接入keycloak">Springboot接入keycloak</a>
+      <ul>
+        <li><a href="#引入依赖">引入依赖</a></li>
+        <li><a href="#然后配置applicationyml">然后配置application.yml</a></li>
+        <li><a href="#获取keycloaksecuritycontext">获取KeycloakSecurityContext</a></li>
+        <li><a href="#rest接口">Rest接口</a></li>
+      </ul>
+    </li>
+    <li><a href="#jettyjersey框架接入keycloak">Jetty+Jersey框架接入Keycloak</a>
+      <ul>
+        <li><a href="#jetty整合jersey框架">Jetty整合Jersey框架</a></li>
+        <li><a href="#整合keycloak">整合keycloak</a></li>
+        <li><a href="#获取用户权限信息">获取用户权限信息</a></li>
+      </ul>
+    </li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
