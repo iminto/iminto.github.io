@@ -27,7 +27,7 @@
 <meta name="keywords" content="大数据" />
 
 <meta property="og:title" content="SuperSet安装" />
-<meta property="og:description" content="Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con" />
+<meta property="og:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
@@ -38,7 +38,7 @@
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
 <meta name="twitter:title" content="SuperSet安装"/>
-<meta name="twitter:description" content="Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con"/>
+<meta name="twitter:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常"/>
 
 
 
@@ -101,14 +101,14 @@
         <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;884 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1035 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <p>Centos8安装Superset.</p>
-<p>不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个conda create 的操作而已。
+        <p>Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常有特色。</p>
+<p>不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个conda create 的操作而已。我在Centos7+Python 2.7.5 环境下也安装成功。
 我是新环境，直接升级就好。</p>
 <h3 id="初始化升级到python-38非必须">初始化，升级到python 3.8（非必须）</h3>
 <pre><code class="language-bash">wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
@@ -129,7 +129,7 @@ chmod 777 Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 </code></pre>
 <p>一步一步来，最后把conda的路径加入环境变量。</p>
-<pre><code class="language-bash">conda list #颜值安装是否成功
+<pre><code class="language-bash">conda list #验证安装是否成功
 
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
@@ -137,13 +137,19 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 conda config --add channels conda create -n superset python=3.8
 conda config --get channels
 </code></pre>
+<h3 id="使用conda安装superset">使用conda安装SuperSet</h3>
 <p>最后进入安装superset环节。创建虚拟环境，这也是低版本python安装高版本python软件的关键。为什么不直接用pip，还是考虑到python版本比较混乱的问题。为什么不用virtualenv，主要是conda能安装一些依赖，减少手动操作。最新版的superset应该是不需要这么麻烦，pip一路到底就可以，不过我还是参考了老的安装教程。有闲的可以直接看官方教程，更简单。</p>
 <pre><code class="language-bash">conda create -n superset python=3.8
-source activate superset
+activate superset
 pip install apache-superset
 </code></pre>
-<p>要退出conda创建的虚拟环节可以用conda deactivate指令。
-如果pip太慢，可以加入国内源</p>
+<p>要退出conda创建的虚拟环节可以用conda deactivate指令。</p>
+<p>查看和切换虚拟环境</p>
+<pre><code>conda info --envs
+conda env list
+conda activate base
+</code></pre>
+<p>如果pip太慢，可以加入国内源</p>
 <pre><code class="language-bash">#新建配置文件
 touch ~/.pip/pip.conf
 #加入如下配置
@@ -161,6 +167,7 @@ trusted-host = https://pypi.tuna.tsinghua.edu.cn
 
 </code></pre>
 <p>是因为缺少了 gcc-c++，安装即可。这就是第一步里面的初始化所做的。</p>
+<h3 id="配置和启动">配置和启动</h3>
 <p>如果顺利的话，superset应该是安装成功了。接下来就是官方文档里的初始化操作了。</p>
 <pre><code class="language-bash">superset db upgrade
 # Create an admin user (you will be prompted to set a username, first and last name before setting a password)
@@ -286,6 +293,8 @@ superset run -h 110.6.7.8  -p 8080 --with-threads --reload
       <ul>
         <li><a href="#初始化升级到python-38非必须">初始化，升级到python 3.8（非必须）</a></li>
         <li><a href="#安装miniconda">安装miniconda</a></li>
+        <li><a href="#使用conda安装superset">使用conda安装SuperSet</a></li>
+        <li><a href="#配置和启动">配置和启动</a></li>
       </ul>
     </li>
   </ul>
@@ -392,6 +401,8 @@ superset run -h 110.6.7.8  -p 8080 --with-threads --reload
       <ul>
         <li><a href="#初始化升级到python-38非必须">初始化，升级到python 3.8（非必须）</a></li>
         <li><a href="#安装miniconda">安装miniconda</a></li>
+        <li><a href="#使用conda安装superset">使用conda安装SuperSet</a></li>
+        <li><a href="#配置和启动">配置和启动</a></li>
       </ul>
     </li>
   </ul>

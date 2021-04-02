@@ -22,7 +22,7 @@
       <pubDate>Fri, 02 Apr 2021 11:15:20 +0800</pubDate>
       
       <guid>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</guid>
-      <description>Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con</description>
+      <description>Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常</description>
     </item>
     
     <item>
