@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>大数据 on 白菜不是菜</title>
+    <link>https://iminto.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+    <description>Recent content in 大数据 on 白菜不是菜</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 02 Apr 2021 11:15:20 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SuperSet安装</title>
+      <link>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Fri, 02 Apr 2021 11:15:20 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</guid>
+      <description>Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con</description>
+    </item>
+    
+    <item>
+      <title>Ambari里自定义资源模块的实现</title>
+      <link>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Tue, 13 Oct 2020 09:52:43 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>Ambari里主机，集群，用户等等都视为一种资源，对它们的增删改查就是对资源的增删改查。 了解实现Ambari里增加一个资源的流程，就更方便修改Ambari的实现。 1.新建控制器层 ambari的控制器层</description>
+    </item>
+    
+    <item>
+      <title>hadoop 3.1.2 单机模式安装配置</title>
+      <link>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 25 Aug 2019 23:12:21 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
+      <description>hadoop 3.1.2 单机模式安装配置 现在搞大数据记录一下，方便查阅。 1.安装配置jdk和下载hadoop略。 hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/ 使用</description>
+    </item>
+    
+  </channel>
+</rss>

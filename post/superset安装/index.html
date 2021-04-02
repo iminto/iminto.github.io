@@ -15,7 +15,7 @@
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
 
 
-<title>Centos配置GoogleAuthenticator动态密钥进行ssh二次验证 - 白菜不是菜</title>
+<title>SuperSet安装 - 白菜不是菜</title>
 
 
 <meta name="author" content="baicai" />
@@ -24,21 +24,21 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta name="keywords" content="Linux" />
+<meta name="keywords" content="大数据" />
 
-<meta property="og:title" content="Centos配置GoogleAuthenticator动态密钥进行ssh二次验证" />
-<meta property="og:description" content="安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一" />
+<meta property="og:title" content="SuperSet安装" />
+<meta property="og:description" content="Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/" />
+<meta property="og:url" content="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="article:published_time" content="2020-12-29T16:44:44+08:00" />
-<meta property="article:modified_time" content="2020-12-29T16:44:44+08:00" />
+<meta property="article:published_time" content="2021-04-02T11:15:20+08:00" />
+<meta property="article:modified_time" content="2021-04-02T11:15:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="Centos配置GoogleAuthenticator动态密钥进行ssh二次验证"/>
-<meta name="twitter:description" content="安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一"/>
+<meta name="twitter:title" content="SuperSet安装"/>
+<meta name="twitter:description" content="Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con"/>
 
 
 
@@ -98,79 +98,94 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/">Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</a>
+        <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1000 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;884 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <h3 id="安装依赖">安装依赖</h3>
-<pre><code class="language-bash">yum list | grep google-authenticator
-yum install google-authenticator
-yum install qrencode
+        <p>Centos8安装Superset.</p>
+<p>不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个conda create 的操作而已。
+我是新环境，直接升级就好。</p>
+<h3 id="初始化升级到python-38非必须">初始化，升级到python 3.8（非必须）</h3>
+<pre><code class="language-bash">wget https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz
+yum install gcc gcc-c++ libffi-devel
+tar -xvf Python-3.8.1.tgz
+cd Python-3.8.1
+ ./configure --prefix=/usr/local/python3
+make &amp;&amp; make install
+rm -f /usr/bin/python
+rm -f /usr/bin/pip
+ln -s /usr/local/python3/bin/python3 /usr/bin/python
+ln -s /usr/local/python3/bin/python3 /usr/bin/python
+python -V
 </code></pre>
-<h3 id="配置google-authenticator">配置Google Authenticator</h3>
-<p>安装完直接跑下面的命令进行配置，注意只在当前用户生效</p>
-<pre><code>&gt; google-authenticator
+<h3 id="安装miniconda">安装miniconda</h3>
+<pre><code class="language-bash">wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod 777 Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
 </code></pre>
-<p>之后会需要确认几点信息</p>
-<pre><code>Do you want authentication tokens to be time-based (y/n) y
+<p>一步一步来，最后把conda的路径加入环境变量。</p>
+<pre><code class="language-bash">conda list #颜值安装是否成功
+
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels conda create -n superset python=3.8
+conda config --get channels
 </code></pre>
-<p>是否配置基于时间的动态密钥，选择y，之后会出现超级大一个二维码，下面还会有一些小字,这里的key就是用于配置手机端app的，我们先保存下来，不用慌，因为这个key随时都可以查得到.</p>
-<pre><code>Do you want me to update your &quot;/root/.google_authenticator&quot; file? (y/n) y
+<p>最后进入安装superset环节。创建虚拟环境，这也是低版本python安装高版本python软件的关键。为什么不直接用pip，还是考虑到python版本比较混乱的问题。为什么不用virtualenv，主要是conda能安装一些依赖，减少手动操作。最新版的superset应该是不需要这么麻烦，pip一路到底就可以，不过我还是参考了老的安装教程。有闲的可以直接看官方教程，更简单。</p>
+<pre><code class="language-bash">conda create -n superset python=3.8
+source activate superset
+pip install apache-superset
 </code></pre>
-<p>是否将配置信息更新到自己家目录，选择y进行更新，这个文件里面就保存着上面的key信息，以防后续还有新的手机设备需要用到key</p>
-<pre><code>Do you want to disallow multiple uses of the same authentication
-token? This restricts you to one login about every 30s, but it increases
-your chances to notice or even prevent man-in-the-middle attacks (y/n) y
+<p>要退出conda创建的虚拟环节可以用conda deactivate指令。
+如果pip太慢，可以加入国内源</p>
+<pre><code class="language-bash">#新建配置文件
+touch ~/.pip/pip.conf
+#加入如下配置
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host = https://pypi.tuna.tsinghua.edu.cn
+
 </code></pre>
-<p>是否禁止同一密钥在30秒内被多次使用，如果想要更安全就选择y，如果想要更方便就选择n</p>
-<pre><code>By default, a new token is generated every 30 seconds by the mobile app.
-In order to compensate for possible time-skew between the client and the server,
-we allow an extra token before and after the current time. This allows for a
-time skew of up to 30 seconds between authentication server and client. If you
-experience problems with poor time synchronization, you can increase the window
-from its default size of 3 permitted codes (one previous code, the current
-code, the next code) to 17 permitted codes (the 8 previous codes, the current
-code, and the 8 next codes). This will permit for a time skew of up to 4 minutes
-between client and server.
-Do you want to do so? (y/n) n
+<p>如果出现了类似的报错</p>
+<pre><code class="language-bash"> gcc: error trying to exec 'cc1plus': execvp: No such file or directory
+  error: command 'gcc' failed with exit status 1
+  ----------------------------------------
+  ERROR: Failed building wheel for python-geohash
+
 </code></pre>
-<p>是否允许前8次和后8次的动态密钥也有效，如果客户端和手机端都是基于网络的时间同步，选择n提高安全性</p>
-<pre><code>If the computer that you are logging into isn't hardened against brute-force
-login attempts, you can enable rate-limiting for the authentication module.
-By default, this limits attackers to no more than 3 login attempts every 30s.
-Do you want to enable rate-limiting? (y/n) y
+<p>是因为缺少了 gcc-c++，安装即可。这就是第一步里面的初始化所做的。</p>
+<p>如果顺利的话，superset应该是安装成功了。接下来就是官方文档里的初始化操作了。</p>
+<pre><code class="language-bash">superset db upgrade
+# Create an admin user (you will be prompted to set a username, first and last name before setting a password)
+$ export FLASK_APP=superset
+superset fab create-admin
+
+# Load some data to play with
+superset load_examples
+
+# Create default roles and permissions
+superset init
+
+# To start a development web server on port 8088, use -p to bind to another port
+superset run -p 8088 --with-threads --reload --debugger
 </code></pre>
-<p>是否限制30秒内最多3次尝试，为了防止恶意试错，选择y
-这样服务端的Google Authenticator就配置完毕。下面做一些系统设置，使上面的配置用作ssh。</p>
-<h3 id="配置pam">配置pam</h3>
-<pre><code class="language-bash">vim /etc/pam.d/sshd
-auth required pam_google_authenticator.so nullok
-vim /etc/ssh/sshd_config
-UsePAM yes
-PasswordAuthentication no
-ChallengeResponseAuthentication yes
-sshd -t
-systemctl restart sshd
+<p>再superset load_examples这一步，可能会卡很久，应该是下载网络数据被GFW卡了，直接中止就好了。
+superset默认只绑定localhost，想要外网可访问，可以绑定一个主机。</p>
+<pre><code class="language-bash">#hosts文件里添加一条映射
+0.0.0.0 ten
+#绑定ten
+superset run -h ten  -p 8080 --with-threads --reload
+#这样直接绑定IP地址是会报错的
+superset run -h 110.6.7.8  -p 8080 --with-threads --reload
 </code></pre>
-<p>需要注意的是必须设置PasswordAuthentication no（禁用密码登陆，但是并非必须使用公钥），否则二次验证无法使用，会报如下错误：</p>
-<pre><code>sshd[2690384]: fatal: PAM: pam_setcred(): Permission denied
-</code></pre>
-<h3 id="手机设置">手机设置</h3>
-<p>推荐使用 <a href="https://github.com/andOTP/andOTP" target="_blank">andotp</a> 这个APP，扫码添加即可。</p>
-<p>如果换了手机也很容易，登录到服务器，找到~/.google_authenticator文件，里面会有之前保存的key，重新在新手机进行添加即可。</p>
-<h3 id="xshell登录验证">Xshell登录验证</h3>
-<p>下面还是正常ssh登陆服务器，不过输入完用户名以后只能选择交互键盘，依次输入密码和OTP验证码即可。关于登录的一些报错都在/var/log/secure这个日志文件中，不管是什么场景登陆失败都可以先查看下失败日志，对症下药。</p>
-<p>注意保持时间同步。
-直接使用ntpdate即可，国内可以使用国家授时中心的地址</p>
-<pre><code>ntpdate -u 210.72.145.44
-</code></pre>
-<p>基本上服务器和手机都是用的网络时间就不太会有时间同步的问题。</p>
-<p>refer:<a href="https://blog.csdn.net/Victor2code/article/details/107215820" target="_blank">https://blog.csdn.net/Victor2code/&hellip;</a></p>
+<p>这操作也有点诡异了些。。</p>
 
     </div>
 </article>
@@ -269,11 +284,8 @@ systemctl restart sshd
   <ul>
     <li>
       <ul>
-        <li><a href="#安装依赖">安装依赖</a></li>
-        <li><a href="#配置google-authenticator">配置Google Authenticator</a></li>
-        <li><a href="#配置pam">配置pam</a></li>
-        <li><a href="#手机设置">手机设置</a></li>
-        <li><a href="#xshell登录验证">Xshell登录验证</a></li>
+        <li><a href="#初始化升级到python-38非必须">初始化，升级到python 3.8（非必须）</a></li>
+        <li><a href="#安装miniconda">安装miniconda</a></li>
       </ul>
     </li>
   </ul>
@@ -378,11 +390,8 @@ systemctl restart sshd
   <ul>
     <li>
       <ul>
-        <li><a href="#安装依赖">安装依赖</a></li>
-        <li><a href="#配置google-authenticator">配置Google Authenticator</a></li>
-        <li><a href="#配置pam">配置pam</a></li>
-        <li><a href="#手机设置">手机设置</a></li>
-        <li><a href="#xshell登录验证">Xshell登录验证</a></li>
+        <li><a href="#初始化升级到python-38非必须">初始化，升级到python 3.8（非必须）</a></li>
+        <li><a href="#安装miniconda">安装miniconda</a></li>
       </ul>
     </li>
   </ul>

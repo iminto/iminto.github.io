@@ -15,7 +15,7 @@
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
 
 
-<title>Linux - 白菜不是菜</title>
+<title>大数据 - 白菜不是菜</title>
 
 
 <meta name="author" content="baicai" />
@@ -24,17 +24,17 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta property="og:title" content="Linux" />
+<meta property="og:title" content="大数据" />
 <meta property="og:description" content="A minimal Hugo theme with nice theme color." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://iminto.github.io/tags/linux/" />
+<meta property="og:url" content="https://iminto.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2020-12-29T16:44:44+08:00" />
+<meta property="og:updated_time" content="2021-04-02T11:15:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="Linux"/>
+<meta name="twitter:title" content="大数据"/>
 <meta name="twitter:description" content="A minimal Hugo theme with nice theme color."/>
 
 
@@ -94,86 +94,47 @@
                 
 
 <div class="page-info">
-    <span>拥有标签 Linux 的文章：</span>
+    <span>拥有标签 大数据 的文章：</span>
 </div>
 
 
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/">Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</a>
+        <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1000 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;884 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一
+        Centos8安装Superset. 不建议使用python3.8以下版本。低版本建议使用docker-composer或者helm安装。当然，想要低版本Python安装也不是不可以，其实也就一个con
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/">Prosody搭建xmpp服务器</a>
+        <a href="https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/">Ambari里自定义资源模块的实现</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-08-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;723 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-10-13</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1866 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中
+        Ambari里主机，集群，用户等等都视为一种资源，对它们的增删改查就是对资源的增删改查。 了解实现Ambari里增加一个资源的流程，就更方便修改Ambari的实现。 1.新建控制器层 ambari的控制器层
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/">Kde桌面下自带应用无法输入中文</a>
+        <a href="https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">hadoop 3.1.2 单机模式安装配置</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-03-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;967 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">linux</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-08-25</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;623 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        ​ 这个问题纠结我快一年了。某次manjaro升级后，我的manjaro在系统自带应用上如konsole,kate,Yakuake上都不能切换输入法（目测系统自带的软件都不能），鼠标放键盘图标上提示“无
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/">使用Java自动登录需要动态密码的堡垒机</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;391 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。 不可忍，想了想，还是借助Java在每次调用时自动生成验证
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/get-createtime-in-linux/">Linux 下获取文件创建时间</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-10-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1096 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/">linux下解压bin文件</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-06-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;508 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知
+        hadoop 3.1.2 单机模式安装配置 现在搞大数据记录一下，方便查阅。 1.安装配置jdk和下载hadoop略。 hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/ 使用
     </div>
 </div>
 
