@@ -31,8 +31,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="article:published_time" content="2021-03-24T17:39:00+08:00" />
-<meta property="article:modified_time" content="2021-03-24T17:39:00+08:00" />
+<meta property="article:published_time" content="2021-04-07T09:39:00+08:00" />
+<meta property="article:modified_time" content="2021-04-07T09:39:00+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
@@ -101,7 +101,7 @@
         <a href="https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/">Keycloak接入自研系统</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-03-24</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3199 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3548 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     
@@ -588,6 +588,54 @@ server.setHandler(context);
 <p>keycloak的配置不再赘述。</p>
 <h3 id="获取用户权限信息">获取用户权限信息</h3>
 <p>这块不再举例，自己写个Filter去KeycloakSecurityContext里拿就可以了。</p>
+<h2 id="其它问题">其它问题</h2>
+<h3 id="1如何用代码完成在keycloak注册和配置过程实现自动化配置">1.如何用代码完成在KeyCloak注册和配置过程，实现自动化配置？</h3>
+<p>KeyCloark有restApi，也有命令行工具。下面是简单暴力的做法，使用命令行</p>
+<pre><code class="language-bash">#添加管理员用户
+.../bin/add-user-keycloak.sh -r master -u &lt;username&gt; -p &lt;password&gt;
+
+$ kcadm.sh config credentials --server http://localhost:8080/auth --realm master --user admin 
+$ kcadm.sh create realms -s realm=demorealm -s enabled=true -o
+$ CID=$(kcadm.sh create clients -r demorealm -s clientId=my_client -s 'redirectUris=[&quot;http://localhost:8980/myapp/*&quot;]' -i)
+$ kcadm.sh get clients/$CID/installation/providers/keycloak-oidc-keycloak-json
+</code></pre>
+<p>如下所示，使用windows举例</p>
+<pre><code class="language-bash">PS G:\keycloak11\bin&gt; .\kcadm config credentials --server http://localhost:8080/auth --realm master --user admin        Logging into http://localhost:8080/auth as user admin of realm master
+Enter password: admin
+
+PS G:\keycloak11\bin&gt; .\kcadm create realms -s realm=demorealm -s enabled=true -o
+
+PS G:\keycloak11\bin&gt; .\kcadm create clients -r demorealm -s clientId=my_client -s 'redirectUris=[\&quot;http://localhost:8980/myapp/*\&quot;]' -i &gt; clientid.txt
+PS G:\keycloak11\bin&gt; set /p CID=&lt;clientid.txt
+
+PS G:\keycloak11\bin&gt; .\kcadm get http://localhost:8080/auth/admin/realms/demorealm/clients/8aba2b1f-4587-43ba-8f51-d2e75db5f65d/installation/providers/keycloak-oidc-keycloak-json
+{
+  &quot;realm&quot; : &quot;demorealm&quot;,
+  &quot;auth-server-url&quot; : &quot;http://localhost:8080/auth/&quot;,
+  &quot;ssl-required&quot; : &quot;external&quot;,
+  &quot;resource&quot; : &quot;my_client&quot;,
+  &quot;credentials&quot; : {
+    &quot;secret&quot; : &quot;54b8027b-6d7f-4e2b-9b6a-5c1e85b685fa&quot;
+  },
+  &quot;confidential-port&quot; : 0
+}
+PS G:\keycloak11\bin&gt;
+</code></pre>
+<p>基本操作：</p>
+<pre><code class="language-bash">$ kcadm.sh create ENDPOINT [ARGUMENTS]
+$ kcadm.sh get ENDPOINT [ARGUMENTS]
+$ kcadm.sh update ENDPOINT [ARGUMENTS]
+$ kcadm.sh delete ENDPOINT [ARGUMENTS]
+</code></pre>
+<p>ENDPOINT is a target resource URI and can either be absolute (starting with <code>http:</code> or <code>https:</code>) or relative, used to compose an absolute URL of the following format:</p>
+<pre><code>SERVER_URI/admin/realms/REALM/ENDPOINT
+</code></pre>
+<p>For example, if you authenticate against the server http://localhost:8080/auth and realm is <code>master</code>, then using <code>users</code> as ENDPOINT results in the resource URL http://localhost:8080/auth/admin/realms/master/users.</p>
+<p>If you set ENDPOINT to <code>clients</code>, the effective resource URI would be http://localhost:8080/auth/admin/realms/master/clients.</p>
+<p>角色和用户的管理等也能用kcadm命令来完成。</p>
+<h3 id="2如何退出">2.如何退出</h3>
+<pre><code class="language-java">HttpServletRequest.logout()
+</code></pre>
 <h2 id="参考">参考</h2>
 <p><a href="https://www.keycloak.org/docs/latest/securing_apps/#_jetty9_adapter">https://www.keycloak.org/docs/latest/securing_apps/#_jetty9_adapter</a></p>
 <p><a href="https://stackoverflow.com/questions/22188285/does-embedded-jetty-have-the-ability-to-set-the-init-params-of-a-filter">https://stackoverflow.com/questions/22188285/does-embedded-jetty-have-the-ability-to-set-the-init-params-of-a-filter</a></p>
@@ -702,6 +750,12 @@ server.setHandler(context);
         <li><a href="#jetty整合jersey框架">Jetty整合Jersey框架</a></li>
         <li><a href="#整合keycloak">整合keycloak</a></li>
         <li><a href="#获取用户权限信息">获取用户权限信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#其它问题">其它问题</a>
+      <ul>
+        <li><a href="#1如何用代码完成在keycloak注册和配置过程实现自动化配置">1.如何用代码完成在KeyCloak注册和配置过程，实现自动化配置？</a></li>
+        <li><a href="#2如何退出">2.如何退出</a></li>
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
@@ -820,6 +874,12 @@ server.setHandler(context);
         <li><a href="#jetty整合jersey框架">Jetty整合Jersey框架</a></li>
         <li><a href="#整合keycloak">整合keycloak</a></li>
         <li><a href="#获取用户权限信息">获取用户权限信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#其它问题">其它问题</a>
+      <ul>
+        <li><a href="#1如何用代码完成在keycloak注册和配置过程实现自动化配置">1.如何用代码完成在KeyCloak注册和配置过程，实现自动化配置？</a></li>
+        <li><a href="#2如何退出">2.如何退出</a></li>
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
