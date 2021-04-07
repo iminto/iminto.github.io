@@ -101,7 +101,7 @@
         <a href="https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/">Keycloak接入自研系统</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3548 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3910 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     
@@ -636,6 +636,16 @@ $ kcadm.sh delete ENDPOINT [ARGUMENTS]
 <h3 id="2如何退出">2.如何退出</h3>
 <pre><code class="language-java">HttpServletRequest.logout()
 </code></pre>
+<h3 id="3更暴力的接入方式keycloak-proxy已停止维护">3.更暴力的接入方式KeyCloak Proxy（已停止维护）</h3>
+<p>把KeyCloak作为一个proxy来使用，免去修改现有代码。</p>
+<p><a href="https://hub.docker.com/r/jboss/keycloak-proxy/">https://hub.docker.com/r/jboss/keycloak-proxy/</a>  这里有简单的使用方式说明。这种方式只能代理一个client。</p>
+<blockquote>
+<p><strong>This image is deprecated as the Java based Proxy will be replaced by a new Go based implementation soon.</strong></p>
+</blockquote>
+<p>keycloak-proxy在2018年已停止维护，用Golang实现的继任者louketo-proxy也已在2020年停止更新维护。</p>
+<p>官方文档已不推荐使用这种方式，相关文档已移除。</p>
+<p>ouketo-proxy停止更新和维护，官网说明：https://www.keycloak.org/2020/08/sunsetting-louketo-project.adoc</p>
+<p>官网提供的一种类似替代方案：https://github.com/oauth2-proxy/oauth2-proxy （Golang实现，未验证）</p>
 <h2 id="参考">参考</h2>
 <p><a href="https://www.keycloak.org/docs/latest/securing_apps/#_jetty9_adapter">https://www.keycloak.org/docs/latest/securing_apps/#_jetty9_adapter</a></p>
 <p><a href="https://stackoverflow.com/questions/22188285/does-embedded-jetty-have-the-ability-to-set-the-init-params-of-a-filter">https://stackoverflow.com/questions/22188285/does-embedded-jetty-have-the-ability-to-set-the-init-params-of-a-filter</a></p>
@@ -756,6 +766,7 @@ $ kcadm.sh delete ENDPOINT [ARGUMENTS]
       <ul>
         <li><a href="#1如何用代码完成在keycloak注册和配置过程实现自动化配置">1.如何用代码完成在KeyCloak注册和配置过程，实现自动化配置？</a></li>
         <li><a href="#2如何退出">2.如何退出</a></li>
+        <li><a href="#3更暴力的接入方式keycloak-proxy已停止维护">3.更暴力的接入方式KeyCloak Proxy（已停止维护）</a></li>
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
@@ -880,6 +891,7 @@ $ kcadm.sh delete ENDPOINT [ARGUMENTS]
       <ul>
         <li><a href="#1如何用代码完成在keycloak注册和配置过程实现自动化配置">1.如何用代码完成在KeyCloak注册和配置过程，实现自动化配置？</a></li>
         <li><a href="#2如何退出">2.如何退出</a></li>
+        <li><a href="#3更暴力的接入方式keycloak-proxy已停止维护">3.更暴力的接入方式KeyCloak Proxy（已停止维护）</a></li>
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
