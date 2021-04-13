@@ -15,7 +15,7 @@
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
 
 
-<title>SuperSet安装 - 白菜不是菜</title>
+<title>SuperSet安装配置 - 白菜不是菜</title>
 
 
 <meta name="author" content="baicai" />
@@ -26,7 +26,7 @@
 
 <meta name="keywords" content="大数据" />
 
-<meta property="og:title" content="SuperSet安装" />
+<meta property="og:title" content="SuperSet安装配置" />
 <meta property="og:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/" />
@@ -37,7 +37,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="SuperSet安装"/>
+<meta name="twitter:title" content="SuperSet安装配置"/>
 <meta name="twitter:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常"/>
 
 
@@ -98,10 +98,10 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装</a>
+        <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装配置</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1172 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1805 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     
@@ -193,6 +193,82 @@ superset run -h ten  -p 8080 --with-threads --reload
 superset run -h 110.6.7.8  -p 8080 --with-threads --reload
 </code></pre>
 <p>这操作也有点诡异了些。。</p>
+<blockquote>
+<p>2021-04-13更新</p>
+</blockquote>
+<h3 id="导入样例">导入样例</h3>
+<p>前面说过，在superset load_examples这一步会失败，原因是example数据是存放在github的，这个网站被司马佬吃了。这个路径配置在examples/helpers.py里的BASE_URL项。</p>
+<pre><code class="language-bash">#github上下载examples压缩包
+wget https://github.com/apache-superset/examples-data/archive/refs/heads/master.zip
+#解压，启动本地server
+unzip master.zip
+python -m SimpleHTTPServer 18089
+#PYTHONPATH处理
+cp /root/miniconda2/envs/superset/lib/python3.8/site-packages/superset/examples/ /root/py/examples
+#修改helpers.py
+BASE_URL = &quot;http://10.180.210.146:18089/&quot;
+#导入
+superset load_examples
+</code></pre>
+<p>成功的话，输出应该如下：</p>
+<pre><code class="language-bash">Loaded your LOCAL configuration at [/root/py/superset_config.py]
+Loaded your LOCAL configuration at [/root/py/superset_config.py]
+logging was configured successfully
+INFO:superset.utils.logging_configurator:logging was configured successfully
+/root/miniconda2/envs/superset/lib/python3.8/site-packages/flask_caching/__init__.py:201: UserWarning: Flask-Caching: CACHE_TYPE is set to null, caching is effectively disabled.
+  warnings.warn(
+No PIL installation found
+INFO:superset.utils.screenshots:No PIL installation found
+Loading examples metadata and related data into examples
+Creating default CSS templates
+Loading energy related dataset
+Creating table [wb_health_population] reference
+Loading [World Bank's Health Nutrition and Population Stats]
+Creating table [wb_health_population] reference
+Creating a World's Health Bank dashboard
+Loading [Birth names]
+Done loading table!
+--------------------------------------------------------------------------------
+Creating table [birth_names] reference
+Creating some slices
+Creating a dashboard
+Loading [Random time series data]
+Done loading table!
+--------------------------------------------------------------------------------
+Creating table [random_time_series] reference
+Creating a slice
+Loading [Random long/lat data]
+Done loading table!
+--------------------------------------------------------------------------------
+Creating table reference
+Creating a slice
+Loading [Country Map data]
+Done loading table!
+--------------------------------------------------------------------------------
+Creating table reference
+Creating a slice
+Loading [Multiformat time series]
+Done loading table!
+--------------------------------------------------------------------------------
+Creating table [multiformat_time_series] reference
+Creating Heatmap charts
+Loading [Paris GeoJson]
+Creating table paris_iris_mapping reference
+...
+</code></pre>
+<h3 id="自定义配置及汉化">自定义配置及汉化</h3>
+<p>编辑配置文件后重启即可</p>
+<pre><code class="language-bash">vim /root/miniconda2/envs/superset/lib/python3.8/site-packages/superset/config.py
+
+# Setup default language
+BABEL_DEFAULT_LOCALE = &quot;zh&quot;
+</code></pre>
+<p>这样直接修改配置文件很麻烦（路径太深），可以把自定义配置文件放到指定位置：</p>
+<p>To configure your application, you need to create a file <code>superset_config.py</code> and add it to your <code>PYTHONPATH</code>.</p>
+<p>All the parameters and default values defined in <a href="https://github.com/apache/superset/blob/master/superset/config.py">https://github.com/apache/superset/blob/master/superset/config.py</a> can be altered in your local <code>superset_config.py</code>.</p>
+<h3 id="api文档">API文档</h3>
+<p>API 文档地址：http://10.180.210.146:18088/swagger/v1</p>
+<p>虽然SuperSet支持Oauth，但由于SuperSet用的是FlaskAB框架（不是Flask框架），支持比较弱，需要自己写python代码。如果是外部系统对接Superset，只能用cookie登陆的方式调用。</p>
 
     </div>
 </article>
@@ -295,6 +371,9 @@ superset run -h 110.6.7.8  -p 8080 --with-threads --reload
         <li><a href="#安装miniconda">安装miniconda</a></li>
         <li><a href="#使用conda安装superset">使用conda安装SuperSet</a></li>
         <li><a href="#配置和启动">配置和启动</a></li>
+        <li><a href="#导入样例">导入样例</a></li>
+        <li><a href="#自定义配置及汉化">自定义配置及汉化</a></li>
+        <li><a href="#api文档">API文档</a></li>
       </ul>
     </li>
   </ul>
@@ -403,6 +482,9 @@ superset run -h 110.6.7.8  -p 8080 --with-threads --reload
         <li><a href="#安装miniconda">安装miniconda</a></li>
         <li><a href="#使用conda安装superset">使用conda安装SuperSet</a></li>
         <li><a href="#配置和启动">配置和启动</a></li>
+        <li><a href="#导入样例">导入样例</a></li>
+        <li><a href="#自定义配置及汉化">自定义配置及汉化</a></li>
+        <li><a href="#api文档">API文档</a></li>
       </ul>
     </li>
   </ul>
