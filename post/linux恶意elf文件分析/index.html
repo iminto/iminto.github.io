@@ -15,7 +15,7 @@
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
 
 
-<title>Linux - 白菜不是菜</title>
+<title>Linux恶意ELF文件分析 - 白菜不是菜</title>
 
 
 <meta name="author" content="baicai" />
@@ -24,18 +24,21 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta property="og:title" content="Linux" />
-<meta property="og:description" content="A minimal Hugo theme with nice theme color." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://iminto.github.io/tags/linux/" />
+<meta name="keywords" content="Linux" />
+
+<meta property="og:title" content="Linux恶意ELF文件分析" />
+<meta property="og:description" content="Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。 通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2021-05-17T09:31:11+08:00" />
+<meta property="article:published_time" content="2021-05-17T09:31:11+08:00" />
+<meta property="article:modified_time" content="2021-05-17T09:31:11+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="Linux"/>
-<meta name="twitter:description" content="A minimal Hugo theme with nice theme color."/>
+<meta name="twitter:title" content="Linux恶意ELF文件分析"/>
+<meta name="twitter:description" content="Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。 通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不"/>
 
 
 
@@ -92,14 +95,8 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-
-<div class="page-info">
-    <span>拥有标签 Linux 的文章：</span>
-</div>
-
-
-
-<div class="post">
+<article>
+    
     <h2 class="post-item post-title">
         <a href="https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/">Linux恶意ELF文件分析</a>
     </h2>
@@ -107,95 +104,121 @@
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1110 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
-    <div class="post-item post-summary markdown-body">
-        Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。 通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不
+    
+    
+    <div class="post-content markdown-body">
+        <p>Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。
+通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不总是有效。
+比如对于静态编译的程序，或者变种脚本，ldd就无效了。
+对于没有section table的程序，objdump也就可能无法得出结果了。</p>
+<pre><code class="language-bash">#objdump -d ./wi
+./wi:     file format elf64-x86-64
+
+</code></pre>
+<p>因为objdump需要依赖code sections或section table，可以用readelf看看</p>
+<pre><code class="language-bash">[root@localhost ~]# readelf -a ./wi
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x5c9e70
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          0 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         3
+  Size of section headers:           64 (bytes)
+  Number of section headers:         0
+  Section header string table index: 0
+
+There are no sections in this file.
+
+There are no sections to group in this file.
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x00000000001ca78b 0x00000000001ca78b  R E    200000
+  LOAD           0x0000000000000000 0x00000000005cb000 0x00000000005cb000
+                 0x0000000000000000 0x0000000000597d58  RW     1000
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     10
+
+There is no dynamic section in this file.
+
+There are no relocations in this file.
+
+The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
+
+Dynamic symbol information is not available for displaying symbols.
+
+No version information found in this file.
+</code></pre>
+<p>所以这种情况下，可以这么来，-D表示对全部文件进行反汇编，-b表示二进制，-m表示指令集架构</p>
+<pre><code class="language-bash">[root@localhost ~]# objdump -b binary -D -m i386 ./wi
+
+./wi:     file format binary
+Disassembly of section .data:
+
+00000000 &lt;.data&gt;:
+       0:       7f 45                   jg     0x47
+       2:       4c                      dec    %esp
+       3:       46                      inc    %esi
+       4:       02 01                   add    (%ecx),%al
+       6:       01 00                   add    %eax,(%eax)
+        ...
+      10:       02 00                   add    (%eax),%al
+      12:       3e 00 01                add    %al,%ds:(%ecx)
+      15:       00 00                   add    %al,(%eax)
+</code></pre>
+<p>另外，strace，gdb等工具也有一定的帮助。当然，上IDA这种大型武器就更有效了。
+这只是浅尝辄止，就算dump出了这么一堆汇编代码，又有什么用，没那么容易看懂。</p>
+<p>所以，好端端的一个ELF可执行文件，怎么就没了section table呢？很简单，脚本小子就是喜欢玩些小把戏，很容易就想到是加壳了，Linux下最容易想到的壳就是UPX。</p>
+<pre><code class="language-bash">[root@localhost ~]# strings ./wi |grep UPX
+nUPX!(
+$Info: This file is packed with the UPX executable packer http://upx.sf.net $
+$Id: UPX 3.95 Copyright (C) 1996-2018 the UPX Team. All Rights Reserved. $
+UPX!u
+UPX!
+UPX!
+
+</code></pre>
+<p>脚本小子做事还是毛糙，也不晓得隐藏一下壳。把它的王八壳子扒了</p>
+<pre><code class="language-bash">[root@localhost ~]# ./upx -d wi
+                       Ultimate Packer for eXecutables
+                          Copyright (C) 1996 - 2020
+UPX 3.96        Markus Oberhumer, Laszlo Molnar &amp; John Reiser   Jan 23rd 2020
+
+        File size         Ratio      Format      Name
+   --------------------   ------   -----------   -----------
+   5011080 &lt;-   1878380   37.48%   linux/amd64   wi
+
+Unpacked 1 file.
+
+</code></pre>
+<p>要是脚本小子把UPX壳的信息给隐藏了，那么UPX自带的-d命令就没法脱壳了，这个时候就得用IDA了。加壳的本质就是把原来的程序的数据全部压缩加密了，在静态文件中无法分析，随着程序的执行，运行时会将代码释放到内存中。我们可以用ida远程调试test程序，找到upx自解壳后的 OEP，再把内存给dump出来，就可以实现手动脱壳了。怎样找OEP，这就得看经验了。</p>
+<p>脱壳之后呢，继续用strings，strace，netstat等命令做定性分析。</p>
+<p>当然了，最简单的就是直接上传到virustotal，最后得出的结果果然是一个Linux.Risk.Bitcoinminer.Tbix。</p>
+<p>呵呵，脚本小子。</p>
+
     </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
+    </blockquote>
 </div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/">Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1000 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/">Prosody搭建xmpp服务器</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-08-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;723 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/">Kde桌面下自带应用无法输入中文</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-03-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;967 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        ​ 这个问题纠结我快一年了。某次manjaro升级后，我的manjaro在系统自带应用上如konsole,kate,Yakuake上都不能切换输入法（目测系统自带的软件都不能），鼠标放键盘图标上提示“无
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/">使用Java自动登录需要动态密码的堡垒机</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;391 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。 不可忍，想了想，还是借助Java在每次调用时自动生成验证
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/get-createtime-in-linux/">Linux 下获取文件创建时间</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-10-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1096 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/">linux下解压bin文件</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-06-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;508 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知
-    </div>
-</div>
-
-
-
-
-
-
-
 
 
 
@@ -276,6 +299,11 @@
     </div>
     
     
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents"></nav>
+    </div>
     
     
 </aside>
@@ -365,6 +393,13 @@
             </span>
             
         </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents"></nav>
     </div>
     
     
