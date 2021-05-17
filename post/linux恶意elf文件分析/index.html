@@ -101,7 +101,7 @@
         <a href="https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/">Linux恶意ELF文件分析</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1507 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1750 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     
@@ -187,6 +187,7 @@ Disassembly of section .data:
 </code></pre>
 <p>另外，strace，gdb等工具也有一定的帮助。当然，上IDA这种大型武器就更有效了。
 这只是浅尝辄止，就算dump出了这么一堆汇编代码，又有什么用，没那么容易看懂。</p>
+<p>我又凭啥让别人相信这东西不是个正常的二进制文件？仅仅凭它各种龌龊的隐藏行为还不够。</p>
 <p>所以，好端端的一个ELF可执行文件，怎么就没了section table呢？很简单，脚本小子就是喜欢玩些小把戏，很容易就想到是加壳了，Linux下最容易想到的壳就是UPX。</p>
 <pre><code class="language-bash">[root@localhost ~]# strings ./wi |grep UPX
 nUPX!(
@@ -212,6 +213,38 @@ Unpacked 1 file.
 </code></pre>
 <p>要是脚本小子把UPX壳的信息给隐藏了，那么UPX自带的-d命令就没法脱壳了，这个时候就得用IDA了。加壳的本质就是把原来的程序的数据全部压缩加密了，在静态文件中无法分析，随着程序的执行，运行时会将代码释放到内存中。我们可以用ida远程调试test程序，找到upx自解壳后的 OEP，再把内存给dump出来，就可以实现手动脱壳了。怎样找OEP，这就得看经验了。</p>
 <p>脱壳之后呢，继续用strings，strace，netstat等命令做定性分析。</p>
+<p>其实到了这一步,strings命令已经足够分析出其行为了。</p>
+<pre><code class="language-bash">[1;37monnection
+ * COMMANDS     'h' hashrate, 'p' pause, 'r' resume, 's' results, 'c' connection
+&gt;wz 
+*ctz&gt;3&gt;c)
+:w 3
+[32m||
+[31m ERROR 
+[32m||
+[37m Invalid Port Use In This Range 
+[36m'1-65535' 
+[37me.g
+[31m ( ./xmrig -p 3333 )
+[32m||
+[31m ERROR 
+[32m||
+[37m Invalid Class You Can Use Only These Classes 
+[36m'192.168'
+[32m, 
+[36m'172'
+[32m, 
+[36m'100'
+[32m, 
+[36m'10'
+[37m e.g
+[31m ( ./xmrig -lan 192.168.0.1 )
+[32m||
+[31m ERROR 
+[32m||
+[37m Empty Or Invalid Pool Address
+</code></pre>
+<p>还能分析出是C++写的木马。想要反汇编出C++源文件，你吃屁呢。objdump得依赖debug信息才行，脚本小子再菜鸡也不会这么做啊。要C++源文件，那只能用IDA dump了，这也得出近似的源文件。</p>
 <p>当然了，最简单的就是直接上传到virustotal，最后得出的结果果然是一个Linux.Risk.Bitcoinminer.Tbix。</p>
 <p>呵呵，脚本小子。</p>
 
