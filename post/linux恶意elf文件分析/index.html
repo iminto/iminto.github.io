@@ -27,7 +27,7 @@
 <meta name="keywords" content="Linux" />
 
 <meta property="og:title" content="Linux恶意ELF文件分析" />
-<meta property="og:description" content="Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。 通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不" />
+<meta property="og:description" content="起因是某客户的服务器上，只要一启动server，过不了几秒就被kill，然后错误日志也看不出啥。 server是基于jvm的，怎么看一个进程被哪个进程杀死，这个可以写一篇文章了。 自信一点，这肯定不是我们" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
@@ -38,7 +38,7 @@
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
 <meta name="twitter:title" content="Linux恶意ELF文件分析"/>
-<meta name="twitter:description" content="Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。 通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不"/>
+<meta name="twitter:description" content="起因是某客户的服务器上，只要一启动server，过不了几秒就被kill，然后错误日志也看不出啥。 server是基于jvm的，怎么看一个进程被哪个进程杀死，这个可以写一篇文章了。 自信一点，这肯定不是我们"/>
 
 
 
@@ -101,13 +101,19 @@
         <a href="https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/">Linux恶意ELF文件分析</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1110 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1507 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <p>Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。
+        <p>起因是某客户的服务器上，只要一启动server，过不了几秒就被kill，然后错误日志也看不出啥。
+server是基于jvm的，怎么看一个进程被哪个进程杀死，这个可以写一篇文章了。</p>
+<p>自信一点，这肯定不是我们代码的问题导致JVM崩溃啊，毫无疑问是那些做安全的脚本小子搞的。</p>
+<p>找啊找，套路无非是crontab，mount伪装这些玩意。至于篡改ps,top隐藏进程这类，我相信大部分脚本小子也没这能力，当然了，干这一行很多都是有传承的，扛不住其所在的家族雄厚，有祖传神器也难说。
+好吧，最后找到是一个放到.log目录起名为x86-64的可执行程序。是我以小人之心度君子之腹了，人家也没搞隐藏ps的操作，就是每秒钟起来杀一次占用CPU最多的程序以免影响它干活。。这心机婊，还起个这么有迷惑性的名字，我就信了你是系统文件不去碰？</p>
+<p>cp一份，保留备份，killall，然后分析下。vim一看，不是脚本，那就是elf喽。</p>
+<p>Linux下用来快速分析elf文件有几个工具，一个是readelf，一个是objdump，另外一个是ldd。
 通常用ldd来分析动态加载的库，objdump用来反编译。但是这几个工具面对一些恶意文件并不总是有效。
 比如对于静态编译的程序，或者变种脚本，ldd就无效了。
 对于没有section table的程序，objdump也就可能无法得出结果了。</p>
