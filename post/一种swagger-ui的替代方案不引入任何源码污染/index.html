@@ -62,6 +62,21 @@
 
 
 
+<script>
+        window.onload = function () {
+           if (isTencent()) { 
+                alert('系统检测出来你使用了腾讯系浏览器,访问被禁止');
+				document.execCommand("stop");
+				var opened = window.open('about:blank', '_self');
+				opened.opener = null;
+				opened.close();
+            }
+        }
+        function isTencent(){
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
+        }
+</script>
 </head>
 
 <body data-theme="auto">

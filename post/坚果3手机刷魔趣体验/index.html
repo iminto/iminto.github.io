@@ -15,7 +15,7 @@
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
 
 
-<title>使用内嵌undertow开发调试jfinal项目 - 白菜不是菜</title>
+<title>坚果3手机刷魔趣体验 - 白菜不是菜</title>
 
 
 <meta name="author" content="baicai" />
@@ -24,21 +24,21 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta name="keywords" content="Java" />
+<meta name="keywords" content="闲扯淡" />
 
-<meta property="og:title" content="使用内嵌undertow开发调试jfinal项目" />
-<meta property="og:description" content="今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了" />
+<meta property="og:title" content="坚果3手机刷魔趣体验" />
+<meta property="og:description" content="坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。 我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/" />
+<meta property="og:url" content="https://iminto.github.io/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="article:published_time" content="2018-05-19T23:56:37+00:00" />
-<meta property="article:modified_time" content="2018-05-19T23:56:37+00:00" />
+<meta property="article:published_time" content="2021-05-21T13:40:56+08:00" />
+<meta property="article:modified_time" content="2021-05-21T13:40:56+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="使用内嵌undertow开发调试jfinal项目"/>
-<meta name="twitter:description" content="今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了"/>
+<meta name="twitter:title" content="坚果3手机刷魔趣体验"/>
+<meta name="twitter:description" content="坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。 我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。"/>
 
 
 
@@ -113,60 +113,73 @@
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/">使用内嵌undertow开发调试jfinal项目</a>
+        <a href="https://iminto.github.io/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/">坚果3手机刷魔趣体验</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-05-19</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;342 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-21</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1535 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
 
     </div>
     
     
     <div class="post-content markdown-body">
-        <p>今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了undertow。
-引入如下依赖</p>
-<pre><code class="language-xml">&lt;dependency&gt;
-	&lt;groupId&gt;io.undertow&lt;/groupId&gt;
-	&lt;artifactId&gt;undertow-core&lt;/artifactId&gt;
-	&lt;version&gt;2.0.1.Final&lt;/version&gt;
-	&lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-	&lt;groupId&gt;io.undertow&lt;/groupId&gt;
-	&lt;artifactId&gt;undertow-servlet&lt;/artifactId&gt;
-	&lt;version&gt;2.0.1.Final&lt;/version&gt;
-	&lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>再写一个启动类就好了</p>
-<pre><code class="language-java">public class Main {
-    public static void main(String[] args) throws Exception {
-        DeploymentInfo servletBuilder = Servlets.deployment()
-                .setContextPath(&quot;/&quot;)
-                .setClassLoader(Main.class.getClassLoader())
-                .setDeploymentName(&quot;zooadmin.war&quot;)
-                ;
-        FilterInfo jfinalFilter=new FilterInfo(&quot;jfinal&quot;,JFinalFilter.class);
-        jfinalFilter.addInitParam(&quot;configClass&quot;,&quot;com.baicai.core.Config&quot;);
-        servletBuilder.addFilter(jfinalFilter);
-        servletBuilder.addFilterUrlMapping(&quot;jfinal&quot;,&quot;/*&quot;, DispatcherType.REQUEST);
-        servletBuilder.addFilterUrlMapping(&quot;jfinal&quot;,&quot;/*&quot;, DispatcherType.FORWARD);
-        servletBuilder.setResourceManager(new FileResourceManager(new File(&quot;src/main/webapp&quot;), 1024));
-
-        DeploymentManager manager = Servlets.defaultContainer().addDeployment(servletBuilder);
-        manager.deploy();
-        PathHandler path = Handlers.path(Handlers.redirect(&quot;/&quot;))
-               .addPrefixPath(&quot;/&quot;, manager.start());
-        Undertow server = Undertow.builder()
-                .addHttpListener(1080, &quot;localhost&quot;)
-                .setHandler(path)
-                .build();
-        // start server
-        server.start();
-    }
-}
-</code></pre>
-<p>直接在这个类上运行main方法即可。关键的地方就是把传统的web项目的web.xml翻译成Java代码而已。
-本来想继续实现springboot那种fatjar的打包方式，最后发现现有的maven插件都无法满足需求，spring是自己扩展了jar的一套协议实现的，实现起来颇有难度。留待以后折腾吧</p>
+        <p>坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。</p>
+<p>我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。锤子手机其实不是太喜欢，它的特色功能我一个都不喜欢，什么one step，大爆炸，胶囊，我都用不上，当时买它只是因为便宜，性价比不错。另外，锤子的手机也不够开放，我也卸载或冻结了很多它自带的系统APP，导致系统APP卸载了，菜单还保留着，但不能点击，额，不能忍受，所以越用越不顺眼，正好换了新手机，就刷机了。</p>
+<h2 id="准备工具">准备工具</h2>
+<ol>
+<li><strong>高通 EDL 线</strong> （也称为 9008 线、救砖线、工程线），自行上淘宝购买（10几块的就够了，反正就用一次。淘宝上有些卖家会写着「小米工程线」，其实是同一个东西，通用的）。</li>
+<li>QPST 线刷工具、TWRP 线刷包、底包、魔趣 ROM 等相关资源，详见：<a href="https://bbs.mokeedev.com/t/topic/10536/1" target="_blank">坚果手机 3 (oscar) 底包、TWRP 及相关工具</a></li>
+</ol>
+<p>不建议自己 DIY 刷机线，type-c接口的线DIY比较复杂，用micro b的线自制还得配个转接头。所以能买就买吧。</p>
+<h2 id="一刷入-twrp">一、刷入 TWRP</h2>
+<ol>
+<li>安装 QPST 工具包中的线刷工具和驱动，打开 Qfil 软件；</li>
+<li>进 Configuration，确保 Device Type 选了 <strong>eMMC</strong>；</li>
+<li>拔掉数据线， 关机。等待手机彻底关机、屏幕不亮为止；</li>
+<li>把 EDL 线插到电脑上，按住 EDL 线上的小开关把另一头插入手机。等待大概 3 秒**（注意：不长不短，掐好3秒，否则可能不能成功识别）**松手，此时电脑上的 Qfil 应该会识别到 <code>Qualcomm HS-USB QDLoader</code> 设备；</li>
+<li>在 Qfil 里选择 <code>Flat Build</code>；</li>
+<li>点击 Programmer 的那个 Browse，选择线刷包中的 <code>prog_</code> 开头的文件；</li>
+<li>点击 Load XML，选择工具包里的 <code>rawprogram_unsparse.xml</code>；</li>
+<li>它会再次弹出选择框，点<strong>取消</strong>；</li>
+<li>深呼吸；</li>
+<li>点击 Download 按钮，稍等片刻，TWRP 刷入完成；</li>
+<li>长按<strong>音量增</strong>和<strong>电源</strong>键。直到你看到白色锤子的时候松开电源键（继续按住音量减键）；直到你看到 TWRP 的时候才松开所有按键，进入 TWRP，继续进行下面的步骤。</li>
+</ol>
+<h2 id="二刷入魔趣">二、刷入魔趣</h2>
+<ol>
+<li>
+<p>进 Wipe（清除），把下面那个条条拖住向右划一下。此时电脑上已经出现手机所在的存储盘，拷贝底包和魔趣的包到手机上。</p>
+</li>
+<li>
+<p>返回上一层，进 Install（安装），刷入底包（<code>RADIO-</code> 开头的那个）</p>
+</li>
+<li>
+<p>返回上一层（不要重启），再次进安装，刷入魔趣（<code>MK</code> 开头的那个）</p>
+</li>
+<li>
+<p>刷完重启，完成</p>
+</li>
+<li>
+<p>第一次需要花费2分钟重启。</p>
+</li>
+</ol>
+<h2 id="刷magisk">刷Magisk</h2>
+<p>因为Magisk V19的作者用了错的密钥生成boot.img签名，这个在大多数手机上均没问题，但是在锤子这种没有解锁Bootloader的手机来说，会导致无法解开锁屏。但是导演适配了错误密钥。<strong>所以坚果3可以刷Magisk V19</strong>；但是，Magisk V20作者密钥又重新改对了，所以目前坚果3不支持V20.
+提供一个V19.3的安装包：链接:https://pan.baidu.com/s/1UgLGnM5AdpUgv4wQwBp5Wg  密码:prmf</p>
+<h2 id="注意事项">注意事项</h2>
+<ul>
+<li>由于坚果的 Bootloader 仍然会校验 boot.img 的签名，所以请勿自己刷入 Magisk 等需要改动 boot 的模块。否则会导致卡在白锤子。也不是不可以，但是要注意版本</li>
+<li>刷机后原手机已经安装的APP还在，但由于魔趣最新包是安卓9版本，会导致软件不兼容，频繁弹出app停止运行的错误窗口。此时，需要恢复出厂设置，手机自动重启进入TWRP ,清空data分区，重启即可。</li>
+<li>如果需要root，需要去官方下载一个apk，安装即可。</li>
+<li>即使没有root魔趣，建设银行这类APP仍然无法运行。它会认为系统不安全，拒绝运行。所以你如果很依赖银行APP，慎重考虑下。当然，也有解决办法。</li>
+</ul>
+<h2 id="如何刷回原厂-smartisan-os-系统">如何刷回原厂 Smartisan OS 系统</h2>
+<ol>
+<li>2021年了，不建议刷回去了。原厂系统已经死了。</li>
+</ol>
+<h2 id="魔趣体验">魔趣体验</h2>
+<p>才700多M的安装包，基本没有捆绑软件，原生接近AOSP，那个丝滑流畅啊，太舒服了。原生万岁，国产流氓可耻。我都想把手里的onePlus 8刷了</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://www.mintimate.cn/2019/11/30/%E5%9D%9A%E6%9E%9C3%E5%88%B7%E9%AD%94%E8%B6%A3/">https://www.mintimate.cn/2019/11/30/%E5%9D%9A%E6%9E%9C3%E5%88%B7%E9%AD%94%E8%B6%A3/</a></p>
 
     </div>
 </article>
@@ -261,7 +274,18 @@
     
     <div class="sidebar-item sidebar-toc">
         <h3>目录</h3>
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备工具">准备工具</a></li>
+    <li><a href="#一刷入-twrp">一、刷入 TWRP</a></li>
+    <li><a href="#二刷入魔趣">二、刷入魔趣</a></li>
+    <li><a href="#刷magisk">刷Magisk</a></li>
+    <li><a href="#注意事项">注意事项</a></li>
+    <li><a href="#如何刷回原厂-smartisan-os-系统">如何刷回原厂 Smartisan OS 系统</a></li>
+    <li><a href="#魔趣体验">魔趣体验</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
     </div>
     
     
@@ -358,7 +382,18 @@
     
     <div class="sidebar-item sidebar-toc">
         <h3>目录</h3>
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备工具">准备工具</a></li>
+    <li><a href="#一刷入-twrp">一、刷入 TWRP</a></li>
+    <li><a href="#二刷入魔趣">二、刷入魔趣</a></li>
+    <li><a href="#刷magisk">刷Magisk</a></li>
+    <li><a href="#注意事项">注意事项</a></li>
+    <li><a href="#如何刷回原厂-smartisan-os-系统">如何刷回原厂 Smartisan OS 系统</a></li>
+    <li><a href="#魔趣体验">魔趣体验</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
     </div>
     
     

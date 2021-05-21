@@ -29,7 +29,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iminto.github.io/post/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2021-05-17T09:31:11+08:00" />
+<meta property="og:updated_time" content="2021-05-21T13:40:56+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
@@ -59,6 +59,21 @@
 
 
 
+<script>
+        window.onload = function () {
+           if (isTencent()) { 
+                alert('系统检测出来你使用了腾讯系浏览器,访问被禁止');
+				document.execCommand("stop");
+				var opened = window.open('about:blank', '_self');
+				opened.opener = null;
+				opened.close();
+            }
+        }
+        function isTencent(){
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
+        }
+</script>
 </head>
 
 <body data-theme="auto">
@@ -94,6 +109,19 @@
                 
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/">坚果3手机刷魔趣体验</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-21</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1535 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。 我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">
@@ -209,19 +237,6 @@
     </div>
     <div class="post-item post-summary markdown-body">
         helm3集成minio搭建私有仓库 我们一般是从本地的目录结构中的chart去进行部署，如果要集中管理chart,就需要涉及到repository的问题可以通过minio建立一个私有的存放仓库。 min
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/">一种swagger Ui的替代方案不引入任何源码污染</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-05-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1379 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要
     </div>
 </div>
 

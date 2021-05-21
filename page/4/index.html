@@ -29,7 +29,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iminto.github.io/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2021-05-17T09:31:11+08:00" />
+<meta property="og:updated_time" content="2021-05-21T13:40:56+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
@@ -59,6 +59,21 @@
 
 
 
+<script>
+        window.onload = function () {
+           if (isTencent()) { 
+                alert('系统检测出来你使用了腾讯系浏览器,访问被禁止');
+				document.execCommand("stop");
+				var opened = window.open('about:blank', '_self');
+				opened.opener = null;
+				opened.close();
+            }
+        }
+        function isTencent(){
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
+        }
+</script>
 </head>
 
 <body data-theme="auto">
@@ -94,6 +109,19 @@
                 
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/">TOTP算法Java版本</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-01-08</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1329 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        TOTP 概念 TOTP - Time-based One-time Password Algorithm is an extension of the HMAC-based One Time Password algorithm HOTP to support a time based moving factor. TOTP（基于时间的一次性密码算法）是支持时间作为动态因素基于HMAC一次性密码算法的扩展。它是OTP算法的一种 算法如下: TOTP = Truncate(HMAC-SHA-1(K, (T - T0) / X)) K 共享密
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">
