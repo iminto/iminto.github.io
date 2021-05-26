@@ -1,4 +1,3 @@
 User-agent: *
 
-
 Sitemap: https://iminto.github.io/sitemap.xml
