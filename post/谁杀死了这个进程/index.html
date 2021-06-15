@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.76.4" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>谁杀死了这个进程 - 白菜不是菜</title>
+
+
+<meta name="author" content="baicai" />
+
+
+<meta name="description" content="A minimal Hugo theme with nice theme color." />
+
+
+<meta name="keywords" content="Linux, Java" />
+
+<meta property="og:title" content="谁杀死了这个进程" />
+<meta property="og:description" content="之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。 先来看自杀。 1.自杀 我们以Ja" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/" />
+<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
+<meta property="article:published_time" content="2021-06-15T16:35:59+08:00" />
+<meta property="article:modified_time" content="2021-06-15T16:35:59+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
+
+<meta name="twitter:title" content="谁杀死了这个进程"/>
+<meta name="twitter:description" content="之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。 先来看自杀。 1.自杀 我们以Ja"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+function isTencent(){
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
+        }
+		
+function taunt() {
+    if (isTencent()) { 
+                alert("系统检测出来你使用了腾讯系浏览器,访问被禁止;\r\n珍爱生命，远离烂人张小龙");
+				document.execCommand("stop");
+				document.body.innerHTML = "系统检测出来你使用了腾讯系浏览器,访问被禁止\r\n珍爱生命，远离烂人张小龙";
+            }
+  }
+document.addEventListener("DOMContentLoaded", taunt);
+      
+</script>
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            
+            <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/">谁杀死了这个进程</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-06-15</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2270 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <p>之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。</p>
+<p>先来看自杀。</p>
+<h2 id="1自杀">1.自杀</h2>
+<p>我们以Java为例，Java程序在main方法运行完就会退出，这种属于自杀。或者像下面这样</p>
+<pre><code class="language-java">System.exit();
+</code></pre>
+<p>这样也属于自杀。</p>
+<p>比如下面的代码</p>
+<pre><code class="language-java">public class SelfKill {
+
+    public static void main(String[] args) throws InterruptedException {
+        while(true){
+            Thread.sleep(5000);
+            System.exit(4);
+        }
+    }
+}
+</code></pre>
+<p>运行如下：</p>
+<pre><code class="language-bash">[koudai@koudai-pc classes]$ java baicai.other.SelfKill
+[koudai@koudai-pc classes]$ echo $?4
+</code></pre>
+<p>我们能用shutdownHook来在临死前记日志。</p>
+<pre><code class="language-java">public class SelfKill {
+
+    public static void main(String[] args) throws InterruptedException {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -&gt; {
+            System.out.println(&quot;关闭应用，释放资源&quot;);
+        }));
+        while(true){
+            Thread.sleep(2000);
+            System.exit(4);
+        }
+    }
+}
+</code></pre>
+<p>执行结果</p>
+<pre><code class="language-bash">[koudai@koudai-pc classes]$ java baicai.other.SelfKill
+关闭应用，释放资源
+</code></pre>
+<p>可以看到，无论是主动自杀，还是被自杀，shutdownHook都能保持现场。那如果是不支持shutdownHook的语言呢，或者程序里没有做Hook，那我们是不知道的。另外，不只是自杀shutdownHook能触发，它杀shutdownHook也会被触发。</p>
+<p><u>总结下：对于主动自杀，如果我们有使用了shutdownHook，是能记录下自杀时间和现场的。如果是被自杀（恶意后门调用System.exit），并且我们没有做Hook，那对自杀现场是不知情的。代码里一定要有完善的shutdownHook。</u></p>
+<p>主动自杀是我们的主动行为，那怎样避免被动自杀呢？刚才说了，被动自杀一般是恶意调用System.exit导致，一种是开发者加入的后门，一种是脚本小子加入的后门。System.exit导致JVM直接退出，且没有日志可以查询到是哪个类里的代码导致，因此通常情况下需要屏蔽。System.exit是可以被禁止的，方法就是自定义SecurityManager：</p>
+<pre><code class="language-java">public class SelfSecurityManager extends SecurityManager{
+    @Override
+    public void checkPermission(Permission perm) {
+        if (perm instanceof java.lang.RuntimePermission) {
+            String name = perm.getName();
+            if (name != null &amp;&amp; name.contains(&quot;setSecurityManager&quot;)) {
+                throw new SecurityException(&quot;System.setSecurityManager denied!&quot;);
+            }
+        }
+    }
+
+    @Override
+    public void checkPermission(Permission perm, Object context) {
+        //
+    }
+
+    @Override
+    public void checkExit(int status) {
+        super.checkExit(status);
+        throw new ExitException(status);//自定义异常
+    }
+}
+
+System.setSecurityManager(new SelfSecurityManager());//main方法中
+</code></pre>
+<p>需要注意的是，你可以自定义SecurityManager，脚本小子也可以自定义。因此光在Java类中自定义SecurityManager是不够的，你需要在JVM启动参数上定义更精细的policy文件，以及保护自己的SecurityManager不被重置。尤其需要注意不要被反射绕过。</p>
+<h2 id="2他杀">2.他杀</h2>
+<p>前面说了，不只是自杀shutdownHook能触发，以下场景都会触发 ShutdownHook :</p>
+<ul>
+<li>代码执行结束，JVM 正常退出</li>
+<li>应用代码中调用 <code>System#exit</code> 方法</li>
+<li>应用中发生 OOM 错误，导致 JVM 关闭</li>
+<li>终端中使用 <code>Ctrl+C</code>(非后台运行)</li>
+<li>主动关闭应用</li>
+</ul>
+<p>我们模拟Ctrl+C试试。如下所示</p>
+<pre><code class="language-bash">[koudai@koudai-pc classes]$ java baicai.other.SelfKill^C关闭应用，释放资源[koudai@koudai-pc classes]$
+</code></pre>
+<p>可以看到ctrl+C是能被捕获到的。那么kill指令能被捕获吗</p>
+<pre><code class="language-bash">[koudai@koudai-pc classes]$ kill 14675[koudai@koudai-pc classes]$ java baicai.other.SelfKill关闭应用，释放资源
+</code></pre>
+<p>可以看到普通的kill是能被捕获的，那么kill -9呢</p>
+<pre><code class="language-bash">[koudai@koudai-pc classes]$ ps -ef|grep Kill
+koudai     14948    8231  0 00:57 pts/1    00:00:00 java baicai.other.SelfKill
+koudai     15235   14640  0 00:58 pts/2    00:00:00 grep --colour=auto Kill
+[koudai@koudai-pc classes]$ kill -9 14948
+[koudai@koudai-pc classes]$ java baicai.other.SelfKill
+已杀死
+</code></pre>
+<p>可以看到kill -9是无法被进程自身所捕获的。</p>
+<p>到这里就结束了吗？</p>
+<p>真正的问题来了，就算我有shutdownHook能记下临终遗言，但是最关键的是我无法知道是谁杀死了我。尤其是分析某些木马的场景下</p>
+<p>如果是系统杀死我的，那一般就是OOM，这种情况也还好。</p>
+<p>Linux内核有个机制叫OOM killer(Out Of Memory  killer)，该机制会监控那些占用内存过大，尤其是瞬间占用内存很快的进程，然后防止内存耗尽而自动把该进程杀掉。内核检测到系统内存不足、挑选并杀掉某个进程的过程可以参考内核源代码linux/mm/oom_kill.c，当系统内存不足的时候，out_of_memory()被触发，然后调用select_bad_process()选择一个”bad”进程杀掉。</p>
+<p>这种OOM，是有日志记录的，可以用下面的方法查看</p>
+<pre><code class="language-bash">grep &quot;Out of memory&quot; /var/log/messagessudo 
+dmesg|grep &quot;Out of memory&quot;
+</code></pre>
+<p>系统杀的，自认倒霉。</p>
+<p>最麻烦的是被第三方杀的，比如木马，各种监控脚本，各种sh脚本，我咋样才知道是哪个进程杀的呢？这就需要用到systemtap了。</p>
+<h2 id="3systemtap使用">3.systemtap使用</h2>
+<p>systemtap是一个<strong>用于简化linux系统运行形态信息收集的开源工具</strong>。它立足于性能诊断和bug调试，对内核及用户态程序提供了动态追踪功能，用户可以自定探测事件来跟踪程序的运行情况，如函数的调用路径、CPU占用和磁盘IO等一系列可以探测的情况。有了systemtap，可以在程序不修改代码，甚至不用重启就能分析出程序的运行情况。</p>
+<p>systemtap 的核心思想是定义一个事件（event），以及给出处理该事件的句柄（Handler）。当一个特定的事件发生时，内核运行该处理句柄，就像快速调用一个子函数一样，处理完之后恢复到内核原始状态。</p>
+<p>先来安装它</p>
+<pre><code class="language-bash">yum install systemtap systemtap-runtime
+stap-prep
+stap -e 'probe begin{printf(&quot;Hello, World&quot;); exit();}' #测试验证
+</code></pre>
+<p>由于我们并不需要高级功能，所以暂不安装内核符号文件。接下来，我们写一个stap脚本</p>
+<pre><code class="language-bash">vim sigmon.stp
+# 内容如下
+probe begin
+{
+  printf(&quot;%-8s %-16s %-5s %-16s %6s %-16s\n&quot;,
+         &quot;SPID&quot;, &quot;SNAME&quot;, &quot;RPID&quot;, &quot;RNAME&quot;, &quot;SIGNUM&quot;, &quot;SIGNAME&quot;)
+}
+
+probe signal.send
+{
+  if (sig_name == @1 &amp;&amp; sig_pid == target())
+    printf(&quot;%-8d %-16s %-5d %-16s %-6d %-16s\n&quot;,
+      pid(), execname(), sig_pid, pid_name, sig, sig_name)
+}
+</code></pre>
+<p>现在我们需要监控某个进程，就这么调用</p>
+<pre><code class="language-java">(base) [root@VM-0-7-centos ~]# stap -x 28262  sigmon.stp SIGKILLSPID     SNAME            RPID  RNAME            SIGNUM SIGNAME         2362819  bash             28262 rsyslogd         9      SIGKILL
+</code></pre>
+<p>这样我们就知道28262这个进程是被2362819这个进程，也就是bash所杀死的。</p>
+<p>当然，如果不在事前监控，事后我们是拿不到日志信息的。</p>
+<p>如果我们即不做ShutdownHook，也不使用systemtap进行监控，仅仅靠操作系统自带日志，那我们是无法保存死亡现场，也很难知道谁是进程killed背后的凶手了</p>
+
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1自杀">1.自杀</a></li>
+    <li><a href="#2他杀">2.他杀</a></li>
+    <li><a href="#3systemtap使用">3.systemtap使用</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1自杀">1.自杀</a></li>
+    <li><a href="#2他杀">2.他杀</a></li>
+    <li><a href="#3systemtap使用">3.systemtap使用</a></li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            <span>&copy; 2021 <a href="https://iminto.github.io/">baicai</a> |
+                基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
+                   target="_blank">Hugo</a> 构建</span>
+        </div>
+    </div>
+</footer>
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+</body>
+
+</html>

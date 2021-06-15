@@ -6,14 +6,23 @@
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 21 May 2021 13:40:56 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Jun 2021 16:35:59 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://iminto.github.io/about/</link>
       <pubDate>Sun, 07 Jul 2019 15:17:21 +0800</pubDate>
       
       <guid>https://iminto.github.io/about/</guid>
-      <description>目前可以找到我的j私人联系方式：(联系方式隐藏在下图) 不使用微信/QQ/微博/知乎 电报渠道：https://t.me/notonlyshare</description>
+      <description>目前可以找到我的可回复私人联系方式：(联系方式隐藏在下图) 不使用微信/QQ/微博/知乎 电报渠道：https://t.me/notonlyshare GPG： KeyId：0xC2F337FBA26CB3F</description>
+    </item>
+    
+    <item>
+      <title>谁杀死了这个进程</title>
+      <link>https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Tue, 15 Jun 2021 16:35:59 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</guid>
+      <description>之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。 先来看自杀。 1.自杀 我们以Ja</description>
     </item>
     
     <item>
