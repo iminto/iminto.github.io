@@ -6,7 +6,16 @@
     <description>Recent content in Java on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 15 Jun 2021 16:35:59 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Jun 2021 08:39:26 +0800</lastBuildDate><atom:link href="https://iminto.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java安全策略配置和沙箱闲话</title>
+      <link>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</link>
+      <pubDate>Thu, 17 Jun 2021 08:39:26 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</guid>
+      <description>之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码 public class SelfSecurityManager extends SecurityManager{ ..// @Override public void checkExit(int status) { super.checkExit(status); throw new ExitException(status); } } 通过自定义SecurityManager来禁止System.exit的执行</description>
+    </item>
+    
     <item>
       <title>谁杀死了这个进程</title>
       <link>https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</link>

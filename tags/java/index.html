@@ -29,7 +29,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iminto.github.io/tags/java/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2021-06-15T16:35:59+08:00" />
+<meta property="og:updated_time" content="2021-06-17T08:39:26+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
@@ -114,6 +114,19 @@ document.addEventListener("DOMContentLoaded", taunt);
 </div>
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/">Java安全策略配置和沙箱闲话</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-06-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3354 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码 public class SelfSecurityManager extends SecurityManager{ ..// @Override public void checkExit(int status) { super.checkExit(status); throw new ExitException(status); } } 通过自定义SecurityManager来禁止System.exit的执行
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">
@@ -229,19 +242,6 @@ document.addEventListener("DOMContentLoaded", taunt);
     </div>
     <div class="post-item post-summary markdown-body">
         互联网低潮，老是会看到别人发面试经验，看到很多人谈乐观锁，谈CAS，但是都没有说清楚。忍不住叨叨几句。 那什么是乐观锁呢，比较书面的定义是 “它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Netty实现http服务器keep Alive无效的问题排查</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-07-06</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1043 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        netty实现http服务器keep-alive无效的问题排查 今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的head
     </div>
 </div>
 

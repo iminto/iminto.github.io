@@ -6,7 +6,7 @@
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 15 Jun 2021 16:35:59 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Jun 2021 08:39:26 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://iminto.github.io/about/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://iminto.github.io/about/</guid>
       <description>目前可以找到我的可回复私人联系方式：(联系方式隐藏在下图) 不使用微信/QQ/微博/知乎 电报渠道：https://t.me/notonlyshare GPG： KeyId：0xC2F337FBA26CB3F</description>
+    </item>
+    
+    <item>
+      <title>Java安全策略配置和沙箱闲话</title>
+      <link>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</link>
+      <pubDate>Thu, 17 Jun 2021 08:39:26 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</guid>
+      <description>之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码 public class SelfSecurityManager extends SecurityManager{ ..// @Override public void checkExit(int status) { super.checkExit(status); throw new ExitException(status); } } 通过自定义SecurityManager来禁止System.exit的执行</description>
     </item>
     
     <item>

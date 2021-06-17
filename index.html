@@ -29,7 +29,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iminto.github.io/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2021-06-15T16:35:59+08:00" />
+<meta property="og:updated_time" content="2021-06-17T08:39:26+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
@@ -110,6 +110,19 @@ document.addEventListener("DOMContentLoaded", taunt);
                 
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/">Java安全策略配置和沙箱闲话</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-06-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3354 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码 public class SelfSecurityManager extends SecurityManager{ ..// @Override public void checkExit(int status) { super.checkExit(status); throw new ExitException(status); } } 通过自定义SecurityManager来禁止System.exit的执行
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">
@@ -225,19 +238,6 @@ document.addEventListener("DOMContentLoaded", taunt);
     </div>
     <div class="post-item post-summary markdown-body">
         按惯例上Prosody 自己的文档: https://prosody.im/doc/ 安装 使用centos8安装 yum install prosody dnf --enablerepo=PowerTools install lua-filesystem 其它版本linux则无需单独安装lua-filesystem依赖。 配置 主配置文件 prosody.cfg.lua 一般不需要修改。 下面写些咱做的修改😂 在 modules_enabled 中
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/">基于restfulAPI实现k8s的监听机制</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-08-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2727 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/k8s">k8s</a>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。 在此之前简单先说一下http长连接 分块传输编码（Chunked transfer encodi
     </div>
 </div>
 
