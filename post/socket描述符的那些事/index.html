@@ -172,13 +172,15 @@ lrwx------ 1 root root 64 Jul  7 13:49 95 -&gt; socket:[5722372]
 [root@manager net]#
 </code></pre>
 <p>这个文件怎么解读呢，我们暂时只看第一部分</p>
-<p>8: 55F9B40A:0016 59CDB40A:2738 01
-|      |      |      |      |   |&ndash;&gt; connection state（套接字状态）
-|      |      |      |      |&mdash;&mdash;&gt; remote TCP port number（远端端口，主机字节序）
-|      |      |      |&mdash;&mdash;&mdash;&mdash;-&gt; remote IPv4 address（远端IP，网络字节序）
-|      |      |&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;&gt; local TCP port number（本地端口，主机字节序）
-|      |&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&gt; local IPv4 address（本地IP，网络字节序）
-|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-&gt; number of entry</p>
+<pre><code class="language-bash">   8: 55F9B40A:0016 59CDB40A:2738 01 
+   |      |      |      |      |   |--&gt; connection state（套接字状态）
+   |      |      |      |      |------&gt; remote TCP port number（远端端口，主机字节序）
+   |      |      |      |-------------&gt; remote IPv4 address（远端IP，网络字节序）
+   |      |      |--------------------&gt; local TCP port number（本地端口，主机字节序）
+   |      |---------------------------&gt; local IPv4 address（本地IP，网络字节序）
+   |----------------------------------&gt; number of entry
+
+</code></pre>
 <p>比如我们看到59CDB40A:2738这个rem_address，很自然它就是TCP的四元组，十六进制转为二进制后就是
 89.205.180.10:10040，注意此处IP地址应该是10.180.205.89。用lsof验证下</p>
 <pre><code class="language-bash">[root@manager net]# lsof -i|grep 10040
