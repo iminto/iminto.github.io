@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 17 Jun 2021 08:39:26 +0800</lastBuildDate><atom:link href="https://iminto.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 13:52:40 +0800</lastBuildDate><atom:link href="https://iminto.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>进程Socket描述符的那些事</title>
+      <link>https://iminto.github.io/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</link>
+      <pubDate>Fri, 09 Jul 2021 13:52:40 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</guid>
+      <description>前几天看到有人发的一个面试题，问的是MySQL连接的进程描述符的问题。 在Linux里，一切皆文件，那进程描述符，实际就是文件描述符了。 我们还知道Linux 内核提供了一种通过 proc文件系统，/proc</description>
+    </item>
+    
     <item>
       <title>Java安全策略配置和沙箱闲话</title>
       <link>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</link>
