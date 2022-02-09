@@ -6,7 +6,7 @@
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 09 Jul 2021 13:52:40 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Feb 2022 14:16:58 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://iminto.github.io/about/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://iminto.github.io/about/</guid>
       <description>目前可以找到我的可回复私人联系方式：(联系方式隐藏在下图) 不使用微信/QQ/微博/知乎 电报渠道：https://t.me/notonlyshare GPG： KeyId：0xC2F337FBA26CB3F</description>
+    </item>
+    
+    <item>
+      <title>Cpuid和序列号背后的那些故事</title>
+      <link>https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/</link>
+      <pubDate>Wed, 09 Feb 2022 14:16:58 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/</guid>
+      <description>最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。 这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说</description>
     </item>
     
     <item>

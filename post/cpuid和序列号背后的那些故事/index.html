@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.76.4" />
+
+
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
+
+
+<title>Cpuid和序列号背后的那些故事 - 白菜不是菜</title>
+
+
+<meta name="author" content="baicai" />
+
+
+<meta name="description" content="A minimal Hugo theme with nice theme color." />
+
+
+<meta name="keywords" content="Linux" />
+
+<meta property="og:title" content="Cpuid和序列号背后的那些故事" />
+<meta property="og:description" content="最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。 这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/" />
+<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
+<meta property="article:published_time" content="2022-02-09T14:16:58+08:00" />
+<meta property="article:modified_time" content="2022-02-09T14:16:58+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
+
+<meta name="twitter:title" content="Cpuid和序列号背后的那些故事"/>
+<meta name="twitter:description" content="最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。 这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说"/>
+
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+function isTencent(){
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
+        }
+		
+function taunt() {
+    if (isTencent()) { 
+                alert("系统检测出来你使用了腾讯系浏览器,访问被禁止;\r\n珍爱生命，远离烂人张小龙");
+				document.execCommand("stop");
+				document.body.innerHTML = "系统检测出来你使用了腾讯系浏览器,访问被禁止\r\n珍爱生命，远离烂人张小龙";
+            }
+  }
+document.addEventListener("DOMContentLoaded", taunt);
+      
+</script>
+</head>
+
+<body data-theme="auto">
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            
+            <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/">Cpuid和序列号背后的那些故事</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-02-09</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2514 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+
+    </div>
+    
+    
+    <div class="post-content markdown-body">
+        <p>最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。
+这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说又复现了，马上去看了下测试环境，服务器是一台国产化FT S2500服务器,验证了下，果然如此，马上去看了下关键代码。</p>
+<pre><code class="language-java">public static String executeLinuxCmd(int type) {
+        try {
+            String cmd = &quot;dmidecode |grep 'Serial Number'&quot;;
+            if (type == 1) {
+                cmd = &quot;fdisk -l&quot;;
+            }
+            //...
+        } catch (IOException e) {//
+        }
+        return null;
+    }
+    
+    public static String getSerialNumber(int type, String record, String symbol) {
+            String execResult = executeLinuxCmd(type);
+            String[] infos = execResult.split(&quot;\n&quot;);
+            for (String info : infos) {
+                info = info.trim();
+                if (info.indexOf(record) != -1) {
+                    String[] sn = info.replace(&quot; &quot;, &quot;&quot;).split(symbol);
+                    return sn[1];
+                }
+            }
+       //...
+        }
+        
+      /**
+     * 获取CPUID、硬盘序列号、MAC地址、主板序列号
+     *
+     * @return
+     */
+    public static Map&lt;String, String&gt; getAllSn() {
+        String os = System.getProperty(&quot;os.name&quot;);
+        Map&lt;String, String&gt; snVo = new HashMap();
+        if (&quot;LINUX&quot;.equalsIgnoreCase(os)) {
+            String mainboardNumber = getSerialNumber(0, &quot;Serial Number&quot;, &quot;:&quot;);
+            String diskNumber = getSerialNumber(1, &quot;Disk identifier&quot;, &quot;:&quot;);
+            snVo.put(&quot;diskid&quot;, diskNumber == null ? &quot;tmpDiskId&quot; : diskNumber.toUpperCase().replace(&quot; &quot;, &quot;&quot;));
+            snVo.put(&quot;mainboard&quot;, mainboardNumber == null ? &quot;tmpMainboard&quot; : mainboardNumber.toUpperCase().replace(&quot; &quot;, &quot;&quot;));
+        } else {
+</code></pre>
+<p>这下明白了，它是取的CPU序列号作为机器码。dmidecode的输出中有多个Serial Number，它只取了第一个，恰恰就是Processor Information，也就是我们常说的CPU序列号。</p>
+<pre><code class="language-bash">Handle 0x0001, DMI type 4, 48 bytes
+Processor Information
+        Socket Designation: CPU0
+        Type: Central Processor
+        Family: ARMv8
+        Manufacturer: Phytium
+        ID: 33 66 1F 70 00 00 00 00
+        Signature: Implementor 0x70, Variant 0x1, Architecture 15, Part 0x663, Revision 3
+        Version: S2500
+        Voltage: 0.8 V
+        External Clock: 100 MHz
+        Max Speed: 2100 MHz
+        Current Speed: 2100 MHz
+        Status: Populated, Enabled
+        Upgrade: Unknown
+        L1 Cache Handle: 0x1001
+        L2 Cache Handle: 0x1002
+        L3 Cache Handle: 0x1003
+        Serial Number: A5F9B0AD-E023-7E89-CF01-47772188AD003
+        Asset Tag: 9EEC0F35-D6DB-EE11-4788-C0EE56755439
+        Part Number: ABD15C29-35D3-1659-BFAF-AD57F39874C3
+        Core Count: 64
+        Core Enabled: 64
+        Thread Count: 64
+        Characteristics:
+                64-bit capable
+                Multi-Core
+                Execute Protection
+                Enhanced Virtualization
+                Power/Performance Control
+</code></pre>
+<p>CPU支持过序列号功能，但是被人指责侵犯隐私，所以现在的规范中，CPU完全没有所谓的序列号。</p>
+<p>关于CPU序列号，其实还有一段历史。在奔腾3中短暂的引入过这个功能，但是后来很快就移除了。</p>
+<p>EAX=3: Processor Serial Number</p>
+<p>See also:  Pentium III § Controversy about privacy issues（https://en.wikipedia.org/wiki/Pentium_III#Controversy_about_privacy_issues）</p>
+<p>This returns the processor&rsquo;s serial number. The processor serial number was introduced on Intel Pentium III, but due to privacy concerns, this feature is no longer implemented on later models (PSN feature bit is always cleared). Transmeta&rsquo;s Efficeon and Crusoe processors also provide this feature. AMD CPUs however, do not implement this feature in any CPU models.</p>
+<p>For Intel Pentium III CPUs, the serial number is returned in EDX:ECX registers. For Transmeta Efficeon CPUs, it is returned in EBX:EAX registers. And for Transmeta Crusoe CPUs, it is returned in EBX register only.</p>
+<p>Note that the processor serial number feature must be enabled in the BIOS setting in order to function.</p>
+<p>所以，我们不应该使用CPU Serial Number来作为设备唯一性判断，而应该使用CPU ID来判断。</p>
+<h3 id="1windows下获取cpu-id">1.Windows下获取CPU ID</h3>
+<p>如果是windows系统，根据MSDN文档：http://msdn.microsoft.com/en-us/library/aa394373(v=vs.85).aspx
+ProcessorId</p>
+<p>Data type: string</p>
+<p>Access type: Read-only</p>
+<p>Processor information that describes the processor features. For an x86 class CPU, the field format depends on the processor support of the CPUID instruction. If the instruction is supported, the property contains 2 (two) DWORD formatted values. The first is an offset of 08h-0Bh, which is the EAX value that a CPUID instruction returns with input EAX set to 1. The second is an offset of 0Ch-0Fh, which is the EDX value that the instruction returns. Only the first two bytes of the property are significant and contain the contents of the DX register at CPU reset—all others are set to 0 (zero), and the contents are in DWORD format.&quot;</p>
+<p>可以用如下代码获取CPU ID</p>
+<pre><code class="language-c">#include &quot;stdafx.h&quot;
+#include&lt;iostream&gt;
+ 
+int main()
+{
+ 
+    int32_t deBuf[4];
+ 
+    __cpuidex(deBuf, 01, 0);
+    printf(&quot;%.8x%.8x&quot;, deBuf[3], deBuf[0]);
+ 
+    getchar();
+    return 0;
+}
+</code></pre>
+<p>本地没有msvc编译环境，就不做测试了。</p>
+<h3 id="2linux-x86amd64获取cpu-id">2.linux x86/amd64获取CPU ID</h3>
+<p>在Linux上呢，我们也可以用C内联汇编来实现</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+static inline void native_cpuid(unsigned int *eax, unsigned int *ebx,
+                                unsigned int *ecx, unsigned int *edx)
+{
+        /* ecx is often an input as well as an output. */
+        asm volatile(&quot;cpuid&quot;
+            : &quot;=a&quot; (*eax),
+              &quot;=b&quot; (*ebx),
+              &quot;=c&quot; (*ecx),
+              &quot;=d&quot; (*edx)
+            : &quot;0&quot; (*eax), &quot;2&quot; (*ecx));
+}
+
+int main(int argc, char **argv)
+{
+  unsigned eax, ebx, ecx, edx;
+
+  eax = 1; /* processor info and feature bits */
+  native_cpuid(&amp;eax, &amp;ebx, &amp;ecx, &amp;edx);
+
+  printf(&quot;stepping %d\n&quot;, eax &amp; 0xF);
+  printf(&quot;model %d\n&quot;, (eax &gt;&gt; 4) &amp; 0xF);
+  printf(&quot;family %d\n&quot;, (eax &gt;&gt; 8) &amp; 0xF);
+  printf(&quot;processor type %d\n&quot;, (eax &gt;&gt; 12) &amp; 0x3);
+  printf(&quot;extended model %d\n&quot;, (eax &gt;&gt; 16) &amp; 0xF);
+  printf(&quot;extended family %d\n&quot;, (eax &gt;&gt; 20) &amp; 0xFF);
+
+  /* EDIT */
+  eax = 3; /* processor serial number */
+  native_cpuid(&amp;eax, &amp;ebx, &amp;ecx, &amp;edx);
+
+  /** see the CPUID Wikipedia article on which models return the serial 
+      number in which registers. The example here is for 
+      Pentium III */
+  printf(&quot;cpu serial number 0x%08x%08x\n&quot;, edx, ecx);
+
+</code></pre>
+<p>native_cpuid这段代码来自linux kernel里的源码，其实gcc里有cpuid.h这个文件，它封装了ASM代码，直接引入即可。</p>
+<p>看下运行结果：</p>
+<pre><code class="language-bash">[root@localhost xx]# gcc cpu_x86.c -o cpu_x86
+[root@localhost xx]# ./cpu_x86
+stepping 4
+model 5
+family 6
+processor type 0
+extended model 5
+extended family 0
+serial number 0x0000000000000000
+</code></pre>
+<p>如上所示，eax, ebx, ecx, edx这四个寄存器对应的内容就是cpu id。跟dmidecode的结果比较下，可以对应上。</p>
+<pre><code class="language-bash">[root@localhost xx]# dmidecode -t 4
+# dmidecode 3.0
+Getting SMBIOS data from sysfs.
+SMBIOS 2.7 present.
+
+Handle 0x0004, DMI type 4, 42 bytes
+Processor Information
+        Socket Designation: CPU #000
+        Type: Central Processor
+        Family: Unknown
+        Manufacturer: GenuineIntel
+        ID: 54 06 05 00 FF FB AB 0F
+        Version: Intel(R) Xeon(R) Gold 6152 CPU @ 2.10GHz
+        Voltage: 3.3 V
+        External Clock: Unknown
+        Max Speed: 30000 MHz
+        Current Speed: 2100 MHz
+        Status: Populated, Enabled
+        Upgrade: ZIF Socket
+        L1 Cache Handle: 0x0016
+        L2 Cache Handle: 0x0018
+        L3 Cache Handle: Not Provided
+        Serial Number: Not Specified
+        Asset Tag: Not Specified
+        Part Number: Not Specified
+        Core Count: 1
+        Core Enabled: 1
+        Characteristics:
+                64-bit capable
+                Execute Protection
+
+</code></pre>
+<h3 id="3aarch64下获取cpu-id">3.aarch64下获取CPU ID</h3>
+<p>如果是aarch64架构，CPU架构不一样，就不能用同样的ASM汇编了，找了下ARM官方文档，https://developer.arm.com/documentation/ddi0500/d/system-control/aarch64-register-descriptions/main-id-register&ndash;el1?lang=en，参考CPU架构，可以从MIDR_EL1寄存器获取</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(int argc, char **argv)
+{
+   unsigned long arm_cpuid;
+  __asm__(&quot;mrs %0, MIDR_EL1&quot; : &quot;=r&quot;(arm_cpuid));
+  printf(&quot;%-20s: 0x%016lx\n&quot;, &quot;MIDR_EL1=&quot;, arm_cpuid);
+}
+</code></pre>
+<p>输出如下</p>
+<pre><code>[root@master98 xx]# gcc cpu.c -o cpu
+[root@master98 xx]# ./cpu
+MIDR_EL1=           : 0x00000000701f6633
+</code></pre>
+<p>正好与dmidecode中的ID对应。经过测试，重启后cpuid是不会改变的。</p>
+<h3 id="4cpu-id-or-serial-number">4.CPU ID or Serial Number？</h3>
+<p>Java代码里匹配的是Serial Number，这里一直说的是CPU ID，这俩东西到底是不是同一个事呢？</p>
+<p>结论是：
+1.CPU Serial Number是一个Embedded 96-bit code during chip fabrication，但废弃标准，不应该使用，而应该使用CPU ID来判断。</p>
+<p>2.因为涉及隐私问题（Serial Number is Readable by networks &amp; applications），现在的服务器架构已经不支持CPU Serial Number的获取了，用dmidecode获取到的Serial Number不保证有值的。</p>
+<p>3.CPU ID包含的是CPU架构的一些信息，更接近条形码的概念，并不是唯一身份标识，不保证唯一性。</p>
+<p>4.dmidecode在国产服务器架构下获取到的CPU Serial Number，其实又叫PSN（Processor Serial Number）。之所以国产化服务器能拿到PSN，是因为国产服务器是aarch64架构，并且是自主化研发，并没有遵循Intel的规范。另外同为国产化服务器，不同的厂家实现也不一样，有的重启即变，有的并不会变化。关于PSN的开启，应该是可以在BIOS里配置。其实，PSN should NOT exist at all。为什么国产服务器还保留PSN，就不做过多展开了。有兴趣的可以自行阅读PSN相关文档</p>
+<p>最后，修改很简单，如果使用场景不严格，可以使用CPU ID，或者System Information中的UUID即可，两者都能保证重启不变，但System Information中的UUID能保证唯一性，而CPU ID不能 。</p>
+
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1windows下获取cpu-id">1.Windows下获取CPU ID</a></li>
+        <li><a href="#2linux-x86amd64获取cpu-id">2.linux x86/amd64获取CPU ID</a></li>
+        <li><a href="#3aarch64下获取cpu-id">3.aarch64下获取CPU ID</a></li>
+        <li><a href="#4cpu-id-or-serial-number">4.CPU ID or Serial Number？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+</aside>
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>页面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives/">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about/">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+            <li>
+                <a href="/index.xml">RSS</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>链接</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>标签</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/java/">Java</a>
+            </span>
+            
+            <span>
+                <a href="/tags/k8s/">k8s</a>
+            </span>
+            
+            <span>
+                <a href="/tags/linux/">Linux</a>
+            </span>
+            
+            <span>
+                <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/vala/">Vala</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+            </span>
+            
+            <span>
+                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+    
+    <div class="sidebar-item sidebar-toc">
+        <h3>目录</h3>
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1windows下获取cpu-id">1.Windows下获取CPU ID</a></li>
+        <li><a href="#2linux-x86amd64获取cpu-id">2.linux x86/amd64获取CPU ID</a></li>
+        <li><a href="#3aarch64下获取cpu-id">3.aarch64下获取CPU ID</a></li>
+        <li><a href="#4cpu-id-or-serial-number">4.CPU ID or Serial Number？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            <span>&copy; 2022 <a href="https://iminto.github.io/">baicai</a> |
+                基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
+                   target="_blank">Hugo</a> 构建</span>
+        </div>
+    </div>
+</footer>
+    
+<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+</body>
+
+</html>
