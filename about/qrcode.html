@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<!--head部分-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 30%;
+            height: 30%;
+            background: #3487fa;
+            position: absolute;
+        }
+        .erweima{
+            background: rgb(255,255,255);
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            position: absolute;
+            z-index: 1000000;
+            padding: 15% 0 10% 0;
+            margin: 20% 5% 0 5%;
+        }
+        .erweima img{
+            text-align: center;
+            width: 70%;
+        }
+        .erweima p{
+            text-align: center;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .erweima p a{
+            color: #5e9dfb;
+        }
+        .erweima p span{
+            color: #999999;
+        }
+        .erweima p img{
+            width: 15px;
+            height: 15px;
+        }
+        .erweima i{
+            text-align: center;
+            font-size: 16px;
+            line-height: 20px;
+            font-style: normal;
+            color: #474747;
+        }
+    </style>
+
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        var code = null;
+        var task;
+        // $(function(){
+        //     getQrcode();
+        // })
+        function initFun(userId,token) {
+            $("#userId").val(userId);
+            $("#appToken").val(token);
+            startTask();
+        }
+        function flagFunction() {
+            test.hello("js调用了android中的hello方法");
+        }
+        //取消定时任务
+        function stoplTask() {
+            console.log(task);
+            if(task){
+                clearInterval(task);
+            }
+        }
+
+        //启动
+        function startTask() {
+            getQrcode();
+            task = window.setInterval(getQrcode,1000 * 60);//60秒
+        }
+        function getQrcode() {
+            $.ajax({
+                type: "post",
+                headers: {
+                    'token':$('#appToken').val()
+                },
+                url: "http://txkapi.jiatob.com/Qrcode/getQrcode",
+                data: {userCode: $("#userId").val(),currTime:new Date().getTime()},
+                dataType: "json",
+                success: function(data){
+                    console.log(data);
+                    $("#qrcode").attr("src", "data:image/png;base64," + data.result.img);
+                    code = data.result.code;
+                }
+            });
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="erweima">
+            <input id="userId" type="hidden" value="4" >
+            <input id="appToken" type="hidden"value="" >
+            <img id="qrcode" onclick="getQrcode()" src="">
+            <p>
+                <img src="load.png"/>
+                <span>请点击二维码</span><a onclick="getQrcode()" href="javascript:void(0)">刷新</a>
+            </p>
+            <i>请将二维码靠近二维码识别区域</i>
+        </div>
+    </div>
+
+
+</body>
+</html>
