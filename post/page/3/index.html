@@ -29,7 +29,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://iminto.github.io/post/" />
 <meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2022-02-09T14:16:58+08:00" />
+<meta property="og:updated_time" content="2023-06-16T10:37:46+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
@@ -110,6 +110,19 @@ document.addEventListener("DOMContentLoaded", taunt);
                 
 
 
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/">K8s管理crd和K8SAPI编程</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-02-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4305 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/k8s">k8s</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。 目前用的版本 root@de001:/develop# kubectl version Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;17&quot;, GitVersion:&quot;v1.17.2+k3s1&quot;, GitCommit:&quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2020-01-27T18:09:26Z&quot;, GoVersion:&quot;go1.13.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;} Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;17&quot;, GitVersion:&quot;v1.17.2+k3s1&quot;, GitCommit:&quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2020-01-27T18:09:26Z&quot;, GoVersion:&quot;go1.13.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;} 1.编写Spec文档 apiVersion: apiextensions.k8s.io/v1beta1 kind: CustomResourceDefinition metadata: # name must match the spec fields below, and be in the form: &lt;plural&gt;.&lt;group&gt; name: crontabs.chenwen.com spec: # group
+    </div>
+</div>
 
 <div class="post">
     <h2 class="post-item post-title">
@@ -225,19 +238,6 @@ document.addEventListener("DOMContentLoaded", taunt);
     </div>
     <div class="post-item post-summary markdown-body">
         今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/export-freeopt-config/">导出freeOTP中的配置</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-05-14</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;946 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;无标签</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        之前公司的一个网站使用了OTP来做二次验证，然后我就在手机上安装了freeotp这款软件来管理OTP密码，等到换手机了，才发现没法导出原手机的配置，这就尴尬了。FreeOTP is sponsored and officially published by Red Hat，也算
     </div>
 </div>
 
@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <footer>
     <div class="container-lg clearfix">
         <div class="col-12 footer">
-            <span>&copy; 2022 <a href="https://iminto.github.io/">baicai</a> |
+            <span>&copy; 2023 <a href="https://iminto.github.io/">baicai</a> |
                 基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
                    target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
                    target="_blank">Hugo</a> 构建</span>

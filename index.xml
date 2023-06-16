@@ -6,7 +6,7 @@
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 09 Feb 2022 14:16:58 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Jun 2023 10:37:46 +0800</lastBuildDate><atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://iminto.github.io/about/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://iminto.github.io/about/</guid>
       <description>目前可以找到我的可回复私人联系方式：(联系方式隐藏在下图) 不使用微信/QQ/微博/知乎 电报渠道：https://t.me/notonlyshare GPG： KeyId：0xC2F337FBA26CB3F</description>
+    </item>
+    
+    <item>
+      <title>文件生成动态二维码</title>
+      <link>https://iminto.github.io/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/</link>
+      <pubDate>Fri, 16 Jun 2023 10:37:46 +0800</pubDate>
+      
+      <guid>https://iminto.github.io/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/</guid>
+      <description>将图片/文件转为二维码动画 yum install qrencode test=&amp;quot;$(cat dianlong.jpg| base64|tr &#39;\n&#39; &#39; &#39;|sed &#39;s/[[:space:]]//g&#39;)&amp;quot; echo $test &amp;gt;&amp;gt; base64.txt #文件转base64 split -b 1k base64.txt 1_ #按1K分割 for x in $(find -type f -name &amp;quot;1_*&amp;quot;); do cat $x|qrencode -o $x.png -s 4 ;done ffmpeg -framerate 6 -pattern_type glob -i &#39;1_*.png&#39; -loop 0 out1.gif #转GIF ffmpeg -framerate 10 -pattern_type glob -i &#39;1_*.png&#39; -c:v libx264 -pix_fmt yuv420p out.mp4 #计算帧数，验证 ffprobe</description>
     </item>
     
     <item>
