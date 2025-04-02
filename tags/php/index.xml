@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PHP on 白菜不是菜</title>
-    <link>http://localhost:1313/tags/php/</link>
+    <link>https://iminto.github.io/tags/php/</link>
     <description>Recent content in PHP on 白菜不是菜</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 12 Jan 2018 21:24:23 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://iminto.github.io/tags/php/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PHP的mb_check_encoding函数的存在是鸡肋吗</title>
-      <link>http://localhost:1313/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</link>
+      <link>https://iminto.github.io/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</link>
       <pubDate>Fri, 12 Jan 2018 21:24:23 +0000</pubDate>
-      <guid>http://localhost:1313/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</guid>
+      <guid>https://iminto.github.io/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</guid>
       <description>&lt;p&gt;  前不久,有人问到我一个问题，就是使用mb_check_encoding来侦测一段字符的编码，预期是GBK编码，但是PHP给出来UTF-8编码的错误判断。那么，mb_check_encoding的正确姿势是什么呢？&#xA;我们来看一段代码，&lt;/p&gt;</description>
     </item>
   </channel>

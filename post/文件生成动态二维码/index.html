@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head lang="zh-hans">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>文件生成动态二维码 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="将图片/文件转为二维码动画
@@ -17,7 +17,7 @@ ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=
 
 还原：" />
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content="http://localhost:1313/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/">
+	<meta property="og:url" content="https://iminto.github.io/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="文件生成动态二维码">
   <meta property="og:description" content="将图片/文件转为二维码动画
@@ -28,24 +28,24 @@ yum install qrencode test=&#34;$(cat dianlong.jpg| base64|tr &#39;\n&#39; &#39; 
     <meta property="article:published_time" content="2023-06-16T10:37:46+08:00">
     <meta property="article:modified_time" content="2023-06-16T10:37:46+08:00">
     <meta property="article:tag" content="Linux">
-    <meta property="og:image" content="http://localhost:1313/img/og.png">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
   <meta name="twitter:title" content="文件生成动态二维码">
   <meta name="twitter:description" content="将图片/文件转为二维码动画
 yum install qrencode test=&#34;$(cat dianlong.jpg| base64|tr &#39;\n&#39; &#39; &#39;|sed &#39;s/[[:space:]]//g&#39;)&#34;echo $test &gt;&gt; base64.txt #文件转base64split -b 1k base64.txt 1_ #按1K分割for x in $(find -type f -name &#34;1_*&#34;); do cat $x|qrencode -o $x.png -s 4 ;doneffmpeg -framerate 6 -pattern_type glob -i &#39;1_*.png&#39; -loop 0 out1.gif #转GIFffmpeg -framerate 10 -pattern_type glob -i &#39;1_*.png&#39; -c:v libx264 -pix_fmt yuv420p out.mp4#计算帧数，验证ffprobe -i out.mp4ffmpeg -i out.mp4 -map 0:v:0 -c copy -f null -ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 out.mp4还原：">
 
-        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
 	
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://localhost:1313/">白菜不是菜</a>
+		<a href="https://iminto.github.io/">白菜不是菜</a>
 	</div>
 	<nav>
 		
@@ -121,6 +121,8 @@ base64 -d base64.txt &gt;b.jpg
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
+
+
 
 </div>
     </body>

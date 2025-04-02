@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head lang="zh-hans">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Java里常见的几个语法小坑 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="很久没更新博客了，想到几个小坑，虽然没啥技术含量，但或许有人不知道呢。
@@ -19,7 +19,7 @@ List&lt;Integer&gt; students=new ArrayList&lt;Integer&gt;();
 
 students是个list，然后我们新建立了一个subList对象，这个对象截取了students的一部分，我们删除了subList对象里的一些元素，看下运行结果。" />
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content="http://localhost:1313/post/java_trap/">
+	<meta property="og:url" content="https://iminto.github.io/post/java_trap/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="Java里常见的几个语法小坑">
   <meta property="og:description" content="很久没更新博客了，想到几个小坑，虽然没啥技术含量，但或许有人不知道呢。
@@ -31,25 +31,25 @@ List&lt;Integer&gt; students=new ArrayList&lt;Integer&gt;();for (int i = 0; i &
     <meta property="article:published_time" content="2018-05-05T14:18:23+00:00">
     <meta property="article:modified_time" content="2018-05-05T14:18:23+00:00">
     <meta property="article:tag" content="Java">
-    <meta property="og:image" content="http://localhost:1313/img/og.png">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
   <meta name="twitter:title" content="Java里常见的几个语法小坑">
   <meta name="twitter:description" content="很久没更新博客了，想到几个小坑，虽然没啥技术含量，但或许有人不知道呢。
 1.删除sublist的元素导致原对象元素被删除 看下面这段代码
 List&lt;Integer&gt; students=new ArrayList&lt;Integer&gt;();for (int i = 0; i &lt;5 ; i&#43;&#43;) {students.add(i);}List&lt;Integer&gt; subList=new ArrayList&lt;Integer&gt;();subList=students.subList(0,5);subList.remove(0);subList.remove(1);for (int i = 0; i &lt;5 ; i&#43;&#43;) {System.out.println(i&#43;&#34;=&#34;&#43;students.get(i));}students是个list，然后我们新建立了一个subList对象，这个对象截取了students的一部分，我们删除了subList对象里的一些元素，看下运行结果。">
 
-        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
 	
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://localhost:1313/">白菜不是菜</a>
+		<a href="https://iminto.github.io/">白菜不是菜</a>
 	</div>
 	<nav>
 		
@@ -214,6 +214,8 @@ Java里面还有许多线程不安全的类，使用这些类的时候，务必�
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
+
+
 
 </div>
     </body>

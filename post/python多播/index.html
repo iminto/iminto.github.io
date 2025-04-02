@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head lang="zh-hans">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Python多播 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="多播协议是个好东西。
@@ -43,7 +43,7 @@ finally:
 
 客户端" />
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content="http://localhost:1313/post/python%E5%A4%9A%E6%92%AD/">
+	<meta property="og:url" content="https://iminto.github.io/post/python%E5%A4%9A%E6%92%AD/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="Python多播">
   <meta property="og:description" content="多播协议是个好东西。 服务端
@@ -54,24 +54,24 @@ import socketimport struct# 多播地址和端口MULTICAST_GROUP = &#39;239.0
     <meta property="article:published_time" content="2025-04-02T17:39:49+08:00">
     <meta property="article:modified_time" content="2025-04-02T17:39:49+08:00">
     <meta property="article:tag" content="Python">
-    <meta property="og:image" content="http://localhost:1313/img/og.png">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
   <meta name="twitter:title" content="Python多播">
   <meta name="twitter:description" content="多播协议是个好东西。 服务端
 import socketimport struct# 多播地址和端口MULTICAST_GROUP = &#39;239.0.0.110&#39;SERVER_PORT = 12345# 创建 UDP 套接字server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)# 允许地址重用server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)# 绑定到指定端口server_socket.bind((&#39;&#39;, SERVER_PORT))# 将套接字加入多播组group = socket.inet_aton(MULTICAST_GROUP)mreq = struct.pack(&#39;4sL&#39;, group, socket.INADDR_ANY)server_socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)print(f&#34;Listening on multicast address {MULTICAST_GROUP}:{SERVER_PORT}...&#34;)try:while True:# 接收数据data, client_address = server_socket.recvfrom(1024)message = data.decode(&#39;utf-8&#39;)print(f&#34;Received message from {client_address}: {message}&#34;)# 向客户端发送响应response = &#34;Message received successfully!&#34;server_socket.sendto(response.encode(&#39;utf-8&#39;), client_address)except KeyboardInterrupt:print(&#34;Shutting down...&#34;)finally:server_socket.close()客户端">
 
-        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
 	
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://localhost:1313/">白菜不是菜</a>
+		<a href="https://iminto.github.io/">白菜不是菜</a>
 	</div>
 	<nav>
 		
@@ -193,6 +193,8 @@ finally:
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
+
+
 
 </div>
     </body>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on 白菜不是菜</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://iminto.github.io/tags/python/</link>
     <description>Recent content in Python on 白菜不是菜</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 02 Apr 2025 17:39:49 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://iminto.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python多播</title>
-      <link>http://localhost:1313/post/python%E5%A4%9A%E6%92%AD/</link>
+      <link>https://iminto.github.io/post/python%E5%A4%9A%E6%92%AD/</link>
       <pubDate>Wed, 02 Apr 2025 17:39:49 +0800</pubDate>
-      <guid>http://localhost:1313/post/python%E5%A4%9A%E6%92%AD/</guid>
+      <guid>https://iminto.github.io/post/python%E5%A4%9A%E6%92%AD/</guid>
       <description>&lt;p&gt;多播协议是个好东西。&#xA;服务端&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import socket&#xD;&#xA;import struct&#xD;&#xA;&#xD;&#xA;# 多播地址和端口&#xD;&#xA;MULTICAST_GROUP = &#39;239.0.0.110&#39;&#xD;&#xA;SERVER_PORT = 12345&#xD;&#xA;&#xD;&#xA;# 创建 UDP 套接字&#xD;&#xA;server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)&#xD;&#xA;# 允许地址重用&#xD;&#xA;server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)&#xD;&#xA;# 绑定到指定端口&#xD;&#xA;server_socket.bind((&#39;&#39;, SERVER_PORT))&#xD;&#xA;&#xD;&#xA;# 将套接字加入多播组&#xD;&#xA;group = socket.inet_aton(MULTICAST_GROUP)&#xD;&#xA;mreq = struct.pack(&#39;4sL&#39;, group, socket.INADDR_ANY)&#xD;&#xA;server_socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)&#xD;&#xA;&#xD;&#xA;print(f&amp;quot;Listening on multicast address {MULTICAST_GROUP}:{SERVER_PORT}...&amp;quot;)&#xD;&#xA;&#xD;&#xA;try:&#xD;&#xA;    while True:&#xD;&#xA;        # 接收数据&#xD;&#xA;        data, client_address = server_socket.recvfrom(1024)&#xD;&#xA;        message = data.decode(&#39;utf-8&#39;)&#xD;&#xA;        print(f&amp;quot;Received message from {client_address}: {message}&amp;quot;)&#xD;&#xA;&#xD;&#xA;        # 向客户端发送响应&#xD;&#xA;        response = &amp;quot;Message received successfully!&amp;quot;&#xD;&#xA;        server_socket.sendto(response.encode(&#39;utf-8&#39;), client_address)&#xD;&#xA;except KeyboardInterrupt:&#xD;&#xA;    print(&amp;quot;Shutting down...&amp;quot;)&#xD;&#xA;finally:&#xD;&#xA;    server_socket.close()&#xD;&#xA;&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;客户端&lt;/p&gt;</description>
     </item>
   </channel>

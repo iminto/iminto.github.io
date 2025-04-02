@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head lang="zh-hans">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Netty实现http服务器keep Alive无效的问题排查 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="netty实现http服务器keep-alive无效的问题排查
@@ -19,7 +19,7 @@ connection: keep-alive
 
 可以看出，无论是请求还是响应，都是keep-alive的，但是请求两次，服务器端日志如下：" />
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content="http://localhost:1313/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
+	<meta property="og:url" content="https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="Netty实现http服务器keep Alive无效的问题排查">
   <meta property="og:description" content="netty实现http服务器keep-alive无效的问题排查 今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的header里都能看到keep-alive的标志：
@@ -30,24 +30,24 @@ request:Accept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,image
     <meta property="article:published_time" content="2019-07-06T22:11:37+08:00">
     <meta property="article:modified_time" content="2019-07-06T22:11:37+08:00">
     <meta property="article:tag" content="Java">
-    <meta property="og:image" content="http://localhost:1313/img/og.png">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
   <meta name="twitter:title" content="Netty实现http服务器keep Alive无效的问题排查">
   <meta name="twitter:description" content="netty实现http服务器keep-alive无效的问题排查 今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的header里都能看到keep-alive的标志：
 request:Accept: text/html,application/xhtml&#43;xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3Accept-Encoding: gzip, deflate, brAccept-Language: zh-CN,zh;q=0.9,en;q=0.8Cache-Control: max-age=0Connection: keep-aliveresponse:HTTP/1.1 200 OKcontent-type: text/html;charset=UTF-8content-length: 0connection: keep-alive可以看出，无论是请求还是响应，都是keep-alive的，但是请求两次，服务器端日志如下：">
 
-        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
 	
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://localhost:1313/">白菜不是菜</a>
+		<a href="https://iminto.github.io/">白菜不是菜</a>
 	</div>
 	<nav>
 		
@@ -208,6 +208,8 @@ http uri: /favicon.ico
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
+
+
 
 </div>
     </body>

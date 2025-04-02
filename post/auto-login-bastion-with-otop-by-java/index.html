@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head lang="zh-hans">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>使用Java自动登录需要动态密码的堡垒机 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码&#43;空格&#43;OTOP验证码，都得打开手机APP操作一把，烦不胜烦。
 不可忍，想了想，还是借助Java在每次调用时自动生成验证码，然后搞个ssh自动登录（别问我问啥不用公钥，哪有权限啊）得了。" />
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content="http://localhost:1313/post/auto-login-bastion-with-otop-by-java/">
+	<meta property="og:url" content="https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="使用Java自动登录需要动态密码的堡垒机">
   <meta property="og:description" content="公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码&#43;空格&#43;OTOP验证码，都得打开手机APP操作一把，烦不胜烦。
@@ -17,24 +17,24 @@
     <meta property="article:modified_time" content="2018-11-16T20:45:00+00:00">
     <meta property="article:tag" content="Java">
     <meta property="article:tag" content="Linux">
-    <meta property="og:image" content="http://localhost:1313/img/og.png">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
   <meta name="twitter:title" content="使用Java自动登录需要动态密码的堡垒机">
   <meta name="twitter:description" content="公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码&#43;空格&#43;OTOP验证码，都得打开手机APP操作一把，烦不胜烦。
 不可忍，想了想，还是借助Java在每次调用时自动生成验证码，然后搞个ssh自动登录（别问我问啥不用公钥，哪有权限啊）得了。">
 
-        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
 	
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://localhost:1313/">白菜不是菜</a>
+		<a href="https://iminto.github.io/">白菜不是菜</a>
 	</div>
 	<nav>
 		
@@ -132,6 +132,8 @@ interact
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
+
+
 
 </div>
     </body>

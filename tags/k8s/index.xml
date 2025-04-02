@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>K8s on 白菜不是菜</title>
-    <link>http://localhost:1313/tags/k8s/</link>
+    <link>https://iminto.github.io/tags/k8s/</link>
     <description>Recent content in K8s on 白菜不是菜</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 11 Aug 2020 10:17:04 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://iminto.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于restfulAPI实现k8s的监听机制</title>
-      <link>http://localhost:1313/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</link>
+      <link>https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Tue, 11 Aug 2020 10:17:04 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</guid>
+      <guid>https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</guid>
       <description>&lt;p&gt;k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。&lt;/p&gt;&#xA;&lt;p&gt;在此之前简单先说一下http长连接&lt;/p&gt;&#xA;&lt;h2 id=&#34;分块传输编码chunked-transfer-encoding&#34;&gt;分块传输编码（Chunked transfer encoding）&lt;/h2&gt;&#xA;&lt;p&gt;超文本传输协议（HTTP）中的一种数据传输机制，允许HTTP由应用服务器发送给客户端应用（ 通常是网页浏览器）的数据可以分成多个部分。分块传输编码只在HTTP协议1.1版本（HTTP/1.1）中提供。&#xA;通常，HTTP应答消息中发送的数据是整个发送的，Content-Length消息头字段表示数据的长度。数据的长度很重要，因为客户端需要知道哪里是应答消息的结束，以及后续应答消息的开始。然而，使用分块传输编码，数据分解成一系列数据块，并以一个或多个块发送，这样服务器可以发送数据而不需要预先知道发送内容的总大小。通常数据块的大小是一致的，但也不总是这种情况。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Helm集成minio搭建私有仓库</title>
-      <link>http://localhost:1313/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
+      <link>https://iminto.github.io/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
       <pubDate>Fri, 03 Jul 2020 10:20:40 +0800</pubDate>
-      <guid>http://localhost:1313/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
+      <guid>https://iminto.github.io/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
       <description>&lt;h1 id=&#34;helm3集成minio搭建私有仓库&#34;&gt;helm3集成minio搭建私有仓库&lt;/h1&gt;&#xA;&lt;p&gt;我们一般是从本地的目录结构中的chart去进行部署，如果要集中管理chart,就需要涉及到repository的问题可以通过minio建立一个私有的存放仓库。&lt;/p&gt;&#xA;&lt;h2 id=&#34;minio安装&#34;&gt;minio安装&lt;/h2&gt;&#xA;&lt;p&gt;安装过程略去，直接下载执行文件即可&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; .\minio.exe server g:/tmp/&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;配置mc&lt;/p&gt;</description>
     </item>
     <item>
       <title>K8s部署springboot</title>
-      <link>http://localhost:1313/post/k8s%E9%83%A8%E7%BD%B2springboot/</link>
+      <link>https://iminto.github.io/post/k8s%E9%83%A8%E7%BD%B2springboot/</link>
       <pubDate>Fri, 06 Mar 2020 13:44:14 +0800</pubDate>
-      <guid>http://localhost:1313/post/k8s%E9%83%A8%E7%BD%B2springboot/</guid>
+      <guid>https://iminto.github.io/post/k8s%E9%83%A8%E7%BD%B2springboot/</guid>
       <description>&lt;h3 id=&#34;1安装k8s&#34;&gt;1.安装k8s&lt;/h3&gt;&#xA;&lt;p&gt;安装K8S的步骤略去，使用k3s安装会更快捷方便，方便测试环境。&lt;/p&gt;&#xA;&lt;p&gt;如果使用k3s会有个坑，k3s默认使用container而不是docker作为容器，会导致运行时出现一些问题，后面会详细分析。&lt;/p&gt;&#xA;&lt;p&gt;安装k3s后，需要按照如下修改 /etc/systemd/system/k3s.service&lt;/p&gt;</description>
     </item>
     <item>
       <title>Windows上编译安装运行rancher</title>
-      <link>http://localhost:1313/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</link>
+      <link>https://iminto.github.io/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</link>
       <pubDate>Fri, 28 Feb 2020 10:07:59 +0800</pubDate>
-      <guid>http://localhost:1313/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</guid>
+      <guid>https://iminto.github.io/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</guid>
       <description>&lt;p&gt;rancher 是一个为DevOps团队提供的完整的Kubernetes与容器管理解决方案。rancher最大的优点就是安装部署方便，极大地简化了K8S的安装配置。在官网上，推荐的是使用docker方式安装rancher，这种方式隐藏了大量的细节。在网上搜了下现有的资料，几乎都是照抄官方文档，更没有在windows上安装rancher的先例。&lt;/p&gt;</description>
     </item>
     <item>
       <title>K8s管理crd和K8SAPI编程</title>
-      <link>http://localhost:1313/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</link>
+      <link>https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Tue, 11 Feb 2020 14:38:59 +0800</pubDate>
-      <guid>http://localhost:1313/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</guid>
       <description>&lt;p&gt;k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。&lt;/p&gt;&#xA;&lt;p&gt;目前用的版本&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;root@de001:/develop# kubectl version&#xD;&#xA;Client Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.2+k3s1&amp;quot;, GitCommit:&amp;quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-01-27T18:09:26Z&amp;quot;, GoVersion:&amp;quot;go1.13.6&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;linux/amd64&amp;quot;}&#xD;&#xA;Server Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.2+k3s1&amp;quot;, GitCommit:&amp;quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-01-27T18:09:26Z&amp;quot;, GoVersion:&amp;quot;go1.13.6&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;linux/amd64&amp;quot;}&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;1编写spec文档&#34;&gt;1.编写Spec文档&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: apiextensions.k8s.io/v1beta1&#xD;&#xA;kind: CustomResourceDefinition&#xD;&#xA;metadata:&#xD;&#xA;  # name must match the spec fields below, and be in the form: &amp;lt;plural&amp;gt;.&amp;lt;group&amp;gt;&#xD;&#xA;  name: crontabs.chenwen.com&#xD;&#xA;spec:&#xD;&#xA;  # group name to use for REST API: /apis/&amp;lt;group&amp;gt;/&amp;lt;version&amp;gt;&#xD;&#xA;  group: chenwen.com&#xD;&#xA;  # list of versions supported by this CustomResourceDefinition&#xD;&#xA;  versions:&#xD;&#xA;  - name: v2&#xD;&#xA;    # Each version can be enabled/disabled by Served flag.&#xD;&#xA;    served: true&#xD;&#xA;    # One and only one version must be marked as the storage version.&#xD;&#xA;    storage: true&#xD;&#xA;    # A schema is required&#xD;&#xA;  # The conversion section is introduced in Kubernetes 1.13+ with a default value of&#xD;&#xA;  # None conversion (strategy sub-field set to None).&#xD;&#xA;  conversion:&#xD;&#xA;    # None conversion assumes the same schema for all versions and only sets the apiVersion&#xD;&#xA;    # field of custom resources to the proper value&#xD;&#xA;    strategy: None&#xD;&#xA;  # either Namespaced or Cluster&#xD;&#xA;  scope: Namespaced&#xD;&#xA;  names:&#xD;&#xA;    # plural name to be used in the URL: /apis/&amp;lt;group&amp;gt;/&amp;lt;version&amp;gt;/&amp;lt;plural&amp;gt;&#xD;&#xA;    plural: crontabs&#xD;&#xA;    # singular name to be used as an alias on the CLI and for display&#xD;&#xA;    singular: crontab&#xD;&#xA;    # kind is normally the CamelCased singular type. Your resource manifests use this.&#xD;&#xA;    kind: Crontab&#xD;&#xA;    listKind: CrontabList&#xD;&#xA;    # shortNames allow shorter string to match your resource on the CLI&#xD;&#xA;    shortNames:&#xD;&#xA;    - ct &#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;2导入k8s&#34;&gt;2.导入K8S&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ln -s /etc/rancher/k3s/k3s.yaml ~/.kube/config&#xD;&#xA;kubectl apply -f crontab_crd.yml&#xD;&#xA;kubectl get crd&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到自己创建的crd了。&lt;/p&gt;</description>
     </item>
   </channel>

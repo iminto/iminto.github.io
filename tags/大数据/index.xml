@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>大数据 on 白菜不是菜</title>
-    <link>http://localhost:1313/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+    <link>https://iminto.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
     <description>Recent content in 大数据 on 白菜不是菜</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 02 Apr 2021 11:15:20 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://iminto.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SuperSet安装配置</title>
-      <link>http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/</link>
+      <link>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</link>
       <pubDate>Fri, 02 Apr 2021 11:15:20 +0800</pubDate>
-      <guid>http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/</guid>
+      <guid>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</guid>
       <description>&lt;p&gt;Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常有特色。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ambari里自定义资源模块的实现</title>
-      <link>http://localhost:1313/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <link>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Tue, 13 Oct 2020 09:52:43 +0800</pubDate>
-      <guid>http://localhost:1313/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <guid>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
       <description>&lt;p&gt;Ambari里主机，集群，用户等等都视为一种资源，对它们的增删改查就是对资源的增删改查。&lt;/p&gt;&#xA;&lt;p&gt;了解实现Ambari里增加一个资源的流程，就更方便修改Ambari的实现。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1新建控制器层&#34;&gt;1.新建控制器层&lt;/h3&gt;&#xA;&lt;p&gt;ambari的控制器层在service包里&lt;/p&gt;</description>
     </item>
     <item>
       <title>hadoop 3.1.2 单机模式安装配置</title>
-      <link>http://localhost:1313/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
+      <link>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 25 Aug 2019 23:12:21 +0800</pubDate>
-      <guid>http://localhost:1313/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;h1 id=&#34;hadoop-312-单机模式安装配置&#34;&gt;hadoop 3.1.2 单机模式安装配置&lt;/h1&gt;&#xA;&lt;p&gt;现在搞大数据记录一下，方便查阅。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1安装配置jdk和下载hadoop略&#34;&gt;1.安装配置jdk和下载hadoop略。&lt;/h3&gt;&#xA;&lt;p&gt;hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/&#xA;使用了较新且保守的3.1.2版本&lt;/p&gt;&#xA;&lt;h3 id=&#34;2配置修改&#34;&gt;2.配置修改&lt;/h3&gt;&#xA;&lt;p&gt;环境变量修改&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export HADOOP_HOME=/soft/hadoop&#xD;&#xA;export PATH=$PATH:$HADOOP_HOME/bin&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;配置etc/hadoop/hadoop-env.sh&lt;/p&gt;</description>
     </item>
   </channel>

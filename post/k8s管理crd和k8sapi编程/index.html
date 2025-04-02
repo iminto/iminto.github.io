@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head lang="zh-hans">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>K8s管理crd和K8SAPI编程 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。
@@ -52,7 +52,7 @@ kubectl get crd
 
 可以看到自己创建的crd了。" />
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content="http://localhost:1313/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/">
+	<meta property="og:url" content="https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="K8s管理crd和K8SAPI编程">
   <meta property="og:description" content="k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。
@@ -64,25 +64,25 @@ root@de001:/develop# kubectl versionClient Version: version.Info{Major:&#34;1&#
     <meta property="article:published_time" content="2020-02-11T14:38:59+08:00">
     <meta property="article:modified_time" content="2020-02-11T14:38:59+08:00">
     <meta property="article:tag" content="K8s">
-    <meta property="og:image" content="http://localhost:1313/img/og.png">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
   <meta name="twitter:title" content="K8s管理crd和K8SAPI编程">
   <meta name="twitter:description" content="k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。
 目前用的版本
 root@de001:/develop# kubectl versionClient Version: version.Info{Major:&#34;1&#34;, Minor:&#34;17&#34;, GitVersion:&#34;v1.17.2&#43;k3s1&#34;, GitCommit:&#34;cdab19b09a84389ffbf57bebd33871c60b1d6b28&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2020-01-27T18:09:26Z&#34;, GoVersion:&#34;go1.13.6&#34;, Compiler:&#34;gc&#34;, Platform:&#34;linux/amd64&#34;}Server Version: version.Info{Major:&#34;1&#34;, Minor:&#34;17&#34;, GitVersion:&#34;v1.17.2&#43;k3s1&#34;, GitCommit:&#34;cdab19b09a84389ffbf57bebd33871c60b1d6b28&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2020-01-27T18:09:26Z&#34;, GoVersion:&#34;go1.13.6&#34;, Compiler:&#34;gc&#34;, Platform:&#34;linux/amd64&#34;}1.编写Spec文档 apiVersion: apiextensions.k8s.io/v1beta1kind: CustomResourceDefinitionmetadata:# name must match the spec fields below, and be in the form: &lt;plural&gt;.&lt;group&gt;name: crontabs.chenwen.comspec:# group name to use for REST API: /apis/&lt;group&gt;/&lt;version&gt;group: chenwen.com# list of versions supported by this CustomResourceDefinitionversions:- name: v2# Each version can be enabled/disabled by Served flag.served: true# One and only one version must be marked as the storage version.storage: true# A schema is required# The conversion section is introduced in Kubernetes 1.13&#43; with a default value of# None conversion (strategy sub-field set to None).conversion:# None conversion assumes the same schema for all versions and only sets the apiVersion# field of custom resources to the proper valuestrategy: None# either Namespaced or Clusterscope: Namespacednames:# plural name to be used in the URL: /apis/&lt;group&gt;/&lt;version&gt;/&lt;plural&gt;plural: crontabs# singular name to be used as an alias on the CLI and for displaysingular: crontab# kind is normally the CamelCased singular type. Your resource manifests use this.kind: CrontablistKind: CrontabList# shortNames allow shorter string to match your resource on the CLIshortNames:- ct 2.导入K8S ln -s /etc/rancher/k3s/k3s.yaml ~/.kube/configkubectl apply -f crontab_crd.ymlkubectl get crd可以看到自己创建的crd了。">
 
-        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
 	
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://localhost:1313/">白菜不是菜</a>
+		<a href="https://iminto.github.io/">白菜不是菜</a>
 	</div>
 	<nav>
 		
@@ -845,6 +845,8 @@ I0210 17:41:00.332401   18552 event.go:278] Event(v1.ObjectReference{Kind:&quot;
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
+
+
 
 </div>
     </body>
