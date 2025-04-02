@@ -62,7 +62,7 @@
       <link>http://localhost:1313/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</link>
       <pubDate>Tue, 18 Feb 2020 21:09:34 +0800</pubDate>
       <guid>http://localhost:1313/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</guid>
-      <description>&lt;p&gt;今天群里有位360的安全大佬，发了个链接&lt;a href=&#34;http://93.175.29.89:8008/&#34; target=&#34;_blank&#34;&gt;http://93.175.29.89:8008/&lt;/a&gt;，说爬这个网址的时候，IO会一直卡在那，一直没有返回响应。&#xA;那个网址是他构造的一个特殊请求，输出一个视频流，但是服务器端不返回Content-Length，也不输出真实数据，就是输出不到1024字节的流后就一直停在那也不close，浏览器打开的效果就是看到了视频的前几帧，然后一直卡在哪转圈。&lt;/p&gt;</description>
+      <description>&lt;p&gt;今天群里有位360的安全大佬，发了个链接&lt;a href=&#34;http://93.175.29.89:8008/&#34;&gt;http://93.175.29.89:8008/&lt;/a&gt;，说爬这个网址的时候，IO会一直卡在那，一直没有返回响应。&#xA;那个网址是他构造的一个特殊请求，输出一个视频流，但是服务器端不返回Content-Length，也不输出真实数据，就是输出不到1024字节的流后就一直停在那也不close，浏览器打开的效果就是看到了视频的前几帧，然后一直卡在哪转圈。&lt;/p&gt;</description>
     </item>
     <item>
       <title>hadoop 3.1.2 单机模式安装配置</title>

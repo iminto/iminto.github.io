@@ -1,32 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-hans">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="HandheldFriendly" content="True" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.145.0">
-
-
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
-
-
-<title>一种swagger Ui的替代方案不引入任何源码污染 - 白菜不是菜</title>
-
-
-<meta name="author" content="baicai" />
-
-
-<meta name="description" content="A minimal Hugo theme with nice theme color." />
-
-
-<meta name="keywords" content="Java" />
-
-<meta property="og:url" content="http://localhost:1313/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/">
+<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>一种swagger Ui的替代方案不引入任何源码污染 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要单独部署项目，可让文档随着项目一起发布。" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="一种swagger Ui的替代方案不引入任何源码污染">
   <meta property="og:description" content="在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要单独部署项目，可让文档随着项目一起发布。">
@@ -38,95 +16,50 @@
     <meta property="article:tag" content="Java">
     <meta property="og:image" content="http://localhost:1313/img/og.png">
 
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/img/og.png">
   <meta name="twitter:title" content="一种swagger Ui的替代方案不引入任何源码污染">
   <meta name="twitter:description" content="在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要单独部署项目，可让文档随着项目一起发布。">
 
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
 
-
-<style>
-    @media (prefers-color-scheme: dark) {
-        body[data-theme='auto'] img {
-            filter: brightness(60%);
-        }
-    }
-
-    body[data-theme='dark'] img {
-        filter: brightness(60%);
-    }
-</style>
-
-
-
-<link rel="stylesheet" href="http://localhost:1313/assets/css/fuji.min.css" />
-
-
-
-
-<script>
-function isTencent(){
-            var ua = navigator.userAgent.toLowerCase();
-            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
-        }
-		
-function taunt() {
-    if (isTencent()) { 
-                alert("系统检测出来你使用了腾讯系浏览器,访问被禁止;\r\n珍爱生命，远离烂人张小龙");
-				document.execCommand("stop");
-				document.body.innerHTML = "系统检测出来你使用了腾讯系浏览器,访问被禁止\r\n珍爱生命，远离烂人张小龙";
-            }
-  }
-document.addEventListener("DOMContentLoaded", taunt);
-      
-</script>
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
-
-<body data-theme="auto">
-    <script data-cfasync="false">
-  
-  var fujiThemeData = localStorage.getItem('fuji_data-theme');
-  
-  if (!fujiThemeData) {
-    localStorage.setItem('fuji_data-theme', 'auto');
-  } else {
-    
-    if (fujiThemeData !== 'auto') {
-      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
-    }
-  }
-</script>
-
-    <header>
-    <div class="container-lg clearfix">
-        <div class="col-12 header">
-            <a class="title-main" href="http://localhost:1313/">白菜不是菜</a>
-            
-            <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
-            
-        </div>
-    </div>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">白菜不是菜</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/post">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		<a href="/index.xml">RSS</a>
+		
+		
+	</nav>
 </header>
 
-    <main>
-        <div class="container-lg clearfix">
-            
-            <div class="col-12 col-md-9 float-left content">
-                
-<article>
-    
-    <h2 class="post-item post-title">
-        <a href="http://localhost:1313/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/">一种swagger Ui的替代方案不引入任何源码污染</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-05-12</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1381 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
-
-    </div>
-    
-    
-    <div class="post-content markdown-body">
-        <p>在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要单独部署项目，可让文档随着项目一起发布。</p>
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">一种swagger Ui的替代方案不引入任何源码污染</h1>
+          <div class="meta">Posted on 2020年5月12日</div>
+        </div>
+        
+        <section class="body">
+          <p>在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要单独部署项目，可让文档随着项目一起发布。</p>
 <p>但是开源项目往往是开源一时热，事后拂衣去，缺少维护。这个项目已经两年多没有维护了，很多人在issue反馈过bug，作者一年前表示自己比较忙，没空维护。</p>
 <p>springfox最新的版本是2.9.2，不支持spring5（虽然有个快照版支持spring5，但一直没发布，整合也有点麻烦）。spring5比较大的一个改变就是增加了webflux，因此旧版springfox无法兼容spring5的。</p>
 <p>其实用快照版，稍作修改也能让springfox支持webflux，但是我不是很喜欢这种做法。一个是增加了打包体积和运行内存占用，另一个则是swagger的使用污染了Java源码，很是不美观，强迫症不能忍。</p>
@@ -271,238 +204,41 @@ public class MethodTaglet implements Taglet {
 <pre><code class="language-bash">javadoc -protected -splitindex -use -author -version -encoding utf-8 -charset utf-8 -d /usr/jackma/doc  -windowtitle &quot;ali 文档&quot;  $(ls /usr/jackma/ali/ali-common/src/main/java/com/github/cloud/ali/common/model/*.java |tr &quot;\n&quot; &quot; &quot;) $(ls /usr/jackma/ali/ali-gateway/src/main/java/com/github/cloud/ali/feign/*.java |tr &quot;\n&quot; &quot; &quot;) -tag method:a:&quot;HTTP请求方法:&quot; -tag path:a:&quot;请求路径:&quot;  -tagletpath /usr/jackma/ali/ali-common/src/main/java/com/github/cloud/ali/common/tool/MethodTaglet.java  -tagletpath /usr/jackma/ali/ali-common/src/main/java/com/github/cloud/ali/common/tool/PathTaglet.java -taglet com.github.cloud.ali.common.tool.MethodTaglet -taglet com.github.cloud.ali.common.tool.PathTaglet
 </code></pre>
 <p>最终效果如下：</p>
-<p><img class="img-zoomable" src="https://s1.ax1x.com/2020/05/12/YNRadK.png" alt=" javadoc " />
-</p>
+<p><img src="https://s1.ax1x.com/2020/05/12/YNRadK.png" alt=" javadoc "></p>
 <p>还可以进一步，加上数据类型的注解，这样就更完善了。</p>
 <p>虽然离swagger-ui还有点差距，但是还是比原版javadoc好多了。最大的优点是没有任何限制和对源码的污染。</p>
 <p>不得不说，Java的扩展性不是盖的。</p>
 
-    </div>
-</article>
-
-
-<div class="license markdown-body">
-    <blockquote>
-        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
-    </blockquote>
-</div>
-
-
-
-            </div>
-            <aside class="col-12 col-md-3 float-left sidebar">
-    
-    <div class="sidebar-item sidebar-pages">
-        <h3>页面</h3>
-        <ul>
-            
-            <li>
-                <a href="/">Home</a>
-            </li>
-            
-            <li>
-                <a href="/archives/">Archives</a>
-            </li>
-            
-            <li>
-                <a href="/about/">About</a>
-            </li>
-            
-            <li>
-                <a href="/search/">Search</a>
-            </li>
-            
-            <li>
-                <a href="/index.xml">RSS</a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-links">
-        <h3>链接</h3>
-        <ul>
-            
-            <li>
-                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-tags">
-        <h3>标签</h3>
-        <div>
-            
-            <span>
-                <a href="/tags/java/">Java</a>
-            </span>
-            
-            <span>
-                <a href="/tags/k8s/">K8s</a>
-            </span>
-            
-            <span>
-                <a href="/tags/linux/">Linux</a>
-            </span>
-            
-            <span>
-                <a href="/tags/php/">PHP</a>
-            </span>
-            
-            <span>
-                <a href="/tags/python/">Python</a>
-            </span>
-            
-            <span>
-                <a href="/tags/vala/">Vala</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
-            </span>
-            
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/java">Java</a></li>
+              
+            </ul>
+          </nav>
+          
+          
         </div>
+      </div>
+
+      
+      
     </div>
-    
-    
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>目录</h3>
-        <nav id="TableOfContents"></nav>
-    </div>
-    
-    
-</aside>
-        </div>
-        <div class="btn">
-    <div class="btn-menu" id="btn-menu">
-        <i class="iconfont icon-grid-sharp"></i>
-    </div>
-    <div class="btn-toggle-mode">
-        <i class="iconfont icon-contrast-sharp"></i>
-    </div>
-    <div class="btn-scroll-top">
-        <i class="iconfont icon-chevron-up-circle-sharp"></i>
-    </div>
-</div>
-<aside class="sidebar-mobile" style="display: none;">
-  <div class="sidebar-wrapper">
-    
-    <div class="sidebar-item sidebar-pages">
-        <h3>页面</h3>
-        <ul>
-            
-            <li>
-                <a href="/">Home</a>
-            </li>
-            
-            <li>
-                <a href="/archives/">Archives</a>
-            </li>
-            
-            <li>
-                <a href="/about/">About</a>
-            </li>
-            
-            <li>
-                <a href="/search/">Search</a>
-            </li>
-            
-            <li>
-                <a href="/index.xml">RSS</a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-links">
-        <h3>链接</h3>
-        <ul>
-            
-            <li>
-                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-tags">
-        <h3>标签</h3>
-        <div>
-            
-            <span>
-                <a href="/tags/java/">Java</a>
-            </span>
-            
-            <span>
-                <a href="/tags/k8s/">K8s</a>
-            </span>
-            
-            <span>
-                <a href="/tags/linux/">Linux</a>
-            </span>
-            
-            <span>
-                <a href="/tags/php/">PHP</a>
-            </span>
-            
-            <span>
-                <a href="/tags/python/">Python</a>
-            </span>
-            
-            <span>
-                <a href="/tags/vala/">Vala</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
-            </span>
-            
-        </div>
-    </div>
-    
-    
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>目录</h3>
-        <nav id="TableOfContents"></nav>
-    </div>
-    
-    
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
-</aside>
-    </main>
-
-    <footer>
-    <div class="container-lg clearfix">
-        <div class="col-12 footer">
-            <span>&copy; 2025 <a href="http://localhost:1313/">baicai</a> |
-                基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
-                   target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
-                   target="_blank">Hugo</a> 构建</span>
-        </div>
-    </div>
 </footer>
-    
-<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
-
-
-<script defer src="/assets/js/fuji.min.js"></script>
-
-
-</body>
-
+</div>
+    </body>
 </html>

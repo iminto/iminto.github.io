@@ -1,32 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-hans">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="HandheldFriendly" content="True" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.145.0">
-
-
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
-
-
-<title>TOTP算法Java版本 - 白菜不是菜</title>
-
-
-<meta name="author" content="baicai" />
-
-
-<meta name="description" content="A minimal Hugo theme with nice theme color." />
-
-
-<meta name="keywords" content="Java" />
-
-<meta property="og:url" content="http://localhost:1313/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/">
+<html><head lang="zh-hans"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>TOTP算法Java版本 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="TOTP 概念
+TOTP - Time-based One-time Password Algorithm is an extension of the HMAC-based One Time Password algorithm HOTP to support a time based moving factor.
+TOTP（基于时间的一次性密码算法）是支持时间作为动态因素基于HMAC一次性密码算法的扩展。它是OTP算法的一种
+算法如下:
+TOTP = Truncate(HMAC-SHA-1(K, (T - T0) / X))
+K 共享密钥
+T 时间
+T0 开始计数的时间步长
+X 时间步长" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/">
   <meta property="og:site_name" content="白菜不是菜">
   <meta property="og:title" content="TOTP算法Java版本">
   <meta property="og:description" content="TOTP 概念 TOTP - Time-based One-time Password Algorithm is an extension of the HMAC-based One Time Password algorithm HOTP to support a time based moving factor.
@@ -41,7 +27,6 @@ K 共享密钥 T 时间 T0 开始计数的时间步长 X 时间步长">
     <meta property="article:tag" content="Java">
     <meta property="og:image" content="http://localhost:1313/img/og.png">
 
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/img/og.png">
   <meta name="twitter:title" content="TOTP算法Java版本">
@@ -50,89 +35,45 @@ TOTP（基于时间的一次性密码算法）是支持时间作为动态因素�
 算法如下: TOTP = Truncate(HMAC-SHA-1(K, (T - T0) / X))
 K 共享密钥 T 时间 T0 开始计数的时间步长 X 时间步长">
 
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
 
-
-<style>
-    @media (prefers-color-scheme: dark) {
-        body[data-theme='auto'] img {
-            filter: brightness(60%);
-        }
-    }
-
-    body[data-theme='dark'] img {
-        filter: brightness(60%);
-    }
-</style>
-
-
-
-<link rel="stylesheet" href="http://localhost:1313/assets/css/fuji.min.css" />
-
-
-
-
-<script>
-function isTencent(){
-            var ua = navigator.userAgent.toLowerCase();
-            return ua.indexOf("micromess") > 1||ua.indexOf("qqbrow")>1;
-        }
-		
-function taunt() {
-    if (isTencent()) { 
-                alert("系统检测出来你使用了腾讯系浏览器,访问被禁止;\r\n珍爱生命，远离烂人张小龙");
-				document.execCommand("stop");
-				document.body.innerHTML = "系统检测出来你使用了腾讯系浏览器,访问被禁止\r\n珍爱生命，远离烂人张小龙";
-            }
-  }
-document.addEventListener("DOMContentLoaded", taunt);
-      
-</script>
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
 </head>
-
-<body data-theme="auto">
-    <script data-cfasync="false">
-  
-  var fujiThemeData = localStorage.getItem('fuji_data-theme');
-  
-  if (!fujiThemeData) {
-    localStorage.setItem('fuji_data-theme', 'auto');
-  } else {
-    
-    if (fujiThemeData !== 'auto') {
-      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
-    }
-  }
-</script>
-
-    <header>
-    <div class="container-lg clearfix">
-        <div class="col-12 header">
-            <a class="title-main" href="http://localhost:1313/">白菜不是菜</a>
-            
-            <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
-            
-        </div>
-    </div>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">白菜不是菜</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/post">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		<a href="/index.xml">RSS</a>
+		
+		
+	</nav>
 </header>
 
-    <main>
-        <div class="container-lg clearfix">
-            
-            <div class="col-12 col-md-9 float-left content">
-                
-<article>
-    
-    <h2 class="post-item post-title">
-        <a href="http://localhost:1313/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/">TOTP算法Java版本</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-01-08</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1329 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
-
-    </div>
-    
-    
-    <div class="post-content markdown-body">
-        <h4 id="totp-概念">TOTP 概念</h4>
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">TOTP算法Java版本</h1>
+          <div class="meta">Posted on 2018年1月8日</div>
+        </div>
+        
+        <section class="body">
+          <h4 id="totp-概念">TOTP 概念</h4>
 <p>TOTP - Time-based One-time Password Algorithm is an extension of the HMAC-based One Time Password algorithm HOTP to support a time based moving factor.</p>
 <p>TOTP（基于时间的一次性密码算法）是支持时间作为动态因素基于HMAC一次性密码算法的扩展。它是OTP算法的一种</p>
 <p>算法如下:
@@ -390,248 +331,36 @@ public class GoogleAuthTest {
 <p>在实际使用中,通常把secret嵌入一段URL中并以二维码的形式发布,这个URL一般称为otpauth协议.其URL如下所示:
 otpauth://totp/testuser@testhost?secret=VGH25A7M54QPME5F&amp;algorithm=SHA1&amp;digits=6&amp;period=30</p>
 
-    </div>
-</article>
-
-
-<div class="license markdown-body">
-    <blockquote>
-        <p>除特殊注明部分，本站内容采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-               target="_blank">CC BY-NC-SA 4.0</a> 进行许可。</p>
-    </blockquote>
-</div>
-
-
-
-            </div>
-            <aside class="col-12 col-md-3 float-left sidebar">
-    
-    <div class="sidebar-item sidebar-pages">
-        <h3>页面</h3>
-        <ul>
-            
-            <li>
-                <a href="/">Home</a>
-            </li>
-            
-            <li>
-                <a href="/archives/">Archives</a>
-            </li>
-            
-            <li>
-                <a href="/about/">About</a>
-            </li>
-            
-            <li>
-                <a href="/search/">Search</a>
-            </li>
-            
-            <li>
-                <a href="/index.xml">RSS</a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-links">
-        <h3>链接</h3>
-        <ul>
-            
-            <li>
-                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-tags">
-        <h3>标签</h3>
-        <div>
-            
-            <span>
-                <a href="/tags/java/">Java</a>
-            </span>
-            
-            <span>
-                <a href="/tags/k8s/">K8s</a>
-            </span>
-            
-            <span>
-                <a href="/tags/linux/">Linux</a>
-            </span>
-            
-            <span>
-                <a href="/tags/php/">PHP</a>
-            </span>
-            
-            <span>
-                <a href="/tags/python/">Python</a>
-            </span>
-            
-            <span>
-                <a href="/tags/vala/">Vala</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
-            </span>
-            
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/java">Java</a></li>
+              
+            </ul>
+          </nav>
+          
+          
         </div>
+      </div>
+
+      
+      
     </div>
-    
-    
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>目录</h3>
-        <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-    </div>
-    
-    
-</aside>
-        </div>
-        <div class="btn">
-    <div class="btn-menu" id="btn-menu">
-        <i class="iconfont icon-grid-sharp"></i>
-    </div>
-    <div class="btn-toggle-mode">
-        <i class="iconfont icon-contrast-sharp"></i>
-    </div>
-    <div class="btn-scroll-top">
-        <i class="iconfont icon-chevron-up-circle-sharp"></i>
-    </div>
-</div>
-<aside class="sidebar-mobile" style="display: none;">
-  <div class="sidebar-wrapper">
-    
-    <div class="sidebar-item sidebar-pages">
-        <h3>页面</h3>
-        <ul>
-            
-            <li>
-                <a href="/">Home</a>
-            </li>
-            
-            <li>
-                <a href="/archives/">Archives</a>
-            </li>
-            
-            <li>
-                <a href="/about/">About</a>
-            </li>
-            
-            <li>
-                <a href="/search/">Search</a>
-            </li>
-            
-            <li>
-                <a href="/index.xml">RSS</a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-links">
-        <h3>链接</h3>
-        <ul>
-            
-            <li>
-                <a href="https://github.com/iminto" target="_blank"><span>GitHub</span></a>
-            </li>
-            
-        </ul>
-    </div>
-    
-    <div class="sidebar-item sidebar-tags">
-        <h3>标签</h3>
-        <div>
-            
-            <span>
-                <a href="/tags/java/">Java</a>
-            </span>
-            
-            <span>
-                <a href="/tags/k8s/">K8s</a>
-            </span>
-            
-            <span>
-                <a href="/tags/linux/">Linux</a>
-            </span>
-            
-            <span>
-                <a href="/tags/php/">PHP</a>
-            </span>
-            
-            <span>
-                <a href="/tags/python/">Python</a>
-            </span>
-            
-            <span>
-                <a href="/tags/vala/">Vala</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
-            </span>
-            
-            <span>
-                <a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1/">闲扯淡</a>
-            </span>
-            
-        </div>
-    </div>
-    
-    
-    
-    <div class="sidebar-item sidebar-toc">
-        <h3>目录</h3>
-        <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-    </div>
-    
-    
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
-</aside>
-    </main>
-
-    <footer>
-    <div class="container-lg clearfix">
-        <div class="col-12 footer">
-            <span>&copy; 2025 <a href="http://localhost:1313/">baicai</a> |
-                基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
-                   target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
-                   target="_blank">Hugo</a> 构建</span>
-        </div>
-    </div>
 </footer>
-    
-<script defer src="https://cdn.jsdelivr.net/combine/npm/medium-zoom@1.0.6,npm/lazysizes@5.2.2"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-core.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
-
-
-<script defer src="/assets/js/fuji.min.js"></script>
-
-
-</body>
-
+</div>
+    </body>
 </html>
