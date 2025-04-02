@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-hans">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.76.4" />
+<meta name="generator" content="Hugo 0.145.0">
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -26,19 +26,28 @@
 
 <meta name="keywords" content="k8s, Java" />
 
-<meta property="og:title" content="基于restfulAPI实现k8s的监听机制" />
-<meta property="og:description" content="k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。 在此之前简单先说一下http长连接 分块传输编码（Chunked transfer encodi" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/" />
-<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="article:published_time" content="2020-08-11T10:17:04+08:00" />
-<meta property="article:modified_time" content="2020-08-11T10:17:04+08:00" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/">
+  <meta property="og:site_name" content="白菜不是菜">
+  <meta property="og:title" content="基于restfulAPI实现k8s的监听机制">
+  <meta property="og:description" content="k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。
+在此之前简单先说一下http长连接
+分块传输编码（Chunked transfer encoding） 超文本传输协议（HTTP）中的一种数据传输机制，允许HTTP由应用服务器发送给客户端应用（ 通常是网页浏览器）的数据可以分成多个部分。分块传输编码只在HTTP协议1.1版本（HTTP/1.1）中提供。 通常，HTTP应答消息中发送的数据是整个发送的，Content-Length消息头字段表示数据的长度。数据的长度很重要，因为客户端需要知道哪里是应答消息的结束，以及后续应答消息的开始。然而，使用分块传输编码，数据分解成一系列数据块，并以一个或多个块发送，这样服务器可以发送数据而不需要预先知道发送内容的总大小。通常数据块的大小是一致的，但也不总是这种情况。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-08-11T10:17:04+08:00">
+    <meta property="article:modified_time" content="2020-08-11T10:17:04+08:00">
+    <meta property="article:tag" content="K8s">
+    <meta property="article:tag" content="Java">
+    <meta property="og:image" content="http://localhost:1313/img/og.png">
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="基于restfulAPI实现k8s的监听机制"/>
-<meta name="twitter:description" content="k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。 在此之前简单先说一下http长连接 分块传输编码（Chunked transfer encodi"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:title" content="基于restfulAPI实现k8s的监听机制">
+  <meta name="twitter:description" content="k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。
+在此之前简单先说一下http长连接
+分块传输编码（Chunked transfer encoding） 超文本传输协议（HTTP）中的一种数据传输机制，允许HTTP由应用服务器发送给客户端应用（ 通常是网页浏览器）的数据可以分成多个部分。分块传输编码只在HTTP协议1.1版本（HTTP/1.1）中提供。 通常，HTTP应答消息中发送的数据是整个发送的，Content-Length消息头字段表示数据的长度。数据的长度很重要，因为客户端需要知道哪里是应答消息的结束，以及后续应答消息的开始。然而，使用分块传输编码，数据分解成一系列数据块，并以一个或多个块发送，这样服务器可以发送数据而不需要预先知道发送内容的总大小。通常数据块的大小是一致的，但也不总是这种情况。">
 
 
 
@@ -56,8 +65,7 @@
 
 
 
-<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
-
+<link rel="stylesheet" href="http://localhost:1313/assets/css/fuji.min.css" />
 
 
 
@@ -98,7 +106,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <header>
     <div class="container-lg clearfix">
         <div class="col-12 header">
-            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            <a class="title-main" href="http://localhost:1313/">白菜不是菜</a>
             
             <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
             
@@ -114,10 +122,10 @@ document.addEventListener("DOMContentLoaded", taunt);
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/">基于restfulAPI实现k8s的监听机制</a>
+        <a href="http://localhost:1313/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/">基于restfulAPI实现k8s的监听机制</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-08-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2727 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/k8s">k8s</a>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-08-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2739 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/k8s">k8s</a>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     
@@ -134,7 +142,7 @@ document.addEventListener("DOMContentLoaded", taunt);
 <p>当这个消息首部出现在 HEAD 请求的响应中，而这样的响应没有消息体，那么它其实指的是应用在相应的  GET 请求的应答的值。</p>
 <h3 id="指令">指令</h3>
 <h4 id="chunked">chunked</h4>
-<p>数据以一系列分块的形式进行发送。 Content-Length 首部在这种情况下不被发送。。在每一个分块的开头需要添加当前分块的长度，以十六进制的形式表示，后面紧跟着 &lsquo;\r\n&rsquo; ，之后是分块本身，后面也是'\r\n' 。终止块是一个常规的分块，不同之处在于其长度为0。终止块后面是一个挂载（trailer），由一系列（或者为空）的实体消息首部构成。</p>
+<p>数据以一系列分块的形式进行发送。 Content-Length 首部在这种情况下不被发送。。在每一个分块的开头需要添加当前分块的长度，以十六进制的形式表示，后面紧跟着 &lsquo;\r\n&rsquo; ，之后是分块本身，后面也是&rsquo;\r\n&rsquo; 。终止块是一个常规的分块，不同之处在于其长度为0。终止块后面是一个挂载（trailer），由一系列（或者为空）的实体消息首部构成。</p>
 <h3 id="分块编码">分块编码</h3>
 <p>分块编码主要应用于如下场景，即要传输大量的数据，但是在请求在没有被处理完之前响应的长度是无法获得的。例如，当需要用从数据库中查询获得的数据生成一个大的HTML表格的时候，或者需要传输大量的图片的时候。一个分块响应形式如下：</p>
 <pre><code class="language-bash">HTTP/1.1 200 OK 
@@ -306,7 +314,7 @@ Code    Description
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -315,6 +323,10 @@ Code    Description
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -419,7 +431,7 @@ Code    Description
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -428,6 +440,10 @@ Code    Description
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -476,7 +492,7 @@ Code    Description
     <footer>
     <div class="container-lg clearfix">
         <div class="col-12 footer">
-            <span>&copy; 2023 <a href="https://iminto.github.io/">baicai</a> |
+            <span>&copy; 2025 <a href="http://localhost:1313/">baicai</a> |
                 基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
                    target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
                    target="_blank">Hugo</a> 构建</span>

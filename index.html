@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-hans">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.76.4" />
+<meta name="generator" content="Hugo 0.145.0">
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -24,18 +24,19 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta property="og:title" content="白菜不是菜" />
-<meta property="og:description" content="A minimal Hugo theme with nice theme color." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://iminto.github.io/" />
-<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2023-06-16T10:37:46+08:00" />
+<meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="白菜不是菜">
+  <meta property="og:title" content="白菜不是菜">
+  <meta property="og:description" content="A minimal Hugo theme with nice theme color.">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+    <meta property="og:image" content="http://localhost:1313/img/og.png">
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="白菜不是菜"/>
-<meta name="twitter:description" content="A minimal Hugo theme with nice theme color."/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:title" content="白菜不是菜">
+  <meta name="twitter:description" content="A minimal Hugo theme with nice theme color.">
 
 
 
@@ -53,8 +54,7 @@
 
 
 
-<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
-
+<link rel="stylesheet" href="http://localhost:1313/assets/css/fuji.min.css" />
 
 
 
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <header>
     <div class="container-lg clearfix">
         <div class="col-12 header">
-            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            <a class="title-main" href="http://localhost:1313/">白菜不是菜</a>
             
             <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
             
@@ -113,131 +113,203 @@ document.addEventListener("DOMContentLoaded", taunt);
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/">文件生成动态二维码</a>
+        <a href="http://localhost:1313/post/python%E5%A4%9A%E6%92%AD/">Python多播</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-06-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;136 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2025-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;189 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/python">python</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        将图片/文件转为二维码动画 yum install qrencode test=&quot;$(cat dianlong.jpg| base64|tr '\n' ' '|sed 's/[[:space:]]//g')&quot; echo $test &gt;&gt; base64.txt #文件转base64 split -b 1k base64.txt 1_ #按1K分割 for x in $(find -type f -name &quot;1_*&quot;); do cat $x|qrencode -o $x.png -s 4 ;done ffmpeg -framerate 6 -pattern_type glob -i '1_*.png' -loop 0 out1.gif #转GIF ffmpeg -framerate 10 -pattern_type glob -i '1_*.png' -c:v libx264 -pix_fmt yuv420p out.mp4 #计算帧数，验证 ffprobe
+        <p>多播协议是个好东西。
+服务端</p>
+<pre><code class="language-python">import socket
+import struct
+
+# 多播地址和端口
+MULTICAST_GROUP = '239.0.0.110'
+SERVER_PORT = 12345
+
+# 创建 UDP 套接字
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+# 允许地址重用
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+# 绑定到指定端口
+server_socket.bind(('', SERVER_PORT))
+
+# 将套接字加入多播组
+group = socket.inet_aton(MULTICAST_GROUP)
+mreq = struct.pack('4sL', group, socket.INADDR_ANY)
+server_socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
+print(f&quot;Listening on multicast address {MULTICAST_GROUP}:{SERVER_PORT}...&quot;)
+
+try:
+    while True:
+        # 接收数据
+        data, client_address = server_socket.recvfrom(1024)
+        message = data.decode('utf-8')
+        print(f&quot;Received message from {client_address}: {message}&quot;)
+
+        # 向客户端发送响应
+        response = &quot;Message received successfully!&quot;
+        server_socket.sendto(response.encode('utf-8'), client_address)
+except KeyboardInterrupt:
+    print(&quot;Shutting down...&quot;)
+finally:
+    server_socket.close()
+
+</code></pre>
+<p>客户端</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/">Cpuid和序列号背后的那些故事</a>
+        <a href="http://localhost:1313/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/">文件生成动态二维码</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2023-06-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;133 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        <p>将图片/文件转为二维码动画</p>
+<pre><code class="language-bash">yum install qrencode 
+test=&quot;$(cat dianlong.jpg| base64|tr '\n' ' '|sed 's/[[:space:]]//g')&quot;
+echo $test &gt;&gt; base64.txt #文件转base64
+split -b 1k base64.txt 1_ #按1K分割
+for x in $(find -type f  -name &quot;1_*&quot;); do cat $x|qrencode -o $x.png -s 4 ;done
+ffmpeg -framerate 6  -pattern_type glob -i '1_*.png'  -loop 0 out1.gif #转GIF
+ffmpeg -framerate 10  -pattern_type glob -i '1_*.png'  -c:v libx264 -pix_fmt yuv420p out.mp4
+#计算帧数，验证
+ffprobe -i out.mp4
+ffmpeg -i out.mp4  -map 0:v:0 -c copy -f null -
+ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 out.mp4
+</code></pre>
+<p>还原：</p>
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="http://localhost:1313/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/">Cpuid和序列号背后的那些故事</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-02-09</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2514 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。 这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说
+        <p>最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。
+这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说又复现了，马上去看了下测试环境，服务器是一台国产化FT S2500服务器,验证了下，果然如此，马上去看了下关键代码。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">进程Socket描述符的那些事</a>
+        <a href="http://localhost:1313/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">进程Socket描述符的那些事</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-07-09</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2331 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        前几天看到有人发的一个面试题，问的是MySQL连接的进程描述符的问题。 在Linux里，一切皆文件，那进程描述符，实际就是文件描述符了。 我们还知道Linux 内核提供了一种通过 proc文件系统，/proc
+        <p>前几天看到有人发的一个面试题，问的是MySQL连接的进程描述符的问题。</p>
+<p>在Linux里，一切皆文件，那进程描述符，实际就是文件描述符了。</p>
+<p>我们还知道Linux 内核提供了一种通过 proc文件系统，/proc 文件系统是一个虚拟文件系统，通过它可以使用一种新的方法在 Linux内核空间和用户间之间进行通信。在 /proc文件系统中，我们可以将对虚拟文件的读写作为与内核中实体进行通信的一种手段，但是与普通文件不同的是，这些虚拟文件的内容都是动态创建的。用户和应用程序可以通过proc得到系统的信息，并可以改变内核的某些参数。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/">Java安全策略配置和沙箱闲话</a>
+        <a href="http://localhost:1313/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/">Java安全策略配置和沙箱闲话</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-06-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3354 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码 public class SelfSecurityManager extends SecurityManager{ ..// @Override public void checkExit(int status) { super.checkExit(status); throw new ExitException(status); } } 通过自定义SecurityManager来禁止System.exit的执行
+        <p>之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码</p>
+<pre><code class="language-java">public class SelfSecurityManager extends SecurityManager{
+	..//
+   @Override
+    public void checkExit(int status) {
+        super.checkExit(status);
+        throw new ExitException(status);
+    }
+}
+</code></pre>
+<p>通过自定义SecurityManager来禁止System.exit的执行，这里我们来分析下其实现原理，看下super.checkExit方法</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/">谁杀死了这个进程</a>
+        <a href="http://localhost:1313/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/">谁杀死了这个进程</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-06-15</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;2270 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。 先来看自杀。 1.自杀 我们以Ja
+        <p>之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。</p>
+<p>先来看自杀。</p>
+<h2 id="1自杀">1.自杀</h2>
+<p>我们以Java为例，Java程序在main方法运行完就会退出，这种属于自杀。或者像下面这样</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/">坚果3手机刷魔趣体验</a>
+        <a href="http://localhost:1313/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/">坚果3手机刷魔趣体验</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-21</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1535 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。 我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。
+        <p>坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。</p>
+<p>我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。锤子手机其实不是太喜欢，它的特色功能我一个都不喜欢，什么one step，大爆炸，胶囊，我都用不上，当时买它只是因为便宜，性价比不错。另外，锤子的手机也不够开放，我也卸载或冻结了很多它自带的系统APP，导致系统APP卸载了，菜单还保留着，但不能点击，额，不能忍受，所以越用越不顺眼，正好换了新手机，就刷机了。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/">Linux恶意ELF文件分析</a>
+        <a href="http://localhost:1313/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/">Linux恶意ELF文件分析</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-05-17</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1750 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        起因是某客户的服务器上，只要一启动server，过不了几秒就被kill，然后错误日志也看不出啥。 server是基于jvm的，怎么看一个进程被哪个进程杀死，这个可以写一篇文章了。 自信一点，这肯定不是我们
+        <p>起因是某客户的服务器上，只要一启动server，过不了几秒就被kill，然后错误日志也看不出啥。
+server是基于jvm的，怎么看一个进程被哪个进程杀死，这个可以写一篇文章了。</p>
+<p>自信一点，这肯定不是我们代码的问题导致JVM崩溃啊，毫无疑问是那些做安全的脚本小子搞的。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/">Keycloak接入自研系统</a>
+        <a href="http://localhost:1313/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/">Keycloak接入自研系统</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;3910 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        简介 keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，但是提供了非常方便的Client Adapters和各
+        <h2 id="简介">简介</h2>
+<p>keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，但是提供了非常方便的Client Adapters和各种服务器进行对接，比如wildfly，tomcat，Jetty等。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装配置</a>
+        <a href="http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装配置</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1805 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/">Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-12-29</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1000 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        安装依赖 yum list | grep google-authenticator yum install google-authenticator yum install qrencode 配置Google Authenticator 安装完直接跑下面的命令进行配置，注意只在当前用户生效 &gt; google-authenticator 之后会需要确认几点信息 Do you want authentication tokens to be time-based (y/n) y 是否配置基于时间的动态密钥，选择y，之后会出现超级大一
+        <p>Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常有特色。</p>
     </div>
 </div>
 
@@ -356,7 +428,7 @@ document.addEventListener("DOMContentLoaded", taunt);
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -365,6 +437,10 @@ document.addEventListener("DOMContentLoaded", taunt);
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -448,7 +524,7 @@ document.addEventListener("DOMContentLoaded", taunt);
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -457,6 +533,10 @@ document.addEventListener("DOMContentLoaded", taunt);
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -482,7 +562,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <footer>
     <div class="container-lg clearfix">
         <div class="col-12 footer">
-            <span>&copy; 2023 <a href="https://iminto.github.io/">baicai</a> |
+            <span>&copy; 2025 <a href="http://localhost:1313/">baicai</a> |
                 基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
                    target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
                    target="_blank">Hugo</a> 构建</span>

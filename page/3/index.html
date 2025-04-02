@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-hans">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.76.4" />
+<meta name="generator" content="Hugo 0.145.0">
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -24,18 +24,19 @@
 <meta name="description" content="A minimal Hugo theme with nice theme color." />
 
 
-<meta property="og:title" content="白菜不是菜" />
-<meta property="og:description" content="A minimal Hugo theme with nice theme color." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://iminto.github.io/" />
-<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="og:updated_time" content="2023-06-16T10:37:46+08:00" />
+<meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="白菜不是菜">
+  <meta property="og:title" content="白菜不是菜">
+  <meta property="og:description" content="A minimal Hugo theme with nice theme color.">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="website">
+    <meta property="og:image" content="http://localhost:1313/img/og.png">
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="白菜不是菜"/>
-<meta name="twitter:description" content="A minimal Hugo theme with nice theme color."/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:title" content="白菜不是菜">
+  <meta name="twitter:description" content="A minimal Hugo theme with nice theme color.">
 
 
 
@@ -53,8 +54,7 @@
 
 
 
-<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
-
+<link rel="stylesheet" href="http://localhost:1313/assets/css/fuji.min.css" />
 
 
 
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <header>
     <div class="container-lg clearfix">
         <div class="col-12 header">
-            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            <a class="title-main" href="http://localhost:1313/">白菜不是菜</a>
             
             <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
             
@@ -113,131 +113,221 @@ document.addEventListener("DOMContentLoaded", taunt);
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/">K8s管理crd和K8SAPI编程</a>
+        <a href="http://localhost:1313/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/">HttpURLConnection里setReadTimeout超时无效</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-02-18</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1772 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body">
+        <p>今天群里有位360的安全大佬，发了个链接<a href="http://93.175.29.89:8008/" target="_blank">http://93.175.29.89:8008/</a>，说爬这个网址的时候，IO会一直卡在那，一直没有返回响应。
+那个网址是他构造的一个特殊请求，输出一个视频流，但是服务器端不返回Content-Length，也不输出真实数据，就是输出不到1024字节的流后就一直停在那也不close，浏览器打开的效果就是看到了视频的前几帧，然后一直卡在哪转圈。</p>
+    </div>
+</div>
+
+<div class="post">
+    <h2 class="post-item post-title">
+        <a href="http://localhost:1313/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/">K8s管理crd和K8SAPI编程</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-02-11</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;4305 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/k8s">k8s</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。 目前用的版本 root@de001:/develop# kubectl version Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;17&quot;, GitVersion:&quot;v1.17.2+k3s1&quot;, GitCommit:&quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2020-01-27T18:09:26Z&quot;, GoVersion:&quot;go1.13.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;} Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;17&quot;, GitVersion:&quot;v1.17.2+k3s1&quot;, GitCommit:&quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2020-01-27T18:09:26Z&quot;, GoVersion:&quot;go1.13.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;} 1.编写Spec文档 apiVersion: apiextensions.k8s.io/v1beta1 kind: CustomResourceDefinition metadata: # name must match the spec fields below, and be in the form: &lt;plural&gt;.&lt;group&gt; name: crontabs.chenwen.com spec: # group
+        <p>k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。</p>
+<p>目前用的版本</p>
+<pre><code>root@de001:/develop# kubectl version
+Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;17&quot;, GitVersion:&quot;v1.17.2+k3s1&quot;, GitCommit:&quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2020-01-27T18:09:26Z&quot;, GoVersion:&quot;go1.13.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
+Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;17&quot;, GitVersion:&quot;v1.17.2+k3s1&quot;, GitCommit:&quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2020-01-27T18:09:26Z&quot;, GoVersion:&quot;go1.13.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
+</code></pre>
+<h3 id="1编写spec文档">1.编写Spec文档</h3>
+<pre><code class="language-yaml">apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  # name must match the spec fields below, and be in the form: &lt;plural&gt;.&lt;group&gt;
+  name: crontabs.chenwen.com
+spec:
+  # group name to use for REST API: /apis/&lt;group&gt;/&lt;version&gt;
+  group: chenwen.com
+  # list of versions supported by this CustomResourceDefinition
+  versions:
+  - name: v2
+    # Each version can be enabled/disabled by Served flag.
+    served: true
+    # One and only one version must be marked as the storage version.
+    storage: true
+    # A schema is required
+  # The conversion section is introduced in Kubernetes 1.13+ with a default value of
+  # None conversion (strategy sub-field set to None).
+  conversion:
+    # None conversion assumes the same schema for all versions and only sets the apiVersion
+    # field of custom resources to the proper value
+    strategy: None
+  # either Namespaced or Cluster
+  scope: Namespaced
+  names:
+    # plural name to be used in the URL: /apis/&lt;group&gt;/&lt;version&gt;/&lt;plural&gt;
+    plural: crontabs
+    # singular name to be used as an alias on the CLI and for display
+    singular: crontab
+    # kind is normally the CamelCased singular type. Your resource manifests use this.
+    kind: Crontab
+    listKind: CrontabList
+    # shortNames allow shorter string to match your resource on the CLI
+    shortNames:
+    - ct 
+</code></pre>
+<h3 id="2导入k8s">2.导入K8S</h3>
+<pre><code class="language-bash">ln -s /etc/rancher/k3s/k3s.yaml ~/.kube/config
+kubectl apply -f crontab_crd.yml
+kubectl get crd
+</code></pre>
+<p>可以看到自己创建的crd了。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">hadoop 3.1.2 单机模式安装配置</a>
+        <a href="http://localhost:1313/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">hadoop 3.1.2 单机模式安装配置</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-08-25</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;623 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        hadoop 3.1.2 单机模式安装配置 现在搞大数据记录一下，方便查阅。 1.安装配置jdk和下载hadoop略。 hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/ 使用
+        <h1 id="hadoop-312-单机模式安装配置">hadoop 3.1.2 单机模式安装配置</h1>
+<p>现在搞大数据记录一下，方便查阅。</p>
+<h3 id="1安装配置jdk和下载hadoop略">1.安装配置jdk和下载hadoop略。</h3>
+<p>hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/
+使用了较新且保守的3.1.2版本</p>
+<h3 id="2配置修改">2.配置修改</h3>
+<p>环境变量修改</p>
+<pre><code class="language-bash">export HADOOP_HOME=/soft/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin
+</code></pre>
+<p>配置etc/hadoop/hadoop-env.sh</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/">讲清楚CAS的那点事</a>
+        <a href="http://localhost:1313/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/">讲清楚CAS的那点事</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-07-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1381 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        互联网低潮，老是会看到别人发面试经验，看到很多人谈乐观锁，谈CAS，但是都没有说清楚。忍不住叨叨几句。 那什么是乐观锁呢，比较书面的定义是 “它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不
+        <p>互联网低潮，老是会看到别人发面试经验，看到很多人谈乐观锁，谈CAS，但是都没有说清楚。忍不住叨叨几句。</p>
+<p>那什么是乐观锁呢，比较书面的定义是 “它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。”，在多线程中则指对于数据冲突保持一种乐观态度，操作数据时不会对操作的数据进行加锁（这使得多个任务可以并行的对数据进行操作），只有到数据提交的时候才通过一种机制来验证数据是否存在冲突。在Java中，是通过CAS来实现乐观锁的。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Netty实现http服务器keep Alive无效的问题排查</a>
+        <a href="http://localhost:1313/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">Netty实现http服务器keep Alive无效的问题排查</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-07-06</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1043 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        netty实现http服务器keep-alive无效的问题排查 今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的head
+        <h4 id="netty实现http服务器keep-alive无效的问题排查">netty实现http服务器keep-alive无效的问题排查</h4>
+<p>今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的header里都能看到keep-alive的标志：</p>
+<pre><code class="language-html">request:
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Cache-Control: max-age=0
+Connection: keep-alive
+
+response:
+HTTP/1.1 200 OK
+content-type: text/html;charset=UTF-8
+content-length: 0
+connection: keep-alive
+</code></pre>
+<p>可以看出，无论是请求还是响应，都是keep-alive的，但是请求两次，服务器端日志如下：</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/">Filebeat7自定义index的一个坑</a>
+        <a href="http://localhost:1313/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/">Filebeat7自定义index的一个坑</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-06-26</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;857 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        我用的filebeat7来收集日志发给Elastic search，版本是7.1.1，对应的elasticsearch版本和其相同。 默认的，filebeat生成的索引名字是filebeat-7.1.1-
+        <p>我用的filebeat7来收集日志发给Elastic search，版本是7.1.1，对应的elasticsearch版本和其相同。</p>
+<p>默认的，filebeat生成的索引名字是filebeat-7.1.1-2019.06.24这种，不利于区分不同的业务，需要自定义索引，看了下官方文档，
+是这么写的</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/oh-dingtalk/">从钉钉一个忽略了近亿人的产品细节谈谈产品思维</a>
+        <a href="http://localhost:1313/post/oh-dingtalk/">从钉钉一个忽略了近亿人的产品细节谈谈产品思维</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-05-06</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1012 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E9%97%B2%E6%89%AF%E6%B7%A1">闲扯淡</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        本来我一个软件工程师，是很不屑提产品的，但时不时总见到一些产品人吹牛皮，也忍不住凑个热闹。 钉钉(DingTalk)是一款由阿里巴巴集团开发的用于商务沟通和工作协同的IM，其和企业版微信占据了中国的大部
+        <p>本来我一个软件工程师，是很不屑提产品的，但时不时总见到一些产品人吹牛皮，也忍不住凑个热闹。</p>
+<p>钉钉(DingTalk)是一款由阿里巴巴集团开发的用于商务沟通和工作协同的IM，其和企业版微信占据了中国的大部分企业IM市场。阿里并不是一个擅长做社交的公司，钉钉也是一款命途多舛的产品。2014年左右阿里在内部强行推广来往，一款承载了阿里社交梦的产品，花了巨额的研发和营销费用后，依然是折戟沉沙。后来，来往的团队保留了部分下来，做起了钉钉，针对办公社交，居然做成功了。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/">使用Java自动登录需要动态密码的堡垒机</a>
+        <a href="http://localhost:1313/post/auto-login-bastion-with-otop-by-java/">使用Java自动登录需要动态密码的堡垒机</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-11-16</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;391 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。 不可忍，想了想，还是借助Java在每次调用时自动生成验证
+        <p>公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。</p>
+<p>不可忍，想了想，还是借助Java在每次调用时自动生成验证码，然后搞个ssh自动登录（别问我问啥不用公钥，哪有权限啊）得了。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/get-createtime-in-linux/">Linux 下获取文件创建时间</a>
+        <a href="http://localhost:1313/post/get-createtime-in-linux/">Linux 下获取文件创建时间</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-10-07</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1096 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间 [tudou@tudou-pc statx]$ stat test-statx.c 文件：test-statx.c 大小：6656 块：16 IO 块：4096 普通文件 设备：805
+        <p>在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间</p>
+<pre><code class="language-bash">[tudou@tudou-pc statx]$ stat test-statx.c
+  文件：test-statx.c
+  大小：6656            块：16         IO 块：4096   普通文件
+设备：805h/2053d        Inode：6684737     硬链接：1
+权限：(0644/-rw-r--r--)  Uid：( 1000/   tudou)   Gid：( 1001/   tudou)
+最近访问：2018-10-07 13:16:29.000000000 +0800
+最近更改：2018-10-07 13:21:09.855461986 +0800
+最近改动：2018-10-07 13:21:09.855461986 +0800
+创建时间：-
+</code></pre>
+<p>可以看到「创建时间」一行总是「-」。</p>
     </div>
 </div>
 
 <div class="post">
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/">linux下解压bin文件</a>
+        <a href="http://localhost:1313/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/">linux下解压bin文件</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-06-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;508 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/linux">Linux</a>&nbsp;</span>
 
     </div>
     <div class="post-item post-summary markdown-body">
-        现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/">使用内嵌undertow开发调试jfinal项目</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2018-05-19</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;342 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/java">Java</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了
+        <p>现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知道里面的细节，还是有所顾虑的。比如我前几天需要下载一个JRE6，但Oracle官方在JDK7之前都没有tar.gz包，只有bin包。我肯定不能直接安装bin文件啊，这会破坏我本机已有的JDK8开发环境。</p>
     </div>
 </div>
 
@@ -364,7 +454,7 @@ document.addEventListener("DOMContentLoaded", taunt);
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -373,6 +463,10 @@ document.addEventListener("DOMContentLoaded", taunt);
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -456,7 +550,7 @@ document.addEventListener("DOMContentLoaded", taunt);
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -465,6 +559,10 @@ document.addEventListener("DOMContentLoaded", taunt);
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -490,7 +588,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <footer>
     <div class="container-lg clearfix">
         <div class="col-12 footer">
-            <span>&copy; 2023 <a href="https://iminto.github.io/">baicai</a> |
+            <span>&copy; 2025 <a href="http://localhost:1313/">baicai</a> |
                 基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
                    target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
                    target="_blank">Hugo</a> 构建</span>

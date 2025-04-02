@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-hans">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="generator" content="Hugo 0.76.4" />
+<meta name="generator" content="Hugo 0.145.0">
 
 
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/amzrk2/cdn-stcapi@1/favicons/favicon.ico" />
@@ -26,19 +26,23 @@
 
 <meta name="keywords" content="大数据" />
 
-<meta property="og:title" content="SuperSet安装配置" />
-<meta property="og:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/" />
-<meta property="og:image" content="https://iminto.github.io/img/og.png"/>
-<meta property="article:published_time" content="2021-04-02T11:15:20+08:00" />
-<meta property="article:modified_time" content="2021-04-02T11:15:20+08:00" />
+<meta property="og:url" content="http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/">
+  <meta property="og:site_name" content="白菜不是菜">
+  <meta property="og:title" content="SuperSet安装配置">
+  <meta property="og:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常有特色。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-04-02T11:15:20+08:00">
+    <meta property="article:modified_time" content="2021-04-02T11:15:20+08:00">
+    <meta property="article:tag" content="大数据">
+    <meta property="og:image" content="http://localhost:1313/img/og.png">
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://iminto.github.io/img/og.png"/>
 
-<meta name="twitter:title" content="SuperSet安装配置"/>
-<meta name="twitter:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/og.png">
+  <meta name="twitter:title" content="SuperSet安装配置">
+  <meta name="twitter:description" content="Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常有特色。">
 
 
 
@@ -56,8 +60,7 @@
 
 
 
-<link rel="stylesheet" href="https://iminto.github.io/assets/css/fuji.min.css" />
-
+<link rel="stylesheet" href="http://localhost:1313/assets/css/fuji.min.css" />
 
 
 
@@ -98,7 +101,7 @@ document.addEventListener("DOMContentLoaded", taunt);
     <header>
     <div class="container-lg clearfix">
         <div class="col-12 header">
-            <a class="title-main" href="https://iminto.github.io/">白菜不是菜</a>
+            <a class="title-main" href="http://localhost:1313/">白菜不是菜</a>
             
             <span class="title-sub">他们相信天堂是有的，可以实现的，但在现世界与那天堂的中间隔着一座海，一座血污海，人类泅得过这血海，才能登彼岸，他们决定先实现那血海。</span>
             
@@ -114,7 +117,7 @@ document.addEventListener("DOMContentLoaded", taunt);
 <article>
     
     <h2 class="post-item post-title">
-        <a href="https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装配置</a>
+        <a href="http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/">SuperSet安装配置</a>
     </h2>
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2021-04-02</span><span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;1805 字</span><span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE">大数据</a>&nbsp;</span>
@@ -210,8 +213,7 @@ superset run -h 110.6.7.8  -p 8080 --with-threads --reload
 </code></pre>
 <p>这操作也有点诡异了些。。</p>
 <blockquote>
-<p>2021-04-13更新</p>
-</blockquote>
+<p>2021-04-13更新</p></blockquote>
 <h3 id="导入样例">导入样例</h3>
 <p>前面说过，在superset load_examples这一步会失败，原因是example数据是存放在github的，这个网站被司马佬吃了。这个路径配置在examples/helpers.py里的BASE_URL项。</p>
 <pre><code class="language-bash">#github上下载examples压缩包
@@ -281,7 +283,7 @@ BABEL_DEFAULT_LOCALE = &quot;zh&quot;
 </code></pre>
 <p>这样直接修改配置文件很麻烦（路径太深），可以把自定义配置文件放到指定位置：</p>
 <p>To configure your application, you need to create a file <code>superset_config.py</code> and add it to your <code>PYTHONPATH</code>.</p>
-<p>All the parameters and default values defined in <a href="https://github.com/apache/superset/blob/master/superset/config.py">https://github.com/apache/superset/blob/master/superset/config.py</a> can be altered in your local <code>superset_config.py</code>.</p>
+<p>All the parameters and default values defined in <a href="https://github.com/apache/superset/blob/master/superset/config.py" target="_blank">https://github.com/apache/superset/blob/master/superset/config.py</a> can be altered in your local <code>superset_config.py</code>.</p>
 <h3 id="api文档">API文档</h3>
 <p>API 文档地址：http://10.180.210.146:18088/swagger/v1</p>
 <p>虽然SuperSet支持Oauth，但由于SuperSet用的是FlaskAB框架（不是Flask框架），支持比较弱，需要自己写python代码。如果是外部系统对接Superset，只能用cookie登陆的方式调用。</p>
@@ -349,7 +351,7 @@ BABEL_DEFAULT_LOCALE = &quot;zh&quot;
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -358,6 +360,10 @@ BABEL_DEFAULT_LOCALE = &quot;zh&quot;
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -460,7 +466,7 @@ BABEL_DEFAULT_LOCALE = &quot;zh&quot;
             </span>
             
             <span>
-                <a href="/tags/k8s/">k8s</a>
+                <a href="/tags/k8s/">K8s</a>
             </span>
             
             <span>
@@ -469,6 +475,10 @@ BABEL_DEFAULT_LOCALE = &quot;zh&quot;
             
             <span>
                 <a href="/tags/php/">PHP</a>
+            </span>
+            
+            <span>
+                <a href="/tags/python/">Python</a>
             </span>
             
             <span>
@@ -515,7 +525,7 @@ BABEL_DEFAULT_LOCALE = &quot;zh&quot;
     <footer>
     <div class="container-lg clearfix">
         <div class="col-12 footer">
-            <span>&copy; 2023 <a href="https://iminto.github.io/">baicai</a> |
+            <span>&copy; 2025 <a href="http://localhost:1313/">baicai</a> |
                 基于 <a href="https://github.com/amzrk2/hugo-theme-fuji/"
                    target="_blank">Fuji-v2</a> & <a href="https://gohugo.io/"
                    target="_blank">Hugo</a> 构建</span>
