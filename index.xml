@@ -6,7 +6,7 @@
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 02 Apr 2025 17:39:49 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 03 Apr 2025 13:51:15 +0800</lastBuildDate>
     <atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
@@ -14,6 +14,13 @@
       <pubDate>Sun, 07 Jul 2019 15:17:21 +0800</pubDate>
       <guid>https://iminto.github.io/about/</guid>
       <description>&lt;p&gt;不使用微信/QQ/微博/知乎&lt;/p&gt;&#xA;&lt;p&gt;电报渠道：&lt;a href=&#34;https://t.me/notonlyshare&#34;&gt;https://t.me/notonlyshare&lt;/a&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;GPG：&lt;/p&gt;&#xA;&lt;p&gt;KeyId：0xC2F337FBA26CB3F5&lt;/p&gt;&#xA;&lt;p&gt;Fingerprint：0334 1997 6B80 910E 4615  AEBA C2F3 37FB A26C B3F5&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>鸡肋的knox</title>
+      <link>https://iminto.github.io/post/%E9%B8%A1%E8%82%8B%E7%9A%84knox/</link>
+      <pubDate>Thu, 03 Apr 2025 13:51:15 +0800</pubDate>
+      <guid>https://iminto.github.io/post/%E9%B8%A1%E8%82%8B%E7%9A%84knox/</guid>
+      <description>&lt;p&gt;网络上介绍Knox的文章很多，然而仅限于demo，很少有人真正深入使用过，更少见谈Knox缺点的文章。故写此博客&lt;/p&gt;&#xA;&lt;h1 id=&#34;konx简介&#34;&gt;Konx简介&lt;/h1&gt;&#xA;&lt;p&gt;Apache Knox Gateway是一个应用程序网关，用于与Apache Hadoop部署的REST api和ui进行交互。Knox Gateway为与Apache Hadoop集群的所有REST和HTTP交互提供一个单一的访问点。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Python多播</title>
