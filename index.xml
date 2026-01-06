@@ -2,297 +2,297 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>白菜不是菜</title>
-    <link>http://localhost:1313/</link>
+    <link>https://iminto.github.io/</link>
     <description>Recent content on 白菜不是菜</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 06 Jan 2026 13:51:15 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://iminto.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://iminto.github.io/about/</link>
       <pubDate>Sun, 07 Jul 2019 15:17:21 +0800</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://iminto.github.io/about/</guid>
       <description>&lt;p&gt;不使用微信/QQ/微博/知乎/抖音/小红书&lt;/p&gt;&#xA;&lt;p&gt;session号码：05179ebbaf10d0aa93f7f6079d65e191daf6785021f7a978e27ba97112dec95c2d&lt;/p&gt;&#xA;&lt;h2 id=&#34;无其他联系方式&#34;&gt;无其他联系方式&lt;/h2&gt;</description>
     </item>
     <item>
       <title>苹果到底有多垃圾-讨贼檄文</title>
-      <link>http://localhost:1313/post/%E8%8B%B9%E6%9E%9C%E5%88%B0%E5%BA%95%E6%9C%89%E5%A4%9A%E5%9E%83%E5%9C%BE/</link>
+      <link>https://iminto.github.io/post/%E8%8B%B9%E6%9E%9C%E5%88%B0%E5%BA%95%E6%9C%89%E5%A4%9A%E5%9E%83%E5%9C%BE/</link>
       <pubDate>Tue, 06 Jan 2026 13:51:15 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E8%8B%B9%E6%9E%9C%E5%88%B0%E5%BA%95%E6%9C%89%E5%A4%9A%E5%9E%83%E5%9C%BE/</guid>
+      <guid>https://iminto.github.io/post/%E8%8B%B9%E6%9E%9C%E5%88%B0%E5%BA%95%E6%9C%89%E5%A4%9A%E5%9E%83%E5%9C%BE/</guid>
       <description>&lt;p&gt;注：&lt;strong&gt;本文对苹果公司和苹果粉丝攻击性极强，注意避让，必要时可准备速效救心丸。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;今天，我们来喷一下工业垃圾-iOS手机。早日认清iOS真相，早日拥抱真善美。苹果罪大滔天，搞到百姓怨声载道！&#xA;苹果一日不死，就是IT界最大的毒瘤！&lt;/p&gt;</description>
     </item>
     <item>
       <title>鸡肋的knox</title>
-      <link>http://localhost:1313/post/%E9%B8%A1%E8%82%8B%E7%9A%84knox/</link>
+      <link>https://iminto.github.io/post/%E9%B8%A1%E8%82%8B%E7%9A%84knox/</link>
       <pubDate>Thu, 03 Apr 2025 13:51:15 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E9%B8%A1%E8%82%8B%E7%9A%84knox/</guid>
+      <guid>https://iminto.github.io/post/%E9%B8%A1%E8%82%8B%E7%9A%84knox/</guid>
       <description>&lt;p&gt;网络上介绍Knox的文章很多，然而仅限于demo，很少有人真正深入使用过，更少见谈Knox缺点的文章。故写此博客&lt;/p&gt;&#xA;&lt;h1 id=&#34;konx简介&#34;&gt;Konx简介&lt;/h1&gt;&#xA;&lt;p&gt;Apache Knox Gateway是一个应用程序网关，用于与Apache Hadoop部署的REST api和ui进行交互。Knox Gateway为与Apache Hadoop集群的所有REST和HTTP交互提供一个单一的访问点。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Python多播</title>
-      <link>http://localhost:1313/post/python%E5%A4%9A%E6%92%AD/</link>
+      <link>https://iminto.github.io/post/python%E5%A4%9A%E6%92%AD/</link>
       <pubDate>Wed, 02 Apr 2025 17:39:49 +0800</pubDate>
-      <guid>http://localhost:1313/post/python%E5%A4%9A%E6%92%AD/</guid>
+      <guid>https://iminto.github.io/post/python%E5%A4%9A%E6%92%AD/</guid>
       <description>&lt;p&gt;多播协议是个好东西。&#xA;服务端&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import socket&#xD;&#xA;import struct&#xD;&#xA;&#xD;&#xA;# 多播地址和端口&#xD;&#xA;MULTICAST_GROUP = &#39;239.0.0.110&#39;&#xD;&#xA;SERVER_PORT = 12345&#xD;&#xA;&#xD;&#xA;# 创建 UDP 套接字&#xD;&#xA;server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)&#xD;&#xA;# 允许地址重用&#xD;&#xA;server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)&#xD;&#xA;# 绑定到指定端口&#xD;&#xA;server_socket.bind((&#39;&#39;, SERVER_PORT))&#xD;&#xA;&#xD;&#xA;# 将套接字加入多播组&#xD;&#xA;group = socket.inet_aton(MULTICAST_GROUP)&#xD;&#xA;mreq = struct.pack(&#39;4sL&#39;, group, socket.INADDR_ANY)&#xD;&#xA;server_socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)&#xD;&#xA;&#xD;&#xA;print(f&amp;quot;Listening on multicast address {MULTICAST_GROUP}:{SERVER_PORT}...&amp;quot;)&#xD;&#xA;&#xD;&#xA;try:&#xD;&#xA;    while True:&#xD;&#xA;        # 接收数据&#xD;&#xA;        data, client_address = server_socket.recvfrom(1024)&#xD;&#xA;        message = data.decode(&#39;utf-8&#39;)&#xD;&#xA;        print(f&amp;quot;Received message from {client_address}: {message}&amp;quot;)&#xD;&#xA;&#xD;&#xA;        # 向客户端发送响应&#xD;&#xA;        response = &amp;quot;Message received successfully!&amp;quot;&#xD;&#xA;        server_socket.sendto(response.encode(&#39;utf-8&#39;), client_address)&#xD;&#xA;except KeyboardInterrupt:&#xD;&#xA;    print(&amp;quot;Shutting down...&amp;quot;)&#xD;&#xA;finally:&#xD;&#xA;    server_socket.close()&#xD;&#xA;&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;客户端&lt;/p&gt;</description>
     </item>
     <item>
       <title>文件生成动态二维码</title>
-      <link>http://localhost:1313/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/</link>
+      <link>https://iminto.github.io/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/</link>
       <pubDate>Fri, 16 Jun 2023 10:37:46 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/</guid>
+      <guid>https://iminto.github.io/post/%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%8A%A8%E6%80%81%E4%BA%8C%E7%BB%B4%E7%A0%81/</guid>
       <description>&lt;p&gt;将图片/文件转为二维码动画&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install qrencode &#xD;&#xA;test=&amp;quot;$(cat dianlong.jpg| base64|tr &#39;\n&#39; &#39; &#39;|sed &#39;s/[[:space:]]//g&#39;)&amp;quot;&#xD;&#xA;echo $test &amp;gt;&amp;gt; base64.txt #文件转base64&#xD;&#xA;split -b 1k base64.txt 1_ #按1K分割&#xD;&#xA;for x in $(find -type f  -name &amp;quot;1_*&amp;quot;); do cat $x|qrencode -o $x.png -s 4 ;done&#xD;&#xA;ffmpeg -framerate 6  -pattern_type glob -i &#39;1_*.png&#39;  -loop 0 out1.gif #转GIF&#xD;&#xA;ffmpeg -framerate 10  -pattern_type glob -i &#39;1_*.png&#39;  -c:v libx264 -pix_fmt yuv420p out.mp4&#xD;&#xA;#计算帧数，验证&#xD;&#xA;ffprobe -i out.mp4&#xD;&#xA;ffmpeg -i out.mp4  -map 0:v:0 -c copy -f null -&#xD;&#xA;ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=nokey=1:noprint_wrappers=1 out.mp4&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;还原：&lt;/p&gt;</description>
     </item>
     <item>
       <title>Cpuid和序列号背后的那些故事</title>
-      <link>http://localhost:1313/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/</link>
+      <link>https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/</link>
       <pubDate>Wed, 09 Feb 2022 14:16:58 +0800</pubDate>
-      <guid>http://localhost:1313/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/</guid>
+      <guid>https://iminto.github.io/post/cpuid%E5%92%8C%E5%BA%8F%E5%88%97%E5%8F%B7%E8%83%8C%E5%90%8E%E7%9A%84%E9%82%A3%E4%BA%9B%E6%95%85%E4%BA%8B/</guid>
       <description>&lt;p&gt;最近测试反馈了一个问题，每次重启服务器，我们某个版本的业务系统中的机器码都会改变，导致根据机器码算出来的许可证失效，从而使软件无法使用。&#xA;这个问题反馈了有一段时间了，但是本地一直没复现。然后前几天测试说又复现了，马上去看了下测试环境，服务器是一台国产化FT S2500服务器,验证了下，果然如此，马上去看了下关键代码。&lt;/p&gt;</description>
     </item>
     <item>
       <title>进程Socket描述符的那些事</title>
-      <link>http://localhost:1313/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</link>
+      <link>https://iminto.github.io/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</link>
       <pubDate>Fri, 09 Jul 2021 13:52:40 +0800</pubDate>
-      <guid>http://localhost:1313/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</guid>
+      <guid>https://iminto.github.io/post/socket%E6%8F%8F%E8%BF%B0%E7%AC%A6%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/</guid>
       <description>&lt;p&gt;前几天看到有人发的一个面试题，问的是MySQL连接的进程描述符的问题。&lt;/p&gt;&#xA;&lt;p&gt;在Linux里，一切皆文件，那进程描述符，实际就是文件描述符了。&lt;/p&gt;&#xA;&lt;p&gt;我们还知道Linux 内核提供了一种通过 proc文件系统，/proc 文件系统是一个虚拟文件系统，通过它可以使用一种新的方法在 Linux内核空间和用户间之间进行通信。在 /proc文件系统中，我们可以将对虚拟文件的读写作为与内核中实体进行通信的一种手段，但是与普通文件不同的是，这些虚拟文件的内容都是动态创建的。用户和应用程序可以通过proc得到系统的信息，并可以改变内核的某些参数。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Java安全策略配置和沙箱闲话</title>
-      <link>http://localhost:1313/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</link>
+      <link>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</link>
       <pubDate>Thu, 17 Jun 2021 08:39:26 +0800</pubDate>
-      <guid>http://localhost:1313/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</guid>
+      <guid>https://iminto.github.io/post/java%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B2%99%E7%AE%B1%E9%97%B2%E8%AF%9D/</guid>
       <description>&lt;p&gt;之前一篇文章提到了System.exit和SecurityManager,引入了下面的代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class SelfSecurityManager extends SecurityManager{&#xD;&#xA;&#x9;..//&#xD;&#xA;   @Override&#xD;&#xA;    public void checkExit(int status) {&#xD;&#xA;        super.checkExit(status);&#xD;&#xA;        throw new ExitException(status);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;通过自定义SecurityManager来禁止System.exit的执行，这里我们来分析下其实现原理，看下super.checkExit方法&lt;/p&gt;</description>
     </item>
     <item>
       <title>谁杀死了这个进程</title>
-      <link>http://localhost:1313/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</link>
+      <link>https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</link>
       <pubDate>Tue, 15 Jun 2021 16:35:59 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</guid>
+      <guid>https://iminto.github.io/post/%E8%B0%81%E6%9D%80%E6%AD%BB%E4%BA%86%E8%BF%99%E4%B8%AA%E8%BF%9B%E7%A8%8B/</guid>
       <description>&lt;p&gt;之前文章提到服务器上一个进程启动后不到三分钟就挂掉，到底是什么原因挂掉了，这个问题可以写篇文章了。进程死了，无非就两种可能：自杀，他杀。他杀又包括第三方杀害和系统判死刑。&lt;/p&gt;&#xA;&lt;p&gt;先来看自杀。&lt;/p&gt;&#xA;&lt;h2 id=&#34;1自杀&#34;&gt;1.自杀&lt;/h2&gt;&#xA;&lt;p&gt;我们以Java为例，Java程序在main方法运行完就会退出，这种属于自杀。或者像下面这样&lt;/p&gt;</description>
     </item>
     <item>
       <title>坚果3手机刷魔趣体验</title>
-      <link>http://localhost:1313/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/</link>
+      <link>https://iminto.github.io/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Fri, 21 May 2021 13:40:56 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://iminto.github.io/post/%E5%9D%9A%E6%9E%9C3%E6%89%8B%E6%9C%BA%E5%88%B7%E9%AD%94%E8%B6%A3%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;p&gt;坚果3，发布于2018年4月，骁龙625处理器，4G内存，安卓7.1系统。&lt;/p&gt;&#xA;&lt;p&gt;我手里这台，已经退役两个多月了，屏幕摔得到处是裂缝，老罗破产了，系统最后一次更新是2020年2月了，而且安卓7.1也老了一点。锤子手机其实不是太喜欢，它的特色功能我一个都不喜欢，什么one step，大爆炸，胶囊，我都用不上，当时买它只是因为便宜，性价比不错。另外，锤子的手机也不够开放，我也卸载或冻结了很多它自带的系统APP，导致系统APP卸载了，菜单还保留着，但不能点击，额，不能忍受，所以越用越不顺眼，正好换了新手机，就刷机了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Linux恶意ELF文件分析</title>
-      <link>http://localhost:1313/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/</link>
+      <link>https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/</link>
       <pubDate>Mon, 17 May 2021 09:31:11 +0800</pubDate>
-      <guid>http://localhost:1313/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/</guid>
+      <guid>https://iminto.github.io/post/linux%E6%81%B6%E6%84%8Felf%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/</guid>
       <description>&lt;p&gt;起因是某客户的服务器上，只要一启动server，过不了几秒就被kill，然后错误日志也看不出啥。&#xA;server是基于jvm的，怎么看一个进程被哪个进程杀死，这个可以写一篇文章了。&lt;/p&gt;&#xA;&lt;p&gt;自信一点，这肯定不是我们代码的问题导致JVM崩溃啊，毫无疑问是那些做安全的脚本小子搞的。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Keycloak接入自研系统</title>
-      <link>http://localhost:1313/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/</link>
+      <link>https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Wed, 07 Apr 2021 09:39:00 +0800</pubDate>
-      <guid>http://localhost:1313/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>https://iminto.github.io/post/keycloak%E6%8E%A5%E5%85%A5%E8%87%AA%E7%A0%94%E7%B3%BB%E7%BB%9F/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;&#xA;&lt;p&gt;keycloak是一个非常强大的权限认证系统，我们使用keycloak可以方便的实现SSO的功能。虽然keycloak底层使用的wildfly，但是提供了非常方便的Client Adapters和各种服务器进行对接，比如wildfly，tomcat，Jetty等。&lt;/p&gt;</description>
     </item>
     <item>
       <title>SuperSet安装配置</title>
-      <link>http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/</link>
+      <link>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</link>
       <pubDate>Fri, 02 Apr 2021 11:15:20 +0800</pubDate>
-      <guid>http://localhost:1313/post/superset%E5%AE%89%E8%A3%85/</guid>
+      <guid>https://iminto.github.io/post/superset%E5%AE%89%E8%A3%85/</guid>
       <description>&lt;p&gt;Centos8安装Superset。Superset 是 Airbnb （知名在线房屋短租公司）开源的数据探查与可视化平台（曾用名 Panoramix、Caravel ），也就是BI，该工具在可视化、易用性和交互性上非常有特色。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Centos配置GoogleAuthenticator动态密钥进行ssh二次验证</title>
-      <link>http://localhost:1313/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</link>
+      <link>https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</link>
       <pubDate>Tue, 29 Dec 2020 16:44:44 +0800</pubDate>
-      <guid>http://localhost:1313/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</guid>
+      <guid>https://iminto.github.io/post/centos%E9%85%8D%E7%BD%AEgoogleauthenticator%E5%8A%A8%E6%80%81%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8Cssh%E4%BA%8C%E6%AC%A1%E9%AA%8C%E8%AF%81/</guid>
       <description>&lt;h3 id=&#34;安装依赖&#34;&gt;安装依赖&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum list | grep google-authenticator&#xD;&#xA;yum install google-authenticator&#xD;&#xA;yum install qrencode&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;配置google-authenticator&#34;&gt;配置Google Authenticator&lt;/h3&gt;&#xA;&lt;p&gt;安装完直接跑下面的命令进行配置，注意只在当前用户生效&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;&amp;gt; google-authenticator&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;之后会需要确认几点信息&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;Do you want authentication tokens to be time-based (y/n) y&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;是否配置基于时间的动态密钥，选择y，之后会出现超级大一个二维码，下面还会有一些小字,这里的key就是用于配置手机端app的，我们先保存下来，不用慌，因为这个key随时都可以查得到.&lt;/p&gt;</description>
     </item>
     <item>
       <title>TUI ConsoleLauncher 可定制化geek命令行桌面启动器</title>
-      <link>http://localhost:1313/post/tui-consolelauncher-%E5%8F%AF%E5%AE%9A%E5%88%B6%E5%8C%96geek%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A1%8C%E9%9D%A2%E5%90%AF%E5%8A%A8%E5%99%A8/</link>
+      <link>https://iminto.github.io/post/tui-consolelauncher-%E5%8F%AF%E5%AE%9A%E5%88%B6%E5%8C%96geek%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A1%8C%E9%9D%A2%E5%90%AF%E5%8A%A8%E5%99%A8/</link>
       <pubDate>Fri, 25 Dec 2020 11:24:02 +0800</pubDate>
-      <guid>http://localhost:1313/post/tui-consolelauncher-%E5%8F%AF%E5%AE%9A%E5%88%B6%E5%8C%96geek%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A1%8C%E9%9D%A2%E5%90%AF%E5%8A%A8%E5%99%A8/</guid>
+      <guid>https://iminto.github.io/post/tui-consolelauncher-%E5%8F%AF%E5%AE%9A%E5%88%B6%E5%8C%96geek%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A1%8C%E9%9D%A2%E5%90%AF%E5%8A%A8%E5%99%A8/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/fAndreuzzi/TUI-ConsoleLauncher&#34;&gt;TUI ConsoleLauncher&lt;/a&gt;  basically transforms your Android into a terminal window, requiring you to type out commands to start apps and explore your phone&amp;rsquo;s system as opposed to the familiar process of tapping on icons. It&amp;rsquo;s a great way to practice or learn about Linux commands, and it has the added benefit of securing your phone against unwanted access.&lt;/p&gt;&#xA;&lt;p&gt;常用命令：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;-- 不允许别人用exit命令退出&#xD;&#xA;alias add exit=echo &amp;quot;No&amp;quot;&#xD;&#xA;-- 定制化界面，取消不必要元素&#xD;&#xA;config -set show_session_info false&#xD;&#xA;config -set show_storage_info false&#xD;&#xA;config -set show_device_name false&#xD;&#xA;config -set show_ram false&#xD;&#xA;config -set show_network_info false&#xD;&#xA;-- 优化&#xD;&#xA;config -set time_size 20 --调大时间字体&#xD;&#xA;config -set system_wallpaper true --显示系统壁纸&#xD;&#xA;config -set fullscreen true&#xD;&#xA;config -set enable_music true&#xD;&#xA;-- 记日志/备忘录&#xD;&#xA;note -add 明早九点加班&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;修改配置后需要restart才能生效。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Ambari里自定义资源模块的实现</title>
-      <link>http://localhost:1313/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <link>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Tue, 13 Oct 2020 09:52:43 +0800</pubDate>
-      <guid>http://localhost:1313/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <guid>https://iminto.github.io/post/ambari%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
       <description>&lt;p&gt;Ambari里主机，集群，用户等等都视为一种资源，对它们的增删改查就是对资源的增删改查。&lt;/p&gt;&#xA;&lt;p&gt;了解实现Ambari里增加一个资源的流程，就更方便修改Ambari的实现。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1新建控制器层&#34;&gt;1.新建控制器层&lt;/h3&gt;&#xA;&lt;p&gt;ambari的控制器层在service包里&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prosody搭建xmpp服务器</title>
-      <link>http://localhost:1313/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <link>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Wed, 26 Aug 2020 10:22:59 +0800</pubDate>
-      <guid>http://localhost:1313/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <guid>https://iminto.github.io/post/prosody%E6%90%AD%E5%BB%BAxmpp%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
       <description>&lt;p&gt;按惯例上Prosody 自己的文档: &lt;a href=&#34;https://prosody.im/doc/&#34;&gt;https://prosody.im/doc/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;&#xA;&lt;p&gt;使用centos8安装&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install prosody&#xD;&#xA;dnf --enablerepo=PowerTools install lua-filesystem&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;其它版本linux则无需单独安装lua-filesystem依赖。&lt;/p&gt;&#xA;&lt;h3 id=&#34;配置&#34;&gt;配置&lt;/h3&gt;&#xA;&lt;p&gt;主配置文件 prosody.cfg.lua 一般不需要修改。&lt;/p&gt;&#xA;&lt;p&gt;下面写些咱做的修改😂&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在 modules_enabled 中取消启用 version 和 uptime 模块，顺便启动些其他的模块，比如offline。&lt;/li&gt;&#xA;&lt;li&gt;如果需要允许在客户端上注册的话，把 allow_registration 设置成 true 。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;其它配置保持默认即可。&lt;/p&gt;</description>
     </item>
     <item>
       <title>基于restfulAPI实现k8s的监听机制</title>
-      <link>http://localhost:1313/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</link>
+      <link>https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Tue, 11 Aug 2020 10:17:04 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</guid>
+      <guid>https://iminto.github.io/post/%E5%9F%BA%E4%BA%8Erestfulapi%E5%AE%9E%E7%8E%B0k8s%E7%9A%84%E7%9B%91%E5%90%AC%E6%9C%BA%E5%88%B6/</guid>
       <description>&lt;p&gt;k8s rest api对rc、svc、ingress、pod、deployment等都提供的watch接口，可以实时的监听应用部署状态。&lt;/p&gt;&#xA;&lt;p&gt;在此之前简单先说一下http长连接&lt;/p&gt;&#xA;&lt;h2 id=&#34;分块传输编码chunked-transfer-encoding&#34;&gt;分块传输编码（Chunked transfer encoding）&lt;/h2&gt;&#xA;&lt;p&gt;超文本传输协议（HTTP）中的一种数据传输机制，允许HTTP由应用服务器发送给客户端应用（ 通常是网页浏览器）的数据可以分成多个部分。分块传输编码只在HTTP协议1.1版本（HTTP/1.1）中提供。&#xA;通常，HTTP应答消息中发送的数据是整个发送的，Content-Length消息头字段表示数据的长度。数据的长度很重要，因为客户端需要知道哪里是应答消息的结束，以及后续应答消息的开始。然而，使用分块传输编码，数据分解成一系列数据块，并以一个或多个块发送，这样服务器可以发送数据而不需要预先知道发送内容的总大小。通常数据块的大小是一致的，但也不总是这种情况。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Helm集成minio搭建私有仓库</title>
-      <link>http://localhost:1313/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
+      <link>https://iminto.github.io/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
       <pubDate>Fri, 03 Jul 2020 10:20:40 +0800</pubDate>
-      <guid>http://localhost:1313/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
+      <guid>https://iminto.github.io/post/helm%E9%9B%86%E6%88%90minio%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
       <description>&lt;h1 id=&#34;helm3集成minio搭建私有仓库&#34;&gt;helm3集成minio搭建私有仓库&lt;/h1&gt;&#xA;&lt;p&gt;我们一般是从本地的目录结构中的chart去进行部署，如果要集中管理chart,就需要涉及到repository的问题可以通过minio建立一个私有的存放仓库。&lt;/p&gt;&#xA;&lt;h2 id=&#34;minio安装&#34;&gt;minio安装&lt;/h2&gt;&#xA;&lt;p&gt;安装过程略去，直接下载执行文件即可&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; .\minio.exe server g:/tmp/&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;配置mc&lt;/p&gt;</description>
     </item>
     <item>
       <title>一种swagger Ui的替代方案不引入任何源码污染</title>
-      <link>http://localhost:1313/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/</link>
+      <link>https://iminto.github.io/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/</link>
       <pubDate>Tue, 12 May 2020 17:18:49 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/</guid>
+      <guid>https://iminto.github.io/post/%E4%B8%80%E7%A7%8Dswagger-ui%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88%E4%B8%8D%E5%BC%95%E5%85%A5%E4%BB%BB%E4%BD%95%E6%BA%90%E7%A0%81%E6%B1%A1%E6%9F%93/</guid>
       <description>&lt;p&gt;在后端项目中，难免遇到需要写接口文档方便第三方调用的场景，一般业界最常用的方案是使用swagger。Java项目中，一般采用springfox项目，它集成了swagger和swagger-ui，不需要单独部署项目，可让文档随着项目一起发布。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Kde桌面下自带应用无法输入中文</title>
-      <link>http://localhost:1313/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</link>
+      <link>https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</link>
       <pubDate>Sat, 07 Mar 2020 21:07:54 +0800</pubDate>
-      <guid>http://localhost:1313/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</guid>
+      <guid>https://iminto.github.io/post/kde%E6%A1%8C%E9%9D%A2%E4%B8%8B%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</guid>
       <description>&lt;p&gt;​      这个问题纠结我快一年了。某次manjaro升级后，我的manjaro在系统自带应用上如konsole,kate,Yakuake上都不能切换输入法（目测系统自带的软件都不能），鼠标放键盘图标上提示“无输入窗口”。但是浏览器和其他软件是可以的。这个问题不是太影响使用，就忍了很久，大不了其他地方写好了再复制到kate里，但是就好像衣服上落沾了一坨黄泥，始终感觉不爽，每隔一两个月就要尝试解决一次，始终无果。&lt;/p&gt;</description>
     </item>
     <item>
       <title>K8s部署springboot</title>
-      <link>http://localhost:1313/post/k8s%E9%83%A8%E7%BD%B2springboot/</link>
+      <link>https://iminto.github.io/post/k8s%E9%83%A8%E7%BD%B2springboot/</link>
       <pubDate>Fri, 06 Mar 2020 13:44:14 +0800</pubDate>
-      <guid>http://localhost:1313/post/k8s%E9%83%A8%E7%BD%B2springboot/</guid>
+      <guid>https://iminto.github.io/post/k8s%E9%83%A8%E7%BD%B2springboot/</guid>
       <description>&lt;h3 id=&#34;1安装k8s&#34;&gt;1.安装k8s&lt;/h3&gt;&#xA;&lt;p&gt;安装K8S的步骤略去，使用k3s安装会更快捷方便，方便测试环境。&lt;/p&gt;&#xA;&lt;p&gt;如果使用k3s会有个坑，k3s默认使用container而不是docker作为容器，会导致运行时出现一些问题，后面会详细分析。&lt;/p&gt;&#xA;&lt;p&gt;安装k3s后，需要按照如下修改 /etc/systemd/system/k3s.service&lt;/p&gt;</description>
     </item>
     <item>
       <title>Windows上编译安装运行rancher</title>
-      <link>http://localhost:1313/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</link>
+      <link>https://iminto.github.io/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</link>
       <pubDate>Fri, 28 Feb 2020 10:07:59 +0800</pubDate>
-      <guid>http://localhost:1313/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</guid>
+      <guid>https://iminto.github.io/post/windows%E4%B8%8A%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Crancher/</guid>
       <description>&lt;p&gt;rancher 是一个为DevOps团队提供的完整的Kubernetes与容器管理解决方案。rancher最大的优点就是安装部署方便，极大地简化了K8S的安装配置。在官网上，推荐的是使用docker方式安装rancher，这种方式隐藏了大量的细节。在网上搜了下现有的资料，几乎都是照抄官方文档，更没有在windows上安装rancher的先例。&lt;/p&gt;</description>
     </item>
     <item>
       <title>HttpURLConnection里setReadTimeout超时无效</title>
-      <link>http://localhost:1313/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</link>
+      <link>https://iminto.github.io/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</link>
       <pubDate>Tue, 18 Feb 2020 21:09:34 +0800</pubDate>
-      <guid>http://localhost:1313/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</guid>
+      <guid>https://iminto.github.io/post/httpurlconnection%E9%87%8Csetreadtimeout%E8%B6%85%E6%97%B6%E6%97%A0%E6%95%88/</guid>
       <description>&lt;p&gt;今天群里有位360的安全大佬，发了个链接&lt;a href=&#34;http://93.175.29.89:8008/&#34;&gt;http://93.175.29.89:8008/&lt;/a&gt;，说爬这个网址的时候，IO会一直卡在那，一直没有返回响应。&#xA;那个网址是他构造的一个特殊请求，输出一个视频流，但是服务器端不返回Content-Length，也不输出真实数据，就是输出不到1024字节的流后就一直停在那也不close，浏览器打开的效果就是看到了视频的前几帧，然后一直卡在哪转圈。&lt;/p&gt;</description>
     </item>
     <item>
       <title>K8s管理crd和K8SAPI编程</title>
-      <link>http://localhost:1313/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</link>
+      <link>https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Tue, 11 Feb 2020 14:38:59 +0800</pubDate>
-      <guid>http://localhost:1313/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://iminto.github.io/post/k8s%E7%AE%A1%E7%90%86crd%E5%92%8Ck8sapi%E7%BC%96%E7%A8%8B/</guid>
       <description>&lt;p&gt;k8s每个版本看起来兼容性不是太好，很多网上的例子跑起来往往都有问题。&lt;/p&gt;&#xA;&lt;p&gt;目前用的版本&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code&gt;root@de001:/develop# kubectl version&#xD;&#xA;Client Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.2+k3s1&amp;quot;, GitCommit:&amp;quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-01-27T18:09:26Z&amp;quot;, GoVersion:&amp;quot;go1.13.6&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;linux/amd64&amp;quot;}&#xD;&#xA;Server Version: version.Info{Major:&amp;quot;1&amp;quot;, Minor:&amp;quot;17&amp;quot;, GitVersion:&amp;quot;v1.17.2+k3s1&amp;quot;, GitCommit:&amp;quot;cdab19b09a84389ffbf57bebd33871c60b1d6b28&amp;quot;, GitTreeState:&amp;quot;clean&amp;quot;, BuildDate:&amp;quot;2020-01-27T18:09:26Z&amp;quot;, GoVersion:&amp;quot;go1.13.6&amp;quot;, Compiler:&amp;quot;gc&amp;quot;, Platform:&amp;quot;linux/amd64&amp;quot;}&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;1编写spec文档&#34;&gt;1.编写Spec文档&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;apiVersion: apiextensions.k8s.io/v1beta1&#xD;&#xA;kind: CustomResourceDefinition&#xD;&#xA;metadata:&#xD;&#xA;  # name must match the spec fields below, and be in the form: &amp;lt;plural&amp;gt;.&amp;lt;group&amp;gt;&#xD;&#xA;  name: crontabs.chenwen.com&#xD;&#xA;spec:&#xD;&#xA;  # group name to use for REST API: /apis/&amp;lt;group&amp;gt;/&amp;lt;version&amp;gt;&#xD;&#xA;  group: chenwen.com&#xD;&#xA;  # list of versions supported by this CustomResourceDefinition&#xD;&#xA;  versions:&#xD;&#xA;  - name: v2&#xD;&#xA;    # Each version can be enabled/disabled by Served flag.&#xD;&#xA;    served: true&#xD;&#xA;    # One and only one version must be marked as the storage version.&#xD;&#xA;    storage: true&#xD;&#xA;    # A schema is required&#xD;&#xA;  # The conversion section is introduced in Kubernetes 1.13+ with a default value of&#xD;&#xA;  # None conversion (strategy sub-field set to None).&#xD;&#xA;  conversion:&#xD;&#xA;    # None conversion assumes the same schema for all versions and only sets the apiVersion&#xD;&#xA;    # field of custom resources to the proper value&#xD;&#xA;    strategy: None&#xD;&#xA;  # either Namespaced or Cluster&#xD;&#xA;  scope: Namespaced&#xD;&#xA;  names:&#xD;&#xA;    # plural name to be used in the URL: /apis/&amp;lt;group&amp;gt;/&amp;lt;version&amp;gt;/&amp;lt;plural&amp;gt;&#xD;&#xA;    plural: crontabs&#xD;&#xA;    # singular name to be used as an alias on the CLI and for display&#xD;&#xA;    singular: crontab&#xD;&#xA;    # kind is normally the CamelCased singular type. Your resource manifests use this.&#xD;&#xA;    kind: Crontab&#xD;&#xA;    listKind: CrontabList&#xD;&#xA;    # shortNames allow shorter string to match your resource on the CLI&#xD;&#xA;    shortNames:&#xD;&#xA;    - ct &#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;h3 id=&#34;2导入k8s&#34;&gt;2.导入K8S&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ln -s /etc/rancher/k3s/k3s.yaml ~/.kube/config&#xD;&#xA;kubectl apply -f crontab_crd.yml&#xD;&#xA;kubectl get crd&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到自己创建的crd了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>hadoop 3.1.2 单机模式安装配置</title>
-      <link>http://localhost:1313/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
+      <link>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 25 Aug 2019 23:12:21 +0800</pubDate>
-      <guid>http://localhost:1313/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://iminto.github.io/post/hadoop3.1.2%E5%8D%95%E6%9C%BA%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;h1 id=&#34;hadoop-312-单机模式安装配置&#34;&gt;hadoop 3.1.2 单机模式安装配置&lt;/h1&gt;&#xA;&lt;p&gt;现在搞大数据记录一下，方便查阅。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1安装配置jdk和下载hadoop略&#34;&gt;1.安装配置jdk和下载hadoop略。&lt;/h3&gt;&#xA;&lt;p&gt;hadoop 下载地址：http://mirror.bit.edu.cn/apache/hadoop/common/&#xA;使用了较新且保守的3.1.2版本&lt;/p&gt;&#xA;&lt;h3 id=&#34;2配置修改&#34;&gt;2.配置修改&lt;/h3&gt;&#xA;&lt;p&gt;环境变量修改&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export HADOOP_HOME=/soft/hadoop&#xD;&#xA;export PATH=$PATH:$HADOOP_HOME/bin&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;配置etc/hadoop/hadoop-env.sh&lt;/p&gt;</description>
     </item>
     <item>
       <title>讲清楚CAS的那点事</title>
-      <link>http://localhost:1313/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/</link>
+      <link>https://iminto.github.io/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/</link>
       <pubDate>Tue, 16 Jul 2019 21:54:09 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/</guid>
+      <guid>https://iminto.github.io/post/%E8%AE%B2%E6%B8%85%E6%A5%9Acas%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/</guid>
       <description>&lt;p&gt;互联网低潮，老是会看到别人发面试经验，看到很多人谈乐观锁，谈CAS，但是都没有说清楚。忍不住叨叨几句。&lt;/p&gt;&#xA;&lt;p&gt;那什么是乐观锁呢，比较书面的定义是 “它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。”，在多线程中则指对于数据冲突保持一种乐观态度，操作数据时不会对操作的数据进行加锁（这使得多个任务可以并行的对数据进行操作），只有到数据提交的时候才通过一种机制来验证数据是否存在冲突。在Java中，是通过CAS来实现乐观锁的。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Netty实现http服务器keep Alive无效的问题排查</title>
-      <link>http://localhost:1313/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</link>
+      <link>https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</link>
       <pubDate>Sat, 06 Jul 2019 22:11:37 +0800</pubDate>
-      <guid>http://localhost:1313/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</guid>
+      <guid>https://iminto.github.io/post/netty%E5%AE%9E%E7%8E%B0http%E6%9C%8D%E5%8A%A1%E5%99%A8keep-alive%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</guid>
       <description>&lt;h4 id=&#34;netty实现http服务器keep-alive无效的问题排查&#34;&gt;netty实现http服务器keep-alive无效的问题排查&lt;/h4&gt;&#xA;&lt;p&gt;今天在用netty实现一个http服务器的时候，发现keep-alive并没有生效，具体表现是在request和response的header里都能看到keep-alive的标志：&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;request:&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&#xD;&#xA;Accept-Encoding: gzip, deflate, br&#xD;&#xA;Accept-Language: zh-CN,zh;q=0.9,en;q=0.8&#xD;&#xA;Cache-Control: max-age=0&#xD;&#xA;Connection: keep-alive&#xD;&#xA;&#xD;&#xA;response:&#xD;&#xA;HTTP/1.1 200 OK&#xD;&#xA;content-type: text/html;charset=UTF-8&#xD;&#xA;content-length: 0&#xD;&#xA;connection: keep-alive&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看出，无论是请求还是响应，都是keep-alive的，但是请求两次，服务器端日志如下：&lt;/p&gt;</description>
     </item>
     <item>
       <title>Filebeat7自定义index的一个坑</title>
-      <link>http://localhost:1313/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</link>
+      <link>https://iminto.github.io/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</link>
       <pubDate>Wed, 26 Jun 2019 13:21:52 +0000</pubDate>
-      <guid>http://localhost:1313/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</guid>
+      <guid>https://iminto.github.io/post/filebeat%E4%BF%AE%E6%94%B9index%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</guid>
       <description>&lt;p&gt;我用的filebeat7来收集日志发给Elastic search，版本是7.1.1，对应的elasticsearch版本和其相同。&lt;/p&gt;&#xA;&lt;p&gt;默认的，filebeat生成的索引名字是filebeat-7.1.1-2019.06.24这种，不利于区分不同的业务，需要自定义索引，看了下官方文档，&#xA;是这么写的&lt;/p&gt;</description>
     </item>
     <item>
       <title>从钉钉一个忽略了近亿人的产品细节谈谈产品思维</title>
-      <link>http://localhost:1313/post/oh-dingtalk/</link>
+      <link>https://iminto.github.io/post/oh-dingtalk/</link>
       <pubDate>Mon, 06 May 2019 12:56:37 +0000</pubDate>
-      <guid>http://localhost:1313/post/oh-dingtalk/</guid>
+      <guid>https://iminto.github.io/post/oh-dingtalk/</guid>
       <description>&lt;p&gt;本来我一个软件工程师，是很不屑提产品的，但时不时总见到一些产品人吹牛皮，也忍不住凑个热闹。&lt;/p&gt;&#xA;&lt;p&gt;钉钉(DingTalk)是一款由阿里巴巴集团开发的用于商务沟通和工作协同的IM，其和企业版微信占据了中国的大部分企业IM市场。阿里并不是一个擅长做社交的公司，钉钉也是一款命途多舛的产品。2014年左右阿里在内部强行推广来往，一款承载了阿里社交梦的产品，花了巨额的研发和营销费用后，依然是折戟沉沙。后来，来往的团队保留了部分下来，做起了钉钉，针对办公社交，居然做成功了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>使用Java自动登录需要动态密码的堡垒机</title>
-      <link>http://localhost:1313/post/auto-login-bastion-with-otop-by-java/</link>
+      <link>https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/</link>
       <pubDate>Fri, 16 Nov 2018 20:45:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/auto-login-bastion-with-otop-by-java/</guid>
+      <guid>https://iminto.github.io/post/auto-login-bastion-with-otop-by-java/</guid>
       <description>&lt;p&gt;公司的生产服务器买了QiZhi Technologie的堡垒机，每次登录都得输入密码+空格+OTOP验证码，都得打开手机APP操作一把，烦不胜烦。&lt;/p&gt;&#xA;&lt;p&gt;不可忍，想了想，还是借助Java在每次调用时自动生成验证码，然后搞个ssh自动登录（别问我问啥不用公钥，哪有权限啊）得了。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Linux 下获取文件创建时间</title>
-      <link>http://localhost:1313/post/get-createtime-in-linux/</link>
+      <link>https://iminto.github.io/post/get-createtime-in-linux/</link>
       <pubDate>Sun, 07 Oct 2018 13:23:59 +0000</pubDate>
-      <guid>http://localhost:1313/post/get-createtime-in-linux/</guid>
+      <guid>https://iminto.github.io/post/get-createtime-in-linux/</guid>
       <description>&lt;p&gt;在Linux里，用户层面并没有文件创建时间的概念，无论是用ls还是stat 指令，都无法获取到文件的创建时间&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[tudou@tudou-pc statx]$ stat test-statx.c&#xD;&#xA;  文件：test-statx.c&#xD;&#xA;  大小：6656            块：16         IO 块：4096   普通文件&#xD;&#xA;设备：805h/2053d        Inode：6684737     硬链接：1&#xD;&#xA;权限：(0644/-rw-r--r--)  Uid：( 1000/   tudou)   Gid：( 1001/   tudou)&#xD;&#xA;最近访问：2018-10-07 13:16:29.000000000 +0800&#xD;&#xA;最近更改：2018-10-07 13:21:09.855461986 +0800&#xD;&#xA;最近改动：2018-10-07 13:21:09.855461986 +0800&#xD;&#xA;创建时间：-&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;可以看到「创建时间」一行总是「-」。&lt;/p&gt;</description>
     </item>
     <item>
       <title>linux下解压bin文件</title>
-      <link>http://localhost:1313/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</link>
+      <link>https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</link>
       <pubDate>Sat, 02 Jun 2018 13:08:41 +0000</pubDate>
-      <guid>http://localhost:1313/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</guid>
+      <guid>https://iminto.github.io/post/linux%E4%B8%8B%E8%A7%A3%E5%8E%8Bbin%E6%96%87%E4%BB%B6/</guid>
       <description>&lt;p&gt;现在的一些Linux软件很流行使用bin这种安装包格式，只需要下载个安装包就能自动安装解压，比tar.gz省事，比.deb，.rpm的安装包兼容性强，适应范围广。但也有一个问题，bin安装包让人无法知道里面的细节，还是有所顾虑的。比如我前几天需要下载一个JRE6，但Oracle官方在JDK7之前都没有tar.gz包，只有bin包。我肯定不能直接安装bin文件啊，这会破坏我本机已有的JDK8开发环境。&lt;/p&gt;</description>
     </item>
     <item>
       <title>使用内嵌undertow开发调试jfinal项目</title>
-      <link>http://localhost:1313/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/</link>
+      <link>https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Sat, 19 May 2018 23:56:37 +0000</pubDate>
-      <guid>http://localhost:1313/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>https://iminto.github.io/post/%E4%BD%BF%E7%94%A8%E5%86%85%E5%B5%8Cundertow%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95jfinal%E9%A1%B9%E7%9B%AE/</guid>
       <description>&lt;p&gt;今天在修一个老项目，使用的是jfinal框架，这个框架算是一个比较传统的框架，只支持打包成war运行放入容器中运行，但是在开发过程中可以使用jetty快速启动和调试。个人不是很喜欢jetty，遂换成了undertow。&#xA;引入如下依赖&lt;/p&gt;</description>
     </item>
     <item>
       <title>导出freeOTP中的配置</title>
-      <link>http://localhost:1313/post/export-freeopt-config/</link>
+      <link>https://iminto.github.io/post/export-freeopt-config/</link>
       <pubDate>Mon, 14 May 2018 22:06:05 +0000</pubDate>
-      <guid>http://localhost:1313/post/export-freeopt-config/</guid>
+      <guid>https://iminto.github.io/post/export-freeopt-config/</guid>
       <description>&lt;p&gt;之前公司的一个网站使用了OTP来做二次验证，然后我就在手机上安装了freeotp这款软件来管理OTP密码，等到换手机了，才发现没法导出原手机的配置，这就尴尬了。FreeOTP is sponsored and officially published by Red Hat，也算是大家闺秀出品的软件，居然不支持这么重要的功能。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Java里常见的几个语法小坑</title>
-      <link>http://localhost:1313/post/java_trap/</link>
+      <link>https://iminto.github.io/post/java_trap/</link>
       <pubDate>Sat, 05 May 2018 14:18:23 +0000</pubDate>
-      <guid>http://localhost:1313/post/java_trap/</guid>
+      <guid>https://iminto.github.io/post/java_trap/</guid>
       <description>&lt;p&gt;很久没更新博客了，想到几个小坑，虽然没啥技术含量，但或许有人不知道呢。&lt;/p&gt;&#xA;&lt;h4 id=&#34;1删除sublist的元素导致原对象元素被删除&#34;&gt;1.删除sublist的元素导致原对象元素被删除&lt;/h4&gt;&#xA;&lt;p&gt;看下面这段代码&lt;/p&gt;&#xA;&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;List&amp;lt;Integer&amp;gt; students=new ArrayList&amp;lt;Integer&amp;gt;();&#xD;&#xA;        for (int i = 0; i &amp;lt;5 ; i++) {&#xD;&#xA;            students.add(i);&#xD;&#xA;        }&#xD;&#xA;        List&amp;lt;Integer&amp;gt; subList=new ArrayList&amp;lt;Integer&amp;gt;();&#xD;&#xA;        subList=students.subList(0,5);&#xD;&#xA;        subList.remove(0);&#xD;&#xA;        subList.remove(1);&#xD;&#xA;        for (int i = 0; i &amp;lt;5 ; i++) {&#xD;&#xA;            System.out.println(i+&amp;quot;=&amp;quot;+students.get(i));&#xD;&#xA;        }&#xD;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;students是个list，然后我们新建立了一个subList对象，这个对象截取了students的一部分，我们删除了subList对象里的一些元素，看下运行结果。&lt;/p&gt;</description>
     </item>
     <item>
       <title>折腾阿里云OSS的API</title>
-      <link>http://localhost:1313/post/aliyun_oss_custom/</link>
+      <link>https://iminto.github.io/post/aliyun_oss_custom/</link>
       <pubDate>Thu, 25 Jan 2018 23:26:44 +0000</pubDate>
-      <guid>http://localhost:1313/post/aliyun_oss_custom/</guid>
+      <guid>https://iminto.github.io/post/aliyun_oss_custom/</guid>
       <description>&lt;p&gt;  这两天想给博客做个插件,利用阿里云的OSS来存储文件.但阿里的文档和代码都烂的超乎想象,要么代码老旧不堪,要么跟小脚老太一样引入一坨依赖,想必这块是外包团队做的吧,或者阿里非核心业务员的技术水平也就这样吧.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PHP的mb_check_encoding函数的存在是鸡肋吗</title>
-      <link>http://localhost:1313/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</link>
+      <link>https://iminto.github.io/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</link>
       <pubDate>Fri, 12 Jan 2018 21:24:23 +0000</pubDate>
-      <guid>http://localhost:1313/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</guid>
+      <guid>https://iminto.github.io/post/php%E7%9A%84mb_check_encoding%E5%87%BD%E6%95%B0%E7%9A%84%E5%AD%98%E5%9C%A8%E6%98%AF%E9%B8%A1%E8%82%8B%E5%90%97/</guid>
       <description>&lt;p&gt;  前不久,有人问到我一个问题，就是使用mb_check_encoding来侦测一段字符的编码，预期是GBK编码，但是PHP给出来UTF-8编码的错误判断。那么，mb_check_encoding的正确姿势是什么呢？&#xA;我们来看一段代码，&lt;/p&gt;</description>
     </item>
     <item>
       <title>FireJava输出Java服务器端调试日志到控制台</title>
-      <link>http://localhost:1313/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/</link>
+      <link>https://iminto.github.io/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/</link>
       <pubDate>Wed, 10 Jan 2018 20:21:52 +0000</pubDate>
-      <guid>http://localhost:1313/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/</guid>
+      <guid>https://iminto.github.io/post/firejava%E8%BE%93%E5%87%BAjava%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97%E5%88%B0%E6%8E%A7%E5%88%B6%E5%8F%B0/</guid>
       <description>&lt;p&gt;  针对最新火狐浏览器50+以上版本的firebug协议，类似FirePHP，但是FirePHP已经很久不更新，并且对最新的浏览器也已失效。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这个在Firebug之上运行的扩展，结合一个服务器端的库，就可以让你的PHP代码向浏览器发送调试信息，该信息以HTTP响应头（HTTP headers）的方式编码。经过设置，你可以像在Firebug控制台调试JavaScript代码一样得到PHP脚本的警告和错误提示。下面我们来看看具体步骤。&lt;/p&gt;</description>
     </item>
     <item>
       <title>TOTP算法Java版本</title>
-      <link>http://localhost:1313/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/</link>
+      <link>https://iminto.github.io/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/</link>
       <pubDate>Mon, 08 Jan 2018 20:21:52 +0000</pubDate>
-      <guid>http://localhost:1313/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/</guid>
+      <guid>https://iminto.github.io/post/totp%E7%AE%97%E6%B3%95java%E7%89%88%E6%9C%AC/</guid>
       <description>&lt;h4 id=&#34;totp-概念&#34;&gt;TOTP 概念&lt;/h4&gt;&#xA;&lt;p&gt;TOTP - Time-based One-time Password Algorithm is an extension of the HMAC-based One Time Password algorithm HOTP to support a time based moving factor.&lt;/p&gt;&#xA;&lt;p&gt;TOTP（基于时间的一次性密码算法）是支持时间作为动态因素基于HMAC一次性密码算法的扩展。它是OTP算法的一种&lt;/p&gt;&#xA;&lt;p&gt;算法如下:&#xA;TOTP = Truncate(HMAC-SHA-1(K, (T - T0) / X))&lt;/p&gt;&#xA;&lt;p&gt;K 共享密钥&#xA;T 时间&#xA;T0 开始计数的时间步长&#xA;X 时间步长&lt;/p&gt;</description>
     </item>
     <item>
       <title>Vala使用体验</title>
-      <link>http://localhost:1313/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link>
+      <link>https://iminto.github.io/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Mon, 08 Jan 2018 20:21:52 +0000</pubDate>
-      <guid>http://localhost:1313/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://iminto.github.io/post/vala%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;p&gt;  前段时间用vala开发了一个很小的程序,体验了一把vala的使用,网上关于vala的文章比较少,所以写一篇博客,如果你有相同的使用经验可以交流下.&lt;/p&gt;&#xA;&lt;p&gt;  根据百度百科的解释，vala是一种新的、为GNOME开发者提供的具有现代化编程语言功能的一种编程语言。Vala是一种和C#极度类似的语言。&lt;/p&gt;</description>
     </item>
   </channel>
