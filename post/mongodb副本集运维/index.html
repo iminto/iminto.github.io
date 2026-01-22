@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html><head lang="zh-hans">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>MongoDB副本集运维 - 白菜不是菜</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="一、MongoDB搭建三节点副本集
+1.架构图
+       Your App
+           │
+           ▼
+   ┌───────────────┐
+   │  MongoDB RS   │ ← 所有读写都发到这里（连任意节点）
+   ├───────────────┤
+   │ Node1 (Primary)│ ← 当前主节点（可写）
+   │ Node2 (Secondary)│ ← 从节点（可读，自动同步）
+   │ Node3 (Secondary)│ ← 从节点（可读，自动同步）
+   └───────────────┘
+
+
+3 台物理机：每台运行一个 mongod 实例；
+无 mongos、无 config server：因为不是分片集群；
+自动选主：如果 Node1 宕机，Node2 或 Node3 自动升为 Primary。
+
+即使是单机，也能配置副本集" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="https://iminto.github.io/post/mongodb%E5%89%AF%E6%9C%AC%E9%9B%86%E8%BF%90%E7%BB%B4/">
+  <meta property="og:site_name" content="白菜不是菜">
+  <meta property="og:title" content="MongoDB副本集运维">
+  <meta property="og:description" content="一、MongoDB搭建三节点副本集 1.架构图 Your App │ ▼ ┌───────────────┐ │ MongoDB RS │ ← 所有读写都发到这里（连任意节点） ├───────────────┤ │ Node1 (Primary)│ ← 当前主节点（可写） │ Node2 (Secondary)│ ← 从节点（可读，自动同步） │ Node3 (Secondary)│ ← 从节点（可读，自动同步） └───────────────┘ 3 台物理机：每台运行一个 mongod 实例； 无 mongos、无 config server：因为不是分片集群； 自动选主：如果 Node1 宕机，Node2 或 Node3 自动升为 Primary。 即使是单机，也能配置副本集">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-01-22T18:40:30+08:00">
+    <meta property="article:modified_time" content="2026-01-22T18:40:30+08:00">
+    <meta property="article:tag" content="运维">
+    <meta property="og:image" content="https://iminto.github.io/img/og.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://iminto.github.io/img/og.png">
+  <meta name="twitter:title" content="MongoDB副本集运维">
+  <meta name="twitter:description" content="一、MongoDB搭建三节点副本集 1.架构图 Your App │ ▼ ┌───────────────┐ │ MongoDB RS │ ← 所有读写都发到这里（连任意节点） ├───────────────┤ │ Node1 (Primary)│ ← 当前主节点（可写） │ Node2 (Secondary)│ ← 从节点（可读，自动同步） │ Node3 (Secondary)│ ← 从节点（可读，自动同步） └───────────────┘ 3 台物理机：每台运行一个 mongod 实例； 无 mongos、无 config server：因为不是分片集群； 自动选主：如果 Node1 宕机，Node2 或 Node3 自动升为 Primary。 即使是单机，也能配置副本集">
+
+        <link href="https://iminto.github.io/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://iminto.github.io/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://iminto.github.io/">白菜不是菜</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/post">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		<a href="/index.xml">RSS</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">MongoDB副本集运维</h1>
+          <div class="meta">Posted on 2026年1月22日</div>
+        </div>
+        
+        <section class="body">
+          <h1 id="一mongodb搭建三节点副本集">一、MongoDB搭建三节点副本集</h1>
+<h2 id="1架构图">1.架构图</h2>
+<pre><code class="language-tex">       Your App
+           │
+           ▼
+   ┌───────────────┐
+   │  MongoDB RS   │ ← 所有读写都发到这里（连任意节点）
+   ├───────────────┤
+   │ Node1 (Primary)│ ← 当前主节点（可写）
+   │ Node2 (Secondary)│ ← 从节点（可读，自动同步）
+   │ Node3 (Secondary)│ ← 从节点（可读，自动同步）
+   └───────────────┘
+</code></pre>
+<ul>
+<li><strong>3 台物理机</strong>：每台运行一个 <code>mongod</code> 实例；</li>
+<li><strong>无 mongos、无 config server</strong>：因为不是分片集群；</li>
+<li><strong>自动选主</strong>：如果 Node1 宕机，Node2 或 Node3 自动升为 Primary。</li>
+</ul>
+<p>即使是单机，也能配置副本集</p>
+<h2 id="2步骤">2.步骤</h2>
+<h3 id="1在三台机器上安装-mongodb">1.在三台机器上安装 MongoDB</h3>
+<pre><code class="language-bash">sudo mkdir -p /var/log/mongodb
+sudo chown -R $(whoami) /develop/data/mongo/ /var/log/mongodb/
+</code></pre>
+<h3 id="2配置每台机器的-mongodconf">2.配置每台机器的 <code>mongod.conf</code></h3>
+<p>假设三台机器 IP：</p>
+<ul>
+<li>Node1: <code>192.168.1.101</code></li>
+<li>Node2: <code>192.168.1.102</code></li>
+<li>Node3: <code>192.168.1.103</code></li>
+</ul>
+<p>在 <strong>所有三台</strong> 上编辑 <code>/etc/mongod.conf</code>：</p>
+<pre><code class="language-yaml">storage:
+  dbPath: /var/lib/mongodb
+  journal:
+    enabled: true
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0  # 允许其他节点连接
+
+replication:
+  replSetName: &quot;rs0&quot;  # 副本集名称，必须一致！
+
+security:
+  authorization: enabled  # 启用认证（可选但推荐）
+</code></pre>
+<h3 id="3启动所有-mongod-服务">3.启动所有 mongod 服务</h3>
+<pre><code class="language-bash">sudo systemctl start mongod
+sudo systemctl enable mongod
+</code></pre>
+<h3 id="4初始化副本集只需在一台机器上操作">4.初始化副本集（只需在一台机器上操作）</h3>
+<pre><code class="language-bash"># 连接到任意一台（如 Node1）
+mongo 192.168.1.101
+
+# 切换到 admin
+use admin
+
+# 初始化副本集，注意不要用主机名
+rs.initiate({
+  _id: &quot;rs0&quot;,
+  members: [
+    { _id: 0, host: &quot;m1.bigdata.com:27017&quot; },
+    { _id: 1, host: &quot;m2.bigdata.com:27017&quot; },
+    { _id: 2, host: &quot;m3.bigdata.com:27017&quot; }
+  ]
+})
+
+# 等待至少30秒，查看状态（选举需要时间）
+rs.status()
+</code></pre>
+<p>至少等待30秒后，成功后你会看到：</p>
+<ul>
+<li>一个 <code>PRIMARY</code></li>
+<li>两个 <code>SECONDARY</code></li>
+</ul>
+<p>每个副本集成员可以设置 priority 值（默认为 1），priority 越高，越容易被选为 PRIMARY。</p>
+<p>如果这么写</p>
+<pre><code> { _id: 2, host: &quot;localhost:27019&quot;, arbiterOnly: true }  // ← 关键
+</code></pre>
+<p>那么其中一个就是仲裁节点。</p>
+<p>如果要加入新的副本，注意一次只加一个，等同步完成再加下一个</p>
+<pre><code class="language-js">// 方法 1：简单添加（使用默认配置）
+rs.add(&quot;new_node_ip:27017&quot;)
+// 方法 2：指定更多选项（推荐）
+rs.add({
+  host: &quot;new_node_ip:27017&quot;,
+  priority: 1,        // 可参与选举（0 = 仲裁/只读）
+  votes: 1,           // 有投票权
+  tags: { dc: &quot;rack3&quot; } // 可选标签
+})
+</code></pre>
+<h3 id="5创建用户启用-auth-后必需">5.创建用户（启用 auth 后必需）</h3>
+<pre><code class="language-bash">// 在 PRIMARY 上执行
+use admin
+db.createUser({
+  user: &quot;admin&quot;,
+  pwd: &quot;your_strong_password&quot;,
+  roles: [ { role: &quot;root&quot;, db: &quot;admin&quot; } ]
+})
+
+// 退出重连（带认证）
+exit
+mongo -u admin -p --authenticationDatabase admin 192.168.1.101
+//修改配置文件，按从主依次重启节点
+</code></pre>
+<p>root 角色只能在 admin 库授予，也可以在业务数据库创建用户</p>
+<p>注意：MongoDB 启动后、创建用户前，是完全开放的！如果 admin 数据库中没有任何用户，那么来自 localhost 的连接可以绕过认证，执行创建用户的操作。</p>
+<p>当你启用 <strong>副本集（replica set）</strong> 并开启 <strong>用户认证（<code>authorization: enabled</code>）</strong> 时，<strong>社区版 MongoDB 要求必须配置 <code>keyFile</code></strong>，步骤可参考分片集群。</p>
+<p>代码连接示例</p>
+<pre><code class="language-python">client = MongoClient(
+    &quot;mongodb://user:pwd@host1,host2,host3/?replicaSet=myRepl&amp;authSource=admin&quot;
+)
+# 或者 优先从从读，从不可用时读主
+client = MongoClient(
+    &quot;mongodb://...?replicaSet=rs0&amp;authSource=admin&amp;readPreference=secondaryPreferred&quot;
+)
+</code></pre>
+<p>注意：开启认证后，rs.status()会报错，需要先认证才能查询。</p>
+<h3 id="6连接方式">6.连接方式</h3>
+<p>不要只连一个节点</p>
+<pre><code class="language-bash">mongo &quot;mongodb://host1:27017,host2:27017,host3:27017/mydb?replicaSet=rs0&quot;
+//开了认证
+mongo &quot;mongodb://username:password@host1:27017,host2:27017,host3:27017/mydb?authSource=admin&amp;replicaSet=rs0&quot;
+</code></pre>
+<p>注意：老版本mongo不支持<code>readPreference=secondary</code>这类参数，secondary节点默认是不可读的，需要可读，最兼容的方式是连接后执行如下命令</p>
+<pre><code class="language-js">rs.slaveOk()
+</code></pre>
+<p>而且如mongo 3.0以下连接方式应该是</p>
+<pre><code class="language-bash">mongo --host rs0/host1:27017,host2:27017,host3:27017 mydb
+</code></pre>
+<h1 id="二mongodb创建三节点集群">二、MongoDB创建三节点集群</h1>
+<h2 id="1架构图-1">1.架构图</h2>
+<p>✅ <strong>目标架构</strong>：1 个 Config Server Replica Set + 1 个 Shard Replica Set + 1 个 mongos
+✅ <strong>资源</strong>：3 台物理机（每台运行多个 MongoDB 进程）</p>
+<pre><code class="language-latex">+------------------+     +------------------+     +------------------+
+|    Node A        |     |    Node B        |     |    Node C        |
+|                  |     |                  |     |                  |
+|  ConfigSvr (P)   |&lt;---&gt;|  ConfigSvr (S)   |&lt;---&gt;|  ConfigSvr (S)   |
+|                  |     |                  |     |                  |
+|  Shard0 (P)      |&lt;---&gt;|  Shard0 (S)      |&lt;---&gt;|  Shard0 (S)      |
+|                  |     |                  |     |                  |
+|  mongos          |     |  mongos          |     |  mongos          |
++------------------+     +------------------+     +------------------+
+        ↑                        ↑                        ↑
+        └─────── 应用连接任意 mongos ────────────────┘
+</code></pre>
+<p><strong>端口分配总结</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>组件</th>
+          <th>端口</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mongos</td>
+          <td>27017</td>
+          <td>应用连接入口</td>
+      </tr>
+      <tr>
+          <td>Shard0</td>
+          <td>27018</td>
+          <td>数据存储</td>
+      </tr>
+      <tr>
+          <td>Config Server</td>
+          <td>27019</td>
+          <td>元数据存储</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="2步骤-1">2.步骤</h2>
+<h3 id="1在三台机器上安装-mongodb-1">1.在三台机器上安装 MongoDB</h3>
+<pre><code class="language-bash"># 1. 安装 MongoDB（以 Ubuntu 为例，三台都装）
+sudo apt update &amp;&amp; sudo apt install -y mongodb-org
+
+# 2. 创建目录
+sudo mkdir -p /data/configdb /data/shard0 /logs
+sudo chown -R mongodb:mongodb /data /logs
+
+# 3. 关闭防火墙 or 开放端口（27017~27020）
+sudo ufw allow from 192.168.1.0/24 to any port 27017:27020
+</code></pre>
+<h3 id="2生成并分发-keyfile内部认证密钥">2.生成并分发 keyFile（内部认证密钥）</h3>
+<pre><code class="language-bash"># 在 Node A 生成
+sudo openssl rand -base64 756 &gt; /etc/mongodb-keyfile
+sudo chmod 400 /etc/mongodb-keyfile
+sudo chown mongodb:mongodb /etc/mongodb-keyfile
+
+# 复制到 Node B 和 Node C
+scp /etc/mongodb-keyfile nodeB:/etc/
+scp /etc/mongodb-keyfile nodeC:/etc/
+# （在 B/C 上同样执行 chmod 400 + chown）
+</code></pre>
+<h3 id="3配置并启动-config-server3-节点-rs">3.配置并启动 Config Server（3 节点 RS）</h3>
+<p>在 所有三台 创建 /etc/mongod-config.conf：</p>
+<pre><code class="language-yaml">storage:
+  dbPath: /data/configdb
+  journal:
+    enabled: true
+
+net:
+  port: 27019
+  bindIp: 0.0.0.0
+
+replication:
+  replSetName: &quot;configRepl&quot;
+
+sharding:
+  clusterRole: configsvr
+
+security:
+  authorization: enabled
+  keyFile: /etc/mongodb-keyfile
+</code></pre>
+<p>启动 Config Server（三台都执行）：</p>
+<pre><code class="language-bash">sudo -u mongodb mongod -f /etc/mongod-config.conf --fork --logpath /logs/config.log
+</code></pre>
+<p>初始化 Config Replica Set（只在 Node A 执行）</p>
+<pre><code class="language-bash">mongo --port 27019
+&gt; rs.initiate({
+    _id: &quot;configRepl&quot;,
+    configsvr: true,
+    members: [
+      { _id: 0, host: &quot;nodeA:27019&quot; },
+      { _id: 1, host: &quot;nodeB:27019&quot; },
+      { _id: 2, host: &quot;nodeC:27019&quot; }
+    ]
+  })
+&gt; rs.status()  // 等待 PRIMARY 出现
+</code></pre>
+<h3 id="4配置并启动-shard3-节点-rs">4.配置并启动 Shard（3 节点 RS）</h3>
+<p>在 所有三台 创建 /etc/mongod-shard0.conf</p>
+<pre><code class="language-yml">storage:
+  dbPath: /data/shard0
+  journal:
+    enabled: true
+
+net:
+  port: 27018
+  bindIp: 0.0.0.0
+
+replication:
+  replSetName: &quot;shard0Repl&quot;
+
+sharding:
+  clusterRole: shardsvr
+
+security:
+  authorization: enabled
+  keyFile: /etc/mongodb-keyfile
+</code></pre>
+<p>启动 Shard（三台都执行）：</p>
+<pre><code class="language-bash">sudo -u mongodb mongod -f /etc/mongod-shard0.conf --fork --logpath /logs/shard0.log
+</code></pre>
+<p>初始化 Shard Replica Set（只在 Node A 执行）：</p>
+<pre><code class="language-bash">mongo --port 27018
+&gt; rs.initiate({
+    _id: &quot;shard0Repl&quot;,
+    members: [
+      { _id: 0, host: &quot;nodeA:27018&quot; },
+      { _id: 1, host: &quot;nodeB:27018&quot; },
+      { _id: 2, host: &quot;nodeC:27018&quot; }
+    ]
+  })
+&gt; rs.status()
+</code></pre>
+<h3 id="5启动-mongos路由">5.启动 mongos（路由）</h3>
+<p>在 所有三台 创建 /etc/mongos.conf：</p>
+<pre><code class="language-yaml">sharding:
+  configDB: configRepl/nodeA:27019,nodeB:27019,nodeC:27019
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+security:
+  keyFile: /etc/mongodb-keyfile
+</code></pre>
+<p>⚠️ 注意：mongos <strong>不需要 <code>authorization</code></strong>，它从 shard 获取用户</p>
+<p>启动 mongos（三台都执行）：</p>
+<pre><code class="language-bash">sudo -u mongodb mongos -f /etc/mongos.conf --fork --logpath /logs/mongos.log
+</code></pre>
+<h3 id="6在mongos添加-shard-并创建用户">6.在mongos添加 Shard 并创建用户</h3>
+<p>连接任意 mongos（如 Node A）：</p>
+<pre><code class="language-bash">mongo nodeA:27017
+</code></pre>
+<p>添加 Shard</p>
+<pre><code class="language-bash">// 添加 shard0 到集群
+sh.addShard(&quot;shard0Repl/nodeA:27018,nodeB:27018,nodeC:27018&quot;)
+sh.status()  // 查看是否成功
+</code></pre>
+<p>创建管理员用户</p>
+<pre><code class="language-bash">use admin
+db.createUser({
+  user: &quot;admin&quot;,
+  pwd: &quot;your_strong_password&quot;,
+  roles: [ &quot;root&quot; ]
+})
+</code></pre>
+<p>添加sharding后，还需要做<strong>分片键（Shard Key）的选择 &amp; 分片开启</strong></p>
+<pre><code class="language-js">// 必须在 mongos 上手动执行：
+sh.enableSharding(&quot;myapp&quot;) // 为数据库启用分片
+sh.shardCollection(&quot;myapp.orders&quot;, { customerId: 1 })  //指定分片键，范围分片
+sh.shardCollection(&quot;myapp.orders&quot;, { customerId: &quot;hashed&quot; }) //hash分片
+</code></pre>
+<p>分片键一旦选定，几乎无法更改，除非重新导入导出。而且唯一索引必须包含分片键字段。</p>
+<p>customerId: 1 表示使用文档中的字段 customerId 作为分片依据，且升序，1是固定写法，根据实际插入的数据动态计算中位数。</p>
+<p>如果需要按 customerId 的前缀（如前2位）代表地区，希望不同地区的数据落在不同 shard 上，在 MongoDB 原生分片中 无法直接实现，需要插入数据时，显式计算并存储地区码，然后用 region 作分片键，也可以做联合分片</p>
+<pre><code class="language-js">sh.shardCollection(&quot;myapp.orders&quot;, { region: 1, customerId: 1 })
+</code></pre>
+<h3 id="7应用连接方式">7.应用连接方式</h3>
+<pre><code class="language-python">from pymongo import MongoClient
+
+client = MongoClient(
+    &quot;mongodb://admin:your_strong_password@nodeA:27017,nodeB:27017,nodeC:27017/&quot;
+    &quot;?replicaSet=none&amp;authSource=admin&quot;
+)
+# 注意：连 mongos 时 replicaSet 参数可省略或设为 none
+</code></pre>
+<p>验证：</p>
+<pre><code class="language-bash">// 连 mongos
+mongo -u admin -p --authenticationDatabase admin nodeA:27017
+
+// 查看分片状态
+sh.status()
+
+// 插入测试数据（会自动分片）
+use testdb
+db.testcoll.insertMany([{x:1}, {x:2}])
+db.testcoll.getShardDistribution()
+</code></pre>
+<h1 id="三基本的用户管理和监控">三、基本的用户管理和监控</h1>
+<h2 id="1用户管理">1.用户管理</h2>
+<p>MongoDB 的用户不是全局的，而是属于某个特定数据库（称为 认证源 authentication database），例如：在 admin 库创建的用户，登录时必须指定 authSource=admin。</p>
+<ul>
+<li>用户通过 <strong>角色</strong> 获得权限；</li>
+<li>角色可以是：
+<ul>
+<li><strong>内置角色</strong>（如 <code>readWrite</code>, <code>dbAdmin</code>, <code>root</code>）</li>
+<li><strong>自定义角色</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="权限作用域"><strong>权限作用域</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>角色类型</th>
+          <th>作用范围</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>read</code>, <code>readWrite</code></td>
+          <td>仅限<strong>创建用户所在的数据库</strong></td>
+      </tr>
+      <tr>
+          <td><code>dbAdmin</code>, <code>userAdmin</code>，<code>dbOwner</code></td>
+          <td>仅限所在库</td>
+      </tr>
+      <tr>
+          <td><code>clusterAdmin</code>, <code>root</code></td>
+          <td><strong>整个集群</strong>（必须在 <code>admin</code> 库授予）</td>
+      </tr>
+  </tbody>
+</table>
+<p>查看用户</p>
+<pre><code class="language-js">// 查看当前库的所有用户
+db.getUsers()
+// 查看特定用户
+db.getUser(&quot;app_user&quot;)
+</code></pre>
+<p>修改用户密码</p>
+<pre><code class="language-js">use admin
+db.changeUserPassword(&quot;admin&quot;, &quot;NewStrongPass789!&quot;)
+</code></pre>
+<p>修改角色</p>
+<pre><code class="language-js">use myapp
+db.grantRolesToUser(&quot;app_user&quot;, [ { role: &quot;dbAdmin&quot;, db: &quot;myapp&quot; } ])
+db.revokeRolesFromUser(&quot;app_user&quot;, [ &quot;readWrite&quot; ])
+</code></pre>
+<h2 id="2常用查询监控">2.常用查询监控</h2>
+<pre><code class="language-js">#列出所有非空数据库
+show dbs
+// 检查 admin 库是否有用户（判断是否初始化过，system.users是内置集合）
+use admin
+db.system.users.countDocuments({})
+//查询集合
+show collections
+//查询存贮空间
+db.products.stats()
+db.getReplicationInfo()
+</code></pre>
+<p>常用增删改查</p>
+<pre><code class="language-js">db.products.insertOne({
+  name: &quot;笔记本电脑&quot;,
+  price: 5999,
+  category: &quot;Electronics&quot;,
+  tags: [&quot;办公&quot;, &quot;高性能&quot;],
+  inStock: true,
+  specs: {
+    cpu: &quot;Intel i7&quot;,
+    ram: &quot;16GB&quot;,
+    storage: &quot;512GB SSD&quot;
+  }
+})
+//插入多个文档
+db.products.insertMany([
+  {
+    name: &quot;无线鼠标&quot;,
+    price: 89,
+    category: &quot;Accessories&quot;,
+    tags: [&quot;外设&quot;],
+    inStock: true
+  },
+  {
+    name: &quot;机械键盘&quot;,
+    price: 399,
+    category: &quot;Accessories&quot;,
+    tags: [&quot;外设&quot;, &quot;游戏&quot;],
+    inStock: false
+  }
+])
+//
+db.products.find()
+db.collection_name.find().sort({ _id: -1 }).limit(10)
+db.users.findOne({ _id: ObjectId(&quot;673d1a2b8f4e1c0012345678&quot;) })//_id可以自定义
+db.products.find({ category: &quot;Electronics&quot; })
+// 将“无线鼠标”的价格改为 79 元
+db.products.updateOne(
+  { name: &quot;无线鼠标&quot; },           // 查询条件
+  { $set: { price: 79 } }         // 更新操作
+)
+</code></pre>
+<h2 id="3数据导入导出">3.数据导入导出</h2>
+<p>MongoDB 的数据存储目录结构 不是按数据库（Database）分文件夹，而是采用 统一的存储引擎格式（默认是 WiredTiger），将所有数据库的数据混合存储在同一个目录下，通过内部命名空间（namespace）来区分。</p>
+<p>导入导出工具下载地址：https://www.mongodb.com/try/download/database-tools/releases/archive</p>
+<p>如果启用了认证，加上 <code>--username</code> 和 <code>--password</code>以及<code>--authenticationDatabase admin</code></p>
+<h3 id="导出备份">导出备份</h3>
+<pre><code class="language-bash">./mongodump --host 127.0.0.1 --port 27017 --db test --out /tmp/test
+</code></pre>
+<p>如果是分片集群，必须连接 mongos 路由节点</p>
+<p>副本集</p>
+<pre><code class="language-bash">mongodump \
+  --host &quot;myReplSet/192.168.1.10:27017,192.168.1.11:27017,192.168.1.12:27017&quot; \
+  --db myapp \
+  --out /backup/
+</code></pre>
+<p>当然，也可以直接连 Primary（如果你知道是谁），从 Secondary 备份（减轻主库压力）</p>
+<p>分片集群</p>
+<pre><code class="language-bash">mongodump \
+  --host &quot;192.168.10.100:27017&quot; \  # 任意一个 mongos 地址
+  --db myapp \
+  --out /backup/
+</code></pre>
+<p>批量导出</p>
+<pre><code class="language-bash">#!/bin/bash
+
+set -euo pipefail 
+
+MONGO_URI=&quot;mongodb://user:pass@host:27017&quot;
+DB_NAMES=(&quot;db1&quot; &quot;db2&quot; &quot;myapp&quot;)
+BACKUP_TIME=$(date +%Y%m%d_%H%M%S)
+OUTPUT_ROOT=&quot;./mongodb_backups/$BACKUP_TIME&quot;
+
+mkdir -p &quot;$OUTPUT_ROOT&quot;
+
+echo &quot;备份目标: $OUTPUT_ROOT&quot;
+for db in &quot;${DB_NAMES[@]}&quot;; do
+    if [[ -z &quot;$db&quot; ]]; then continue; fi
+
+    echo &quot;Dumping database: $db ...&quot;
+    
+    # 关键：--out 指向根目录，mongodump 自动创建 $OUTPUT_ROOT/$db/
+    if mongodump --uri=&quot;$MONGO_URI&quot; --db=&quot;$db&quot; --out=&quot;$OUTPUT_ROOT&quot;; then
+        echo &quot;$db -&gt; $OUTPUT_ROOT/$db/&quot;
+    else
+        echo &quot;备份 $db 失败！&quot; &gt;&amp;2
+        exit 1
+    fi
+done
+
+echo &quot;所有数据库备份完成！&quot;
+ls -l &quot;$OUTPUT_ROOT&quot;
+</code></pre>
+<p>MONGO_URI 参数很重要，如果没有认证就 **不要加 <code>?authSource=</code>**这类的参数</p>
+<p>当然，也能用 &ndash;host 的方式去写。</p>
+<h3 id="导入恢复">导入恢复</h3>
+<p>注意：必须指定完整 dump 路径</p>
+<pre><code class="language-bash">mongorestore --host localhost --port 27017 --db myapp /backup/myapp
+</code></pre>
+<p>如果是副本集，<del>连任意一个 主节点（Primary） 或 从节点（Secondary）</del>，同样应该使用副本集连接字符串。</p>
+<pre><code class="language-bash">mongorestore \
+  --host &quot;rsName/host1:port,host2:port,host3:port&quot; \
+  --username user \
+  --password 'xxx' \
+  --authenticationDatabase admin \
+  /path/to/backup
+</code></pre>
+<p>导入时还能重命名</p>
+<pre><code class="language-bash">--nsFrom &quot;prod_files.*&quot; \
+--nsTo &quot;test_files.*&quot; \
+</code></pre>
+<h3 id="加速导入导出">加速导入导出</h3>
+<pre><code class="language-bash">mongorestore --noIndexRestore ...
+# 然后在 mongo shell 中：
+use your_db
+// 查看原库有哪些索引（从 2.6 备份前记录，或从其他环境获取）
+db.fs.files.getIndexes()
+// 手动创建（示例）
+db.mycol.createIndex({ name: 1 })
+db.fs.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true })
+</code></pre>
+<p>fs.files 集合已有默认_id索引，除非特殊需求，否则不需要重建索引。</p>
+<pre><code class="language-js">db.fs.files.createIndex({ filename: 1 })
+</code></pre>
+<p><strong>但是：现代 mongorestore 已优化为“后建索引”模式，所以这个优化无效</strong></p>
+<p>还可以增大缓存配置（但意义不大）：</p>
+<pre><code class="language-yaml">storage:
+  wiredTiger:
+    engineConfig:
+      cacheSizeGB: 8  # 默认是 (RAM - 1GB) / 2，可适当调大
+</code></pre>
+<p>可以使用如下命令查看缓存配置</p>
+<pre><code class="language-bash">db.serverStatus().wiredTiger.cache
+</code></pre>
+<p>还可以在导入时，允许并行导入</p>
+<pre><code class="language-bash">--numParallelCollections 4 \          # 并行恢复 4 个集合
+--writeConcern '{&quot;w&quot;:0}' # 大水漫灌，效果？
+</code></pre>
+<p>同时尝试锁定primary，减少网络漂移，测试能节约10-20%的时间。</p>
+<pre><code class="language-bash">cfg = rs.conf()
+cfg.members[0].priority = 10    // 默认是 1，设为最高
+rs.reconfig(cfg)
+</code></pre>
+<p>或者尝试先单副本，再后台同步</p>
+<pre><code class="language-bash">// 在 Primary (A) 上执行
+rs.remove(&quot;B:27017&quot;)
+rs.remove(&quot;C:27017&quot;)
+// 在 B、C 服务器上执行（停止 mongod 后）
+sudo systemctl stop mongod
+sudo rm -rf /var/lib/mongodb/*     # 清空数据目录
+sudo systemctl start mongod        # 重启（此时是 standalone 模式）
+//在 A 上执行 mongorestore
+rs.add(&quot;B:27017&quot;)//重新加入副本集
+</code></pre>
+<p>或者直接单节点设置副本集，导入后再增加。</p>
+<p>1963个文件+108185文件块，空间占用26G，16核16G虚拟机，三节点数据导入并恢复索引测试</p>
+<table>
+  <thead>
+      <tr>
+          <th>参数与优化</th>
+          <th>导入耗时</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>默认参数</td>
+          <td>62分钟</td>
+      </tr>
+      <tr>
+          <td>&ndash;numParallelCollections=4<br />&ndash;writeConcern &lsquo;{&ldquo;w&rdquo;:0}&rsquo;<br />锁定主节点，确保本地导入</td>
+          <td>49分钟</td>
+      </tr>
+      <tr>
+          <td>先单副本导入，然后添加从节点同步</td>
+          <td>51分钟</td>
+      </tr>
+      <tr>
+          <td>&ndash;numParallelCollections=8<br />&ndash;numInsertionWorkersPerCollection=8<br />锁定主节点，确保本地导入</td>
+          <td>10分钟</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4mongofiles工具">4.mongofiles工具</h2>
+<p>如果要存储 <strong>大于 16MB 的文件</strong>（如视频、音频、大型日志、备份文件等），就需要使用 <strong>GridFS</strong>。</p>
+<blockquote>
+<p>✅ <strong>GridFS 不是单独的文件系统</strong>，而是 MongoDB 的一种<strong>规范</strong>：
+它会自动将大文件 <strong>切分成多个小块（默认 255KB/块）</strong>，存入两个集合：</p>
+<ul>
+<li><code>fs.files</code>：存储文件元信息（文件名、大小、上传时间等）</li>
+<li><code>fs.chunks</code>：存储文件的实际数据块</li>
+</ul></blockquote>
+<p><code>mongofiles</code> 就是用来 <strong>在本地文件系统 和 GridFS 之间传输文件</strong> 的 CLI 工具。</p>
+<p>支持的操作：</p>
+<table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>put</code></td>
+          <td>上传本地文件到 GridFS</td>
+      </tr>
+      <tr>
+          <td><code>get</code></td>
+          <td>从 GridFS 下载文件到本地</td>
+      </tr>
+      <tr>
+          <td><code>list</code></td>
+          <td>列出 GridFS 中的所有文件</td>
+      </tr>
+      <tr>
+          <td><code>search</code></td>
+          <td>按文件名模糊搜索</td>
+      </tr>
+      <tr>
+          <td><code>delete</code></td>
+          <td>删除 GridFS 中的文件</td>
+      </tr>
+      <tr>
+          <td><code>del</code></td>
+          <td>同 <code>delete</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p>比如</p>
+<pre><code class="language-bash">#将本地 文件 上传到 test 库的 GridFS
+./mongofiles -d test put /home/koudai/下载/md5.gif  
+./mongofiles -d test put -l /home/koudai/下载/md5.gif  -r md5.gif
+</code></pre>
+<p>执行后：</p>
+<ul>
+<li>在 <code>test.fs.files</code> 中插入一条元数据记录</li>
+<li>在 <code>test.fs.chunks</code> 中插入多个数据块</li>
+</ul>
+<p>查询</p>
+<pre><code class="language-bash">./mongofiles -d test list
+</code></pre>
+<p>也可以直接用 <code>db.fs.files.find()</code> 查看文件列表！</p>
+<h2 id="5增量备份恢复">5.增量备份恢复</h2>
+<p>先全局备份，假设</p>
+<p>12:00:00：开始执行 mongodump &ndash;oplog
+13:00:00：mongodump 完成，生成了 dump目录 + oplog.bson</p>
+<pre><code class="language-bash">echo &quot;Backup started at $(date -Iseconds)&quot; &gt;&gt; backup.log
+mongodump --host &quot;rs0/localhost:27017&quot; \
+--oplog \
+--out /backup/full_$(date +%Y%m%d_%H%M%S)
+</code></pre>
+<p>&ndash;oplog 备份的 oplog 范围是 [备份开始时刻, 备份结束时刻],<code>oplog.bson</code> = 备份期间产生的所有增量变更</p>
+<p>mongodump只会dump 所有业务数据库（<code>admin</code>, <code>mydb</code>, &hellip;）</p>
+<p>恢复数据需要排除local库</p>
+<pre><code class="language-bash">mongorestore  --oplogReplay ./dum
+</code></pre>
+<p>但是需要注意<code>--oplogReplay</code>选项不能与 <code>--nsInclude</code>等指令同时出现，否则会报错。MongoDB <strong>强制要求</strong>：使用 <code>--oplogReplay</code> 时，必须恢复<strong>完整的备份目录</strong>，不能筛选。</p>
+<h3 id="备份恢复之后的增量更新">备份恢复之后的增量更新</h3>
+<p>假设T0开始DUMP，T1时刻DUMP完毕拿去恢复，mongorestore只能得到T1时刻前的数据，T1后的更新需要迁移到新集群。</p>
+<p>mongodump完毕后立刻执行，获取T1时间戳和序列</p>
+<pre><code class="language-bash">#!/bin/bash
+SRC=&quot;your_2.6_host:27017&quot;
+# 创建临时 JS 脚本
+cat &gt; /tmp/get_ts.js &lt;&lt;'EOF'
+var db = db.getSiblingDB(&quot;local&quot;);
+var last = db.oplog.rs.find().sort({$natural: -1}).limit(1).next();
+if (last &amp;&amp; last.ts) {
+    print(tojson(last.ts));
+} else {
+    print(&quot;null&quot;);
+}
+EOF
+
+# 执行
+T0_STR=$(mongo --host &quot;$SRC&quot; /tmp/get_ts.js 2&gt;/dev/null)
+T0_STR=$(echo &quot;$T0_STR&quot; | tr -d '\n\r ')
+
+# 验证格式
+if [[ &quot;$T0_STR&quot; =~ ^Timestamp$\([0-9]+,[[:space:]]*[0-9]+$\) ]]; then
+    T_SEC=$(echo &quot;$T0_STR&quot; | sed 's/Timestamp(\([0-9]*\),[[:space:]]*\([0-9]*\))/\1/')
+    T_INC=$(echo &quot;$T0_STR&quot; | sed 's/Timestamp(\([0-9]*\),[[:space:]]*\([0-9]*\))/\2/')
+    echo &quot;T0.t = $T_SEC&quot;
+    echo &quot;T0.i = $T_INC&quot;
+else
+    echo &quot;ERROR: Failed to get valid Timestamp: '$T0_STR'&quot;
+    exit 1
+fi
+</code></pre>
+<p>得到了这个时间戳，我们就能增量备份了</p>
+<pre><code class="language-python">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+&quot;&quot;&quot;
+MongoDB Oplog Tailing Sync Tool
+Supports regular collections and GridFS.
+Compatible with Python 2.7+ and PyMongo 3.x.
+局限：运行后新增的数据库无法同步，考虑代码复杂性不做修改
+&quot;&quot;&quot;
+
+import sys
+import os
+import time
+import logging
+import argparse
+from pymongo import MongoClient, CursorType
+from bson.timestamp import Timestamp
+import threading
+from collections import deque
+import re
+
+# Default config (can be overridden by CLI)
+DEFAULT_SRC_URI = &quot;mongodb://manager125.bigdata.com:27017&quot;
+DEFAULT_DST_URI = &quot;mongodb://root:Bigdata123@m1.bigdata.com:27017,m2.bigdata.com:27017,m3.bigdata.com:27017/test?authSource=admin&amp;replicaSet=rs0&quot;
+DEFAULT_CHECKPOINT_FILE = &quot;/tmp/oplog_tail_ts.txt&quot;
+
+logging.basicConfig(
+    level=logging.INFO,
+    format=&quot;%(asctime)s [%(levelname)s] %(message)s&quot;,
+    datefmt=&quot;%Y-%m-%d %H:%M:%S&quot;
+)
+logger = logging.getLogger(__name__)
+running = True
+
+def signal_handler(signum, frame):
+    global running
+    logger.info(&quot;Received signal %d, shutting down gracefully...&quot;, signum)
+    running = False
+
+
+class ProgressTracker(object):
+    def __init__(self, db_name, report_interval=10):
+        self.db_name = db_name
+        self.report_interval = report_interval
+        self.last_report_time = time.time()
+        self.op_count = 0
+        self.total_op_count = 0
+
+    def record_op(self):
+        self.op_count += 1
+        self.total_op_count += 1
+
+    def should_report(self):
+        return time.time() - self.last_report_time &gt;= self.report_interval
+
+    def report(self, last_ts):
+        current_time = time.time()
+        lag_seconds = int(current_time - last_ts.time)
+        elapsed = current_time - self.last_report_time
+        ops_per_sec = float(self.op_count) / elapsed if elapsed &gt; 0 else 0.0
+
+        readable_time = time.strftime(
+            &quot;%Y-%m-%d %H:%M:%S&quot;,
+            time.localtime(last_ts.time)
+        )
+        logger.info(
+            &quot;Progress:  total=%d | rate=%.1f ops/s | lag=%d sec | latest_time=%s|db=%s&quot;,
+            self.total_op_count,
+            ops_per_sec,
+            lag_seconds,
+            readable_time,self.db_name,
+        )
+
+        self.op_count = 0
+        self.last_report_time = current_time
+
+    def force_report_if_needed(self, last_ts):
+        &quot;&quot;&quot;即使没有新操作，也按需报告进度（用于空闲时心跳）&quot;&quot;&quot;
+        if self.should_report():
+            self.report(last_ts)
+
+class OplogTailer(object):
+    def __init__(self, src_uri, dst_uri, db_name, checkpoint_file):
+        self.src_uri = src_uri
+        self.dst_uri = dst_uri
+        self.db_name = db_name
+        self.checkpoint_file = checkpoint_file
+        self.src_client = None
+        self.dst_client = None
+
+    def connect(self):
+        self.src_client = MongoClient(self.src_uri)
+        self.dst_client = MongoClient(self.dst_uri)
+
+    def close(self):
+        if self.src_client:
+            self.src_client.close()
+        if self.dst_client:
+            self.dst_client.close()
+
+    def get_latest_oplog_ts(self):
+        local_db = self.src_client[&quot;local&quot;]
+        doc = local_db.oplog.rs.find_one(
+            {&quot;ns&quot;: {&quot;$regex&quot;: &quot;^&quot; + self.db_name + r&quot;\.&quot;}},
+            sort=[(&quot;ts&quot;, -1)]
+        )
+        if doc:
+            return doc[&quot;ts&quot;]
+        else:
+            return Timestamp(int(time.time()), 0)
+
+    def read_last_ts_from_file(self):
+        try:
+            if os.path.exists(self.checkpoint_file):
+                with open(self.checkpoint_file, &quot;r&quot;) as f:
+                    line = f.read().strip()
+                    if line:
+                        parts = line.split(&quot;,&quot;)
+                        if len(parts) == 2:
+                            return Timestamp(int(parts[0]), int(parts[1]))
+        except Exception as e:
+            logger.warning(&quot;Failed to read checkpoint file: %s&quot;, e)
+        return None
+
+    def write_last_ts_to_file(self, ts):
+        try:
+            with open(self.checkpoint_file, &quot;w&quot;) as f:
+                f.write(&quot;{},{}&quot;.format(ts.time, ts.inc))
+        except Exception as e:
+            logger.warning(&quot;Failed to write checkpoint file: %s&quot;, e)
+
+    def replay_op(self, op):
+        ns = op.get(&quot;ns&quot;, &quot;&quot;)
+        if not ns.startswith(self.db_name + &quot;.&quot;):
+            return
+        coll_name = ns.split(&quot;.&quot;, 1)[1]
+
+        target_coll = self.dst_client[self.db_name][coll_name]
+        src_coll = self.src_client[self.db_name][coll_name]
+
+        try:
+            if op[&quot;op&quot;] == &quot;i&quot;:
+                if coll_name in (&quot;fs.files&quot;, &quot;fs.chunks&quot;):
+                    real_doc = src_coll.find_one({&quot;_id&quot;: op[&quot;o&quot;][&quot;_id&quot;]})
+                    if real_doc:
+                        target_coll.replace_one({&quot;_id&quot;: real_doc[&quot;_id&quot;]}, real_doc, upsert=True)
+                else:
+                    target_coll.insert_one(op[&quot;o&quot;])
+            elif op[&quot;op&quot;] == &quot;u&quot;:
+                filter_ = op.get(&quot;o2&quot;, {})
+                target_coll.update_many(filter_, op[&quot;o&quot;])
+            elif op[&quot;op&quot;] == &quot;d&quot;:
+                target_coll.delete_many(op[&quot;o&quot;])
+        except Exception as e:
+            if &quot;duplicate key&quot; not in str(e).lower():
+                logger.error(&quot;Replay failed (ns=%s): %s&quot;, ns, e)
+
+    def tail(self, start_ts=None):
+        if start_ts is None:
+            start_ts = self.read_last_ts_from_file()
+            if start_ts is None:
+                start_ts = self.get_latest_oplog_ts()
+                logger.info(&quot;No checkpoint found, starting from latest oplog: %s&quot;, start_ts)
+            else:
+                logger.info(&quot;Resuming from checkpoint: %s&quot;, start_ts)
+
+        logger.info(&quot;Starting to tail oplog from ts: %s&quot;, start_ts)
+        last_applied_ts = start_ts
+        tracker = ProgressTracker(self.db_name,report_interval=10)
+        local_db = self.src_client[&quot;local&quot;]
+        query_filter = {
+            &quot;ts&quot;: {&quot;$gt&quot;: last_applied_ts},
+            &quot;ns&quot;: {&quot;$regex&quot;: &quot;^&quot; + re.escape(self.db_name) + r&quot;\.&quot;}  # 防止正则注入
+        }
+
+        while running:
+            try:
+                cursor = local_db.oplog.rs.find(
+                    query_filter,
+                    cursor_type=CursorType.TAILABLE_AWAIT,
+                    oplog_replay=True
+                )
+
+                while running and cursor.alive:
+                    try:
+                        doc = cursor.next()
+                        last_applied_ts = doc[&quot;ts&quot;]
+                        self.replay_op(doc)
+                        self.write_last_ts_to_file(last_applied_ts)
+
+                        tracker.record_op()
+                        if tracker.should_report():
+                            tracker.report(last_applied_ts)
+
+                    except StopIteration:
+                        tracker.force_report_if_needed(last_applied_ts)
+                        time.sleep(0.1)
+                    except Exception as e:
+                        logger.error(&quot;Error processing oplog document: %s&quot;, e)
+                        time.sleep(0.5)
+
+            except Exception as e:
+                if not running:
+                    break
+                logger.error(&quot;Cursor error (oplog may be rolled over or network issue): %s&quot;, e)
+                logger.info(&quot;Retrying in 2 seconds...&quot;)
+                time.sleep(2)
+            finally:
+                try:
+                    cursor.close()
+                except:
+                    pass
+        logger.info(&quot;Oplog tailing stopped&quot;)
+
+
+class MultiDBOplogSyncer(object):
+    SYSTEM_DBS = {&quot;admin&quot;, &quot;config&quot;, &quot;local&quot;}
+
+    def __init__(self, src_uri, dst_uri, db_names, checkpoint_base, start_ts=None):
+        self.src_uri = src_uri
+        self.dst_uri = dst_uri
+        self.db_names = db_names
+        self.checkpoint_base = checkpoint_base
+        self.start_ts = start_ts
+        self.threads = []
+        self.tailers = []
+
+    def resolve_databases(self, client):
+        &quot;&quot;&quot;Resolve 'all' to actual user databases.&quot;&quot;&quot;
+        if len(self.db_names) == 1 and self.db_names[0].lower() == 'all':
+            all_dbs = client.database_names()
+            user_dbs = [db for db in all_dbs if db not in self.SYSTEM_DBS]
+            logger.info(&quot;Resolved 'all' to %d user databases: %s&quot;, len(user_dbs), user_dbs)
+            return user_dbs
+        else:
+            # Validate that specified DBs exist (optional, but helpful)
+            existing = set(client.database_names())
+            valid_dbs = []
+            for db in self.db_names:
+                if db in self.SYSTEM_DBS:
+                    logger.warning(&quot;Skipping system database: %s&quot;, db)
+                    continue
+                if db not in existing:
+                    logger.warning(&quot;Database '%s' does not exist on source, will still attempt to sync.&quot;, db)
+                valid_dbs.append(db)
+            return valid_dbs
+
+    def start(self):
+        src_client = MongoClient(self.src_uri)
+        try:
+            dbs_to_sync = self.resolve_databases(src_client)
+        finally:
+            src_client.close()
+
+        if not dbs_to_sync:
+            logger.error(&quot;No valid databases to sync.&quot;)
+            return
+
+        for db in dbs_to_sync:
+            checkpoint_file = os.path.join(self.checkpoint_base, &quot;oplog_tail_{}.txt&quot;.format(db))
+            tailer = OplogTailer(
+                src_uri=self.src_uri,
+                dst_uri=self.dst_uri,
+                db_name=db,
+                checkpoint_file=checkpoint_file
+            )
+            thread = threading.Thread(target=self._run_tailer, args=(tailer,))
+            thread.daemon = True
+            self.threads.append(thread)
+            self.tailers.append(tailer)
+            thread.start()
+            logger.info(&quot;Started sync thread for database: %s&quot;, db)
+
+    def _run_tailer(self, tailer):
+        try:
+            tailer.connect()
+            tailer.tail(start_ts=self.start_ts)
+        except Exception as e:
+            logger.exception(&quot;Tailer for DB %s crashed: %s&quot;, tailer.db_name, e)
+        finally:
+            tailer.close()
+
+    def stop(self):
+        global running
+        running = False
+        for t in self.threads:
+            t.join(timeout=5)
+        logger.info(&quot;All sync threads stopped.&quot;)
+
+def parse_args():
+    parser = argparse.ArgumentParser(description=&quot;Tail MongoDB oplog and sync to another instance (multi-db support).&quot;)
+    parser.add_argument(&quot;--src&quot;, default=DEFAULT_SRC_URI, help=&quot;Source MongoDB URI&quot;)
+    parser.add_argument(&quot;--dst&quot;, default=DEFAULT_DST_URI, help=&quot;Destination MongoDB URI&quot;)
+    parser.add_argument(&quot;--db&quot;, required=True, nargs='+', help=&quot;Database name(s) to sync, or 'all' for all non-system DBs&quot;)
+    parser.add_argument(&quot;--checkpoint-base&quot;, default=&quot;/tmp/oplog_sync&quot;, help=&quot;Base directory for checkpoint files (one per DB)&quot;)
+    parser.add_argument(&quot;--start-ts&quot;, metavar=&quot;TIME,INC&quot;, help=&quot;Start from specific Timestamp (e.g., 1765504800,123)&quot;)
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+
+    # Parse --start-ts if provided
+    start_ts = None
+    if args.start_ts:
+        try:
+            time_part, inc_part = args.start_ts.split(&quot;,&quot;, 1)
+            start_ts = Timestamp(int(time_part), int(inc_part))
+            logger.info(&quot;Using explicit start timestamp: %s&quot;, start_ts)
+        except Exception as e:
+            logger.error(&quot;Invalid --start-ts format. Use 'time,inc' (e.g., 1765504800,123): %s&quot;, e)
+            sys.exit(1)
+
+    # Ensure checkpoint base dir exists
+    if not os.path.exists(args.checkpoint_base):
+        os.makedirs(args.checkpoint_base)
+
+    import signal
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    syncer = MultiDBOplogSyncer(
+        src_uri=args.src,
+        dst_uri=args.dst,
+        db_names=args.db,
+        checkpoint_base=args.checkpoint_base,
+        start_ts=start_ts
+    )
+
+    try:
+        syncer.start()
+        # Keep main thread alive
+        while running:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        logger.info(&quot;Main thread interrupted.&quot;)
+    finally:
+        syncer.stop()
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<p>如何确认呢，连接两边的数据库查询count即可</p>
+<p>如果是gridFS，也可查看最新的文件时间戳</p>
+<pre><code class="language-bash">db.system.users.estimatedDocumentCount()//4.0+支持
+db.fs.files.find().count()
+db.fs.files.find().sort({uploadDate:-1}).limit(3)
+</code></pre>
+<h3 id="oplog管理">oplog管理</h3>
+<p>oplog 不按时间保留，而是按空间。一旦写满，旧记录会被覆盖。可以通过以下命令查看 oplog 大小和时间范围：</p>
+<pre><code class="language-js">use local
+db.oplog.rs.stats()
+// 查看第一条和最后一条的时间
+db.oplog.rs.find().sort({$natural: 1}).limit(1)
+db.oplog.rs.find().sort({$natural: -1}).limit(1)
+</code></pre>
+<h3 id="分片集群备份">分片集群备份</h3>
+<p>如果是分片集群，需要连mongos备份。但是恢复步骤就不同了，需要<strong>先搭建好目标分片集群拓扑</strong>，即部署相同数量的 <code>config server</code>、<code>shard</code>、<code>mongos</code>，然后通过 mongos 恢复。</p>
+<pre><code class="language-bash"># 备份整个集群（所有数据库）
+mongodump \
+  --host &quot;mongos1:27017&quot; \          # 任意一个 mongos 地址
+  --username admin \
+  --password 'xxx' \
+  --authenticationDatabase admin \
+  --out /backup/full_$(date +%Y%m%d)
+# 恢复
+mongorestore \
+  --host &quot;new_mongos:27017&quot; \
+  --username admin \
+  --password 'xxx' \
+  --authenticationDatabase admin \
+  /backup/full_20251207  
+  
+</code></pre>
+<p>这时，mongorestore 会自动：</p>
+<pre><code>恢复 config 库 → 重建分片元数据（chunk 范围、shard 位置等）
+恢复业务库数据 → 自动路由到正确的 shard
+</code></pre>
+<p>但是<strong>分片集群不支持 <code>--oplog</code></strong> 。</p>
+<h2 id="6修改副本集">6.修改副本集</h2>
+<p>不建议手动修改。</p>
+<pre><code class="language-js">// 1. 先获取当前配置
+cfg = rs.conf()
+
+// 2. 修改各成员的 priority
+cfg.members[0].priority = 10   // 192.168.1.101（希望它当主）
+cfg.members[1].priority = 5    // 192.168.1.102
+cfg.members[2].priority = 5    // 192.168.1.103
+
+// 3. 重新应用配置（必须在 PRIMARY 上执行！）
+rs.reconfig(cfg)
+// 强制在 SECONDARY 上 reconfig（不推荐常规使用）
+//rs.reconfig(cfg, { force: true })
+</code></pre>
+<p>如果你已有 PRIMARY，但想主动切换主节点（比如维护升级），可以：</p>
+<pre><code class="language-js">// 在当前 PRIMARY 上执行，让其主动降级，并触发选举
+rs.stepDown(60)  // 60秒内不参与选举，其他节点会选新主
+</code></pre>
+<p>如果你不想删数据，只想移除副本集身份（变成 standalone 模式）</p>
+<pre><code class="language-js">//停止所有 secondary；
+//在 primary 上执行
+use admin
+db.runCommand({ &quot;replSetFreeze&quot;: 0 })  // 解冻
+db.runCommand({ &quot;replSetStepDown&quot;: 0 }) // 降级
+//修改 mongod.conf，注释或删除 replication段,重启该节点 → 它就变成普通单机实例了,其他节点同理处理
+</code></pre>
+<h2 id="7批量插入数据测试">7.批量插入数据测试</h2>
+<p>以下均针对mongo2.6.9 测试，使用python2.7版本</p>
+<h3 id="插入普通数据">插入普通数据</h3>
+<pre><code class="language-js">// generate_data.js
+// 兼容 MongoDB 2.6 的数据生成脚本
+
+var dbName = &quot;testdb&quot;;
+var collName = &quot;users&quot;;
+var totalDocs = 1000000; // 生成 100 万条
+var batchSize = 1000;    // 每批插入 1000 条（避免内存溢出）
+
+var db = db.getSiblingDB(dbName);
+var coll = db[collName];
+
+print(&quot;开始生成 &quot; + totalDocs + &quot; 条测试数据...&quot;);
+
+var docs = [];
+for (var i = 1; i &lt;= totalDocs; i++) {
+    docs.push({
+        _id: i,
+        name: &quot;user_&quot; + i,
+        email: &quot;user&quot; + i + &quot;@example.com&quot;,
+        age: Math.floor(Math.random() * 50) + 18, // 18-67 岁
+        created_at: new Date(),
+        tags: [&quot;tagA&quot;, &quot;tagB&quot;, &quot;tagC&quot;][Math.floor(Math.random() * 3)],
+        isActive: Math.random() &gt; 0.3,
+        address: {
+            city: [&quot;Beijing&quot;, &quot;Shanghai&quot;, &quot;Guangzhou&quot;, &quot;Shenzhen&quot;][Math.floor(Math.random() * 4)],
+            zip: &quot;100000&quot; + (i % 1000)
+        }
+    });
+
+    // 每 batch 插入一次
+    if (i % batchSize === 0 || i === totalDocs) {
+        coll.insert(docs);
+        print(&quot;已插入 &quot; + i + &quot; 条&quot;);
+        docs = []; // 清空数组
+    }
+}
+
+print(&quot;数据生成完成！&quot;);
+mongo localhost:27017/testdb generate_data.js
+</code></pre>
+<p>检查数据</p>
+<pre><code class="language-js">use your_database_name
+db.your_collection_name.count()//查看集合条数
+</code></pre>
+<p>这样操作后，可能会导致 local库体积很大，所有写操作都会被记录到 oplog（操作日志）中。默认会占用5% 的可用磁盘空间。</p>
+<p>MongoDB 4.0+（特别是 4.2 起）改变了 oplog 的初始化策略，local库占用就不会很大。</p>
+<p>查看验证</p>
+<pre><code class="language-js">use local
+db.oplog.rs.count() //或者db.oplog.rs.stats()
+// 查看 oplog 大小和使用情况
+rs.printReplicationInfo()
+</code></pre>
+<h3 id="插入文件">插入文件</h3>
+<p>内网环境先离线安装pip依赖</p>
+<pre><code class="language-bash">tar -xzf setuptools-1.4.2.tar.gz &amp;&amp; cd setuptools-1.4.2 &amp;&amp; python setup.py install
+tar -xzf  pymongo-2.9.tar.gz &amp;&amp; cd  pymongo-2.9 &amp;&amp; python setup.py install 
+</code></pre>
+<p>python脚本如下</p>
+<pre><code class="language-py">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os
+import sys
+from pymongo import MongoClient
+from gridfs import GridFS
+import argparse
+from datetime import datetime
+
+def upload_directory_to_gridfs(mongo_uri, db_name, directory_path):
+    &quot;&quot;&quot;
+    将指定目录下的所有文件存入 MongoDB 的 GridFS
+    &quot;&quot;&quot;
+    # 连接 MongoDB
+    client = MongoClient(mongo_uri)
+    db = client[db_name]
+    fs = GridFS(db)  # 使用 GridFS
+
+    if not os.path.isdir(directory_path):
+        print(&quot;错误: 路径不是目录 - {}&quot;.format(directory_path))
+        return
+
+    uploaded = 0
+    skipped = 0
+
+    for root, dirs, files in os.walk(directory_path):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+            rel_path = os.path.relpath(file_path, directory_path)
+
+            # 跳过空文件
+            if os.path.getsize(file_path) == 0:
+                print(&quot;跳过空文件: {}&quot;.format(rel_path))
+                skipped += 1
+                continue
+
+            try:
+                with open(file_path, 'rb') as f:
+                    # 存入 GridFS，保留原始文件名和相对路径
+                    file_id = fs.put(
+                        f,
+                        filename=filename,
+                        metadata={
+                            &quot;relative_path&quot;: rel_path,
+                            &quot;upload_time&quot;: datetime.utcnow(),
+                            &quot;size&quot;: os.path.getsize(file_path)
+                        }
+                    )
+                print(&quot;已上传: {} (ID: {})&quot;.format(rel_path, file_id))
+                uploaded += 1
+
+            except Exception as e:
+                print(&quot;上传失败 {}: {}&quot;.format(rel_path, e))
+                skipped += 1
+
+    print(&quot;\n--- 完成 ---&quot;)
+    print(&quot;成功上传: {} 个文件&quot;.format(uploaded))
+    print(&quot;跳过/失败: {} 个文件&quot;.format(skipped))
+
+if __name__ == &quot;__main__&quot;:
+    parser = argparse.ArgumentParser(description=&quot;将目录下所有文件上传到 MongoDB GridFS&quot;)
+    parser.add_argument(&quot;directory&quot;, help=&quot;要上传的本地目录路径&quot;)
+    parser.add_argument(&quot;--host&quot;, default=&quot;localhost&quot;, help=&quot;MongoDB 主机 (默认: localhost)&quot;)
+    parser.add_argument(&quot;--port&quot;, type=int, default=27017, help=&quot;MongoDB 端口 (默认: 27017)&quot;)
+    parser.add_argument(&quot;--db&quot;, default=&quot;filedb&quot;, help=&quot;数据库名 (默认: filedb)&quot;)
+
+    args = parser.parse_args()
+
+    mongo_uri = &quot;mongodb://{}:{}&quot;.format(args.host, args.port)
+    upload_directory_to_gridfs(mongo_uri, args.db, args.directory)
+</code></pre>
+<p>可以用如下脚本生成随机文件</p>
+<pre><code class="language-bash">#!/bin/bash
+for i in {1..100}; do
+    # 生成 10~500 之间的随机数（单位：MB）
+    size=$(( RANDOM % 491 + 10 ))
+    echo &quot;Creating file_$i.dat ($size MB)&quot;
+    dd if=/dev/urandom of=&quot;file_$i.dat&quot; bs=1M count=$size status=progress 2&gt;/dev/null
+done
+</code></pre>
+<p>如果是mongo4.4版本，只需要更新下pytmongo依赖即可</p>
+<pre><code class="language-bash"> pip install pymongo-3.12.3-cp27-cp27mu-manylinux1_x86_64.whl --no-index --find-links ./
+</code></pre>
+
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/%E8%BF%90%E7%BB%B4">运维</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"></div>
+  <div class="footer-info">
+    2026  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+
+</div>
+    </body>
+</html>
